@@ -1,0 +1,7 @@
+{
+  "status": "complete",
+  "scientific_result": true,
+  "completed_corruption_conditions": 150,
+  "completed_clean_checks": 2,
+  "test_metrics_used_for_selection": false
+}

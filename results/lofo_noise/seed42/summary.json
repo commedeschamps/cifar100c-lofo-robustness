@@ -1,0 +1,13 @@
+{
+  "mode": "lofo_noise",
+  "scientific_result": true,
+  "experiment_name": "lofo_noise",
+  "completed": true,
+  "completed_epochs": 100,
+  "planned_epochs": 100,
+  "best_epoch": 100,
+  "best_validation_accuracy_pct": 73.52,
+  "total_training_seconds": 9233.854309007991,
+  "timing_definition": "Sum of train+validation epoch durations; excludes setup, checkpoint/metric writes, plots, and downtime between sessions.",
+  "test_evaluated": false
+}

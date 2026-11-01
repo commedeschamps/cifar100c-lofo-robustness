@@ -1,0 +1,4 @@
+-r requirements.txt
+# Existing cv2 (e.g. in Colab) is sufficient. Do not install two OpenCV variants.
+# OpenCV uses Apache-2.0; the wheel also ships third-party notices.
+opencv-python-headless>=4.8

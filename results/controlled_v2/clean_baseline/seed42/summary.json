@@ -1,0 +1,12 @@
+{
+  "protocol_version": "controlled_v2.0.0",
+  "completed_epochs": 100,
+  "completed": true,
+  "best_epoch": 94,
+  "best_validation_accuracy_pct": 77.2,
+  "test_evaluated": false,
+  "initial_model_sha256": "fe7a5fa407bd0a5669d4cca9949a6cda1f9af4c7145e368d956d1c12b414a50b",
+  "initial_file_sha256": "19fd8c2a8f1a92ae245f463cf58727bd3f8b25f1dd64086b32e9bf64e265d068",
+  "best_file_sha256": "b65b5169d487b43d43b11ae3a9e25a4c2c4531e1b4121f5d6843d009651360fb",
+  "last_file_sha256": "15d5099ab52424d96db51a62f45880174cecff693a0ecce14246ead6a8b9648e"
+}

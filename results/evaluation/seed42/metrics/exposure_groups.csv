@@ -1,0 +1,14 @@
+model,exposure_category,n_types,accuracy_pct
+clean_baseline,clean_only_training,15,47.70146666666667
+lofo_noise,entirely_held_out_family,3,44.14533333333333
+lofo_noise,represented_reference_operator,3,70.83600000000001
+lofo_noise,unseen_type_within_exposed_family,9,61.927555555555564
+lofo_blur,entirely_held_out_family,4,58.575
+lofo_blur,represented_reference_operator,3,69.148
+lofo_blur,unseen_type_within_exposed_family,8,63.81600000000001
+lofo_weather,entirely_held_out_family,4,60.33149999999999
+lofo_weather,represented_reference_operator,3,67.97933333333334
+lofo_weather,unseen_type_within_exposed_family,8,61.341750000000005
+lofo_digital,entirely_held_out_family,4,63.31850000000001
+lofo_digital,represented_reference_operator,3,71.47733333333333
+lofo_digital,unseen_type_within_exposed_family,8,63.40225

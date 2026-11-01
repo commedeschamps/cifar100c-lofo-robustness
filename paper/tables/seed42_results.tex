@@ -1,0 +1,19 @@
+\begin{table*}[t]
+\centering
+\caption{Seed-42 accuracy (\%). Historical and controlled-v2 cohorts remain separately labeled.}
+\label{tab:seed42-results}
+\small
+\begin{tabular}{lrrrrrr}
+\toprule
+Model & Clean & Overall & Noise & Blur & Weather & Digital \\
+\midrule
+Historical clean (CUDA/AMP) & 76.29 & 47.70 & 25.51 & 46.42 & 58.88 & 54.45 \\
+Legacy LOFO-Noise (MPS) & 73.95 & 60.15 & 44.15 & 61.29 & 66.19 & 64.99 \\
+Legacy LOFO-Blur (MPS) & 72.28 & 63.48 & 66.53 & 58.58 & 65.91 & 63.69 \\
+Legacy LOFO-Weather (MPS) & 71.21 & 62.40 & 65.96 & 63.25 & 60.33 & 60.95 \\
+Legacy LOFO-Digital (MPS) & 73.87 & 64.99 & 67.20 & 62.89 & 67.12 & 63.32 \\
+v2 clean (MPS) & 76.68 & 47.83 & 25.91 & 46.33 & 59.38 & 54.23 \\
+v2 all-four representatives (MPS) & 72.68 & 65.20 & 66.46 & 63.75 & 66.28 & 64.62 \\
+\bottomrule
+\end{tabular}
+\end{table*}

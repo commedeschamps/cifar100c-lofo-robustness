@@ -1,0 +1,15 @@
+{
+  "source": "metrics/evaluation.json",
+  "files": [
+    "plots/model_corruption_heatmap.svg",
+    "plots/model_corruption_heatmap.png",
+    "plots/held_out_transfer.svg",
+    "plots/held_out_transfer.png",
+    "plots/severity_curves.svg",
+    "plots/severity_curves.png",
+    "plots/overall_robustness.svg",
+    "plots/overall_robustness.png",
+    "plots/family_transfer_matrix.svg",
+    "plots/family_transfer_matrix.png"
+  ]
+}

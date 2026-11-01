@@ -1,0 +1,89 @@
+# Python environments and generated caches
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.ipynb_checkpoints/
+.coverage
+htmlcov/
+*.egg-info/
+
+# Credentials and machine-local settings
+.env
+.env.*
+*.pem
+*.key
+*.p12
+*.pfx
+.aws/
+.ssh/
+.vscode/
+.idea/
+.python-version
+.tool-versions
+.DS_Store
+Thumbs.db
+
+# Dataset images, downloaded archives and model tensors remain local
+/data/
+*.pt
+*.pth
+*.ckpt
+*.safetensors
+*.npy
+*.npz
+*.zip
+*.tar
+*.tar.gz
+*.tgz
+/dist/
+
+# Execution logs, locks and temporary files
+*.log
+*.jsonl
+*.tmp
+*.temp
+*.bak
+*.swp
+*~
+/results/**/cache/
+/results/**/logs/
+/results/**/.run.lock
+/results/**/.evaluation.lock
+/results/**/sessions.json
+
+# Original machine-specific manifests are preserved locally, never rewritten
+/results/clean_baseline/clean_seed42/config.json
+/results/clean_baseline/clean_seed42/data_manifest.json
+/results/clean_baseline/clean_seed42/clean_test.json
+/results/evaluation/seed42/manifests/provenance.json
+/results/evaluation_controlled_v2/seed42/manifest.json
+
+# Internal planning records and compatibility links required only by full local verification
+/ARCHIVE.md
+/results/research_audit/
+/results/controlled_v2/RUN_PLAN.md
+/results/controlled_v2/frozen_inputs/results/controlled_v2/RUN_PLAN.md
+/docs/verification/
+.codex/
+.agents/
+AGENTS.md
+research_cv_archive*/
+
+# The main tree is canonical; do not duplicate the submission package
+/submission/
+/tools/verify_submission.py
+
+# LaTeX build products; retain scientific figure PDFs
+/paper/*.aux
+/paper/*.bbl
+/paper/*.blg
+/paper/*.fdb_latexmk
+/paper/*.fls
+/paper/*.log
+/paper/*.out
+/paper/*.synctex.gz
+/paper/main.pdf

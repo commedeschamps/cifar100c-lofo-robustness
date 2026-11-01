@@ -1,0 +1,13 @@
+model,scope,n_conditions,accuracy_pct,error_pct,matched_clean_difference_pp
+all_four_representatives,overall_15_type,75,65.19800000000001,34.80199999999999,17.36453333333334
+all_four_representatives,noise,15,66.464,33.536,40.55266666666667
+all_four_representatives,blur,20,63.74950000000001,36.25049999999999,17.41650000000002
+all_four_representatives,weather,20,66.27899999999998,33.72100000000002,6.895999999999987
+all_four_representatives,digital,20,64.616,35.384,10.39
+all_four_representatives,equal_four_family,75,65.277125,34.722875,18.813791666666667
+clean_baseline,overall_15_type,75,47.833466666666666,52.166533333333334,0.0
+clean_baseline,noise,15,25.911333333333335,74.08866666666667,0.0
+clean_baseline,blur,20,46.33299999999999,53.66700000000001,0.0
+clean_baseline,weather,20,59.382999999999996,40.617000000000004,0.0
+clean_baseline,digital,20,54.226,45.774,0.0
+clean_baseline,equal_four_family,75,46.46333333333333,53.53666666666667,0.0

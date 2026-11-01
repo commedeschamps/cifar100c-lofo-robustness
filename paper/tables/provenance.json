@@ -1,0 +1,18 @@
+{
+  "method": "Read final saved metric fields only; no inference or new benchmark",
+  "inputs": {
+    "results/evaluation/seed42/metrics/evaluation.json": "ce61d7ae4bd4a5f783e2f1271e9a463e9ed3970daec1a45471d4f181e207c285",
+    "results/evaluation_controlled_v2/seed42/metrics/evaluation.json": "7a0ac4f4c9c75f7b7d046b00f80fe6a99025058d24c939c29c88504a5d908fca",
+    "results/clean_baseline/clean_seed42/metrics.json": "6d884f9d2ce96db3b4afaf0842d2fbb8b4f1590234925ebacef2f7b741249280",
+    "results/lofo_noise/seed42/metrics.json": "0f85fc535295e9259bc8ffd5142ecaea6d1ce871dc7c37f840597f3168bab0fb",
+    "results/lofo_blur/seed42/metrics.json": "4cb5fbe2771c8448fce35c7f24f23b63096cc080ffec329954b09ddf6ab45e28",
+    "results/lofo_weather/seed42/metrics.json": "669a703490498428febced0085ca2b01962c0f5939e8be39cfc41f378030716b",
+    "results/lofo_digital/seed42/metrics.json": "ae5a669de69d63a0772280dea73cf14676eff4720dbf1bd4d61c0d6955618a0c",
+    "results/controlled_v2/clean_baseline/seed42/metrics.json": "ea0c73ddda2f177f5e5946b9b2c9253dce95c83bf6ae00ab55dd8bfa44679380",
+    "results/controlled_v2/all_four_representatives/seed42/metrics.json": "00fba4d95deb75f4ecf9e01b6b37de71ad8d3c69b0eee1593075601b2e05c318"
+  },
+  "outputs": {
+    "paper/tables/seed42_results.csv": "4d8b804ef4edae7e277c5ffa2baeff5ede1b245eb0e33dc4212ca7eb37ce0b6e",
+    "paper/tables/seed42_results.tex": "95550b3841990cbf92aabfff434ca70cca7f0ba68e71a62d27fbb141ca5fe49c"
+  }
+}

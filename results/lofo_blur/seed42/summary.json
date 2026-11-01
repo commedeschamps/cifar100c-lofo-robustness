@@ -1,0 +1,13 @@
+{
+  "mode": "lofo_blur",
+  "scientific_result": true,
+  "experiment_name": "lofo_blur",
+  "completed": true,
+  "completed_epochs": 100,
+  "planned_epochs": 100,
+  "best_epoch": 100,
+  "best_validation_accuracy_pct": 72.7,
+  "total_training_seconds": 9267.266602120828,
+  "timing_definition": "Sum of train+validation epoch durations; excludes setup, checkpoint/metric writes, plots, and downtime between sessions.",
+  "test_evaluated": false
+}

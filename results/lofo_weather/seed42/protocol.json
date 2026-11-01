@@ -1,0 +1,139 @@
+{
+  "mode": "lofo_weather",
+  "pipeline_check_only": false,
+  "source_sha256": "949e480e1230b94850c1c73bae75c83bd0602730a8359904405b5faff3e9fffa",
+  "scheduler_T_max": 100,
+  "effective_amp": false,
+  "parameter_count": 11220132,
+  "initial_model_sha256": "fe7a5fa407bd0a5669d4cca9949a6cda1f9af4c7145e368d956d1c12b414a50b",
+  "selection": "highest_validation_accuracy_first_tie",
+  "test_set_used_for_selection": false,
+  "train_transforms": [
+    "RandomCrop(32,padding=4)",
+    "RandomHorizontalFlip(p=0.5)",
+    "LOFO:zero_or_one_corruption_before_normalization",
+    "ToTensor",
+    "Normalize(config.mean,config.std)"
+  ],
+  "eval_transforms": [
+    "ToTensor",
+    "Normalize(config.mean,config.std)"
+  ],
+  "experiment_name": "lofo_weather",
+  "held_out_family": "weather",
+  "allowed_corruptions": [
+    "gaussian_noise",
+    "defocus_blur",
+    "jpeg_compression"
+  ],
+  "families": {
+    "noise": [
+      "gaussian_noise",
+      "shot_noise",
+      "impulse_noise"
+    ],
+    "blur": [
+      "defocus_blur",
+      "glass_blur",
+      "motion_blur",
+      "zoom_blur"
+    ],
+    "weather": [
+      "snow",
+      "frost",
+      "fog",
+      "brightness"
+    ],
+    "digital": [
+      "contrast",
+      "elastic_transform",
+      "pixelate",
+      "jpeg_compression"
+    ]
+  },
+  "representatives": {
+    "noise": "gaussian_noise",
+    "blur": "defocus_blur",
+    "weather": "fog",
+    "digital": "jpeg_compression"
+  },
+  "corruption_probability": 0.5,
+  "corruption_selection": "uniform",
+  "severity_selection": "uniform",
+  "allowed_severities": [
+    1,
+    2,
+    3,
+    4,
+    5
+  ],
+  "sampling_unit": "one independent clean/corruption draw per consumed training image per epoch",
+  "audit_unit": "main-process counts of consumed batches; excludes unconsumed worker prefetch",
+  "corruption_implementation": "hendrycks_cifar_c_8190fe3_v1",
+  "split_sha256": "ab04334a218db1266d508e8c9adaaf91d45d81e0f4410739243ef4991fdc3ee9",
+  "initialization": "from_scratch_weights_None",
+  "evaluation_categories": {
+    "gaussian_noise": {
+      "family": "noise",
+      "exposure_category": "exact_seen"
+    },
+    "shot_noise": {
+      "family": "noise",
+      "exposure_category": "unseen_within_represented_family"
+    },
+    "impulse_noise": {
+      "family": "noise",
+      "exposure_category": "unseen_within_represented_family"
+    },
+    "defocus_blur": {
+      "family": "blur",
+      "exposure_category": "exact_seen"
+    },
+    "glass_blur": {
+      "family": "blur",
+      "exposure_category": "unseen_within_represented_family"
+    },
+    "motion_blur": {
+      "family": "blur",
+      "exposure_category": "unseen_within_represented_family"
+    },
+    "zoom_blur": {
+      "family": "blur",
+      "exposure_category": "unseen_within_represented_family"
+    },
+    "snow": {
+      "family": "weather",
+      "exposure_category": "entirely_held_out_family"
+    },
+    "frost": {
+      "family": "weather",
+      "exposure_category": "entirely_held_out_family"
+    },
+    "fog": {
+      "family": "weather",
+      "exposure_category": "entirely_held_out_family"
+    },
+    "brightness": {
+      "family": "weather",
+      "exposure_category": "entirely_held_out_family"
+    },
+    "contrast": {
+      "family": "digital",
+      "exposure_category": "unseen_within_represented_family"
+    },
+    "elastic_transform": {
+      "family": "digital",
+      "exposure_category": "unseen_within_represented_family"
+    },
+    "pixelate": {
+      "family": "digital",
+      "exposure_category": "unseen_within_represented_family"
+    },
+    "jpeg_compression": {
+      "family": "digital",
+      "exposure_category": "exact_seen"
+    }
+  },
+  "benchmark_data_used": false,
+  "validation": "clean_only"
+}

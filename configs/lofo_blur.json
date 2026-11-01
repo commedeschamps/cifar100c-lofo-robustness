@@ -1,0 +1,62 @@
+{
+  "smoke_test": true,
+  "seed": 42,
+  "split_seed": 42,
+  "full_epochs": 100,
+  "smoke_epochs": 2,
+  "smoke_train_per_class": 2,
+  "smoke_val_per_class": 1,
+  "batch_size": 128,
+  "learning_rate": 0.1,
+  "momentum": 0.9,
+  "weight_decay": 0.0005,
+  "num_workers": 2,
+  "use_amp": true,
+  "deterministic": true,
+  "cpu_threads": 4,
+  "data_root": "data",
+  "artifact_root": ".",
+  "run_id": "seed42",
+  "download": true,
+  "device": "auto",
+  "dataset": "CIFAR100",
+  "num_classes": 100,
+  "train_per_class": 450,
+  "val_per_class": 50,
+  "architecture": "cifar_resnet18_scratch",
+  "mean": [
+    0.5071,
+    0.4867,
+    0.4408
+  ],
+  "std": [
+    0.2675,
+    0.2565,
+    0.2761
+  ],
+  "optimizer": "SGD",
+  "scheduler": "CosineAnnealingLR",
+  "eta_min": 0.0,
+  "loss": "CrossEntropyLoss",
+  "selection": "highest_validation_accuracy_first_tie",
+  "experiment_name": "lofo_blur",
+  "held_out_family": "blur",
+  "allowed_corruptions": [
+    "gaussian_noise",
+    "fog",
+    "jpeg_compression"
+  ],
+  "corruption_probability": 0.5,
+  "corruption_selection": "uniform",
+  "severity_selection": "uniform",
+  "allowed_severities": [
+    1,
+    2,
+    3,
+    4,
+    5
+  ],
+  "split_file": "splits/cifar100_seed42.json",
+  "split_sha256": "ab04334a218db1266d508e8c9adaaf91d45d81e0f4410739243ef4991fdc3ee9",
+  "corruption_implementation": "hendrycks_cifar_c_8190fe3_v1"
+}

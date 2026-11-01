@@ -1,0 +1,84 @@
+{
+  "method": "Identities and selected epochs read from the seven completed best/last checkpoint pairs; no model forward pass.",
+  "checkpoint_files_included": false,
+  "prediction_caches_included": false,
+  "runs": [
+    {
+      "cohort": "historical",
+      "model": "clean_baseline",
+      "epochs": 100,
+      "selected_epoch": 90,
+      "best_clean_validation_accuracy_pct": 76.82,
+      "best_checkpoint_sha256": "fc2ce9d3d1cdfb704fb7663ba7352a1009bef4b3898018f42e6aadf374b25809",
+      "last_checkpoint_sha256": "c99c52617dcceff4512eb3aa8067959da6a23219c15c4027776b09c11fe4b7a6",
+      "run_path": "results/clean_baseline/clean_seed42"
+    },
+    {
+      "cohort": "historical",
+      "model": "lofo_noise",
+      "epochs": 100,
+      "selected_epoch": 100,
+      "best_clean_validation_accuracy_pct": 73.52,
+      "best_checkpoint_sha256": "a9486c83ee7b9d0d1e463cb098bfb76ad66de31eef9d6ae918b9721548bd1630",
+      "last_checkpoint_sha256": "f277d6adae7faa280146b26ea2de950e70bba3485e067ec9bd7a123631618f70",
+      "run_path": "results/lofo_noise/seed42"
+    },
+    {
+      "cohort": "historical",
+      "model": "lofo_blur",
+      "epochs": 100,
+      "selected_epoch": 100,
+      "best_clean_validation_accuracy_pct": 72.7,
+      "best_checkpoint_sha256": "126923a78ee6fd471def01c6161a82280cb7301a98caaa9244d3d5a6ea4ec72d",
+      "last_checkpoint_sha256": "246bd76aca7efc43cbc778e5a5f1ebc87ca3215e324d0dd4cb5bb645f67e244c",
+      "run_path": "results/lofo_blur/seed42"
+    },
+    {
+      "cohort": "historical",
+      "model": "lofo_weather",
+      "epochs": 100,
+      "selected_epoch": 91,
+      "best_clean_validation_accuracy_pct": 72.4,
+      "best_checkpoint_sha256": "c49242a0f8af8edfe5223291a1a3999f932b691233b92959e50d50c8a74ce1b9",
+      "last_checkpoint_sha256": "de7327b1cc3ee8126d645facf27ac63afeae6eb358ef0621c40d9332a9c9f559",
+      "run_path": "results/lofo_weather/seed42"
+    },
+    {
+      "cohort": "historical",
+      "model": "lofo_digital",
+      "epochs": 100,
+      "selected_epoch": 95,
+      "best_clean_validation_accuracy_pct": 73.96,
+      "best_checkpoint_sha256": "3c0b95aee051e7e4b6ae55584cae9ca18a10be31c091efdbad57b2fcef980b96",
+      "last_checkpoint_sha256": "4e6311171929fcec3777e20959a244759042ac9fb9128a08e3056d5abb12d433",
+      "run_path": "results/lofo_digital/seed42"
+    },
+    {
+      "cohort": "controlled_v2",
+      "model": "clean_baseline",
+      "epochs": 100,
+      "selected_epoch": 94,
+      "best_clean_validation_accuracy_pct": 77.2,
+      "best_checkpoint_sha256": "b65b5169d487b43d43b11ae3a9e25a4c2c4531e1b4121f5d6843d009651360fb",
+      "last_checkpoint_sha256": "15d5099ab52424d96db51a62f45880174cecff693a0ecce14246ead6a8b9648e",
+      "run_path": "results/controlled_v2/clean_baseline/seed42"
+    },
+    {
+      "cohort": "controlled_v2",
+      "model": "all_four_representatives",
+      "epochs": 100,
+      "selected_epoch": 98,
+      "best_clean_validation_accuracy_pct": 73.34,
+      "best_checkpoint_sha256": "528b2f065e3bf037b4c0ade12eaf4799fcd0906f5dbdfa61d886294d9e6c354e",
+      "last_checkpoint_sha256": "e502a58ccd4cf67a5a2e185cbf6cf7d4002ee10eda1fe7c056da1863cbd0bea7",
+      "run_path": "results/controlled_v2/all_four_representatives/seed42"
+    }
+  ],
+  "controlled_v2_initialization": {
+    "initial_file_sha256": "19fd8c2a8f1a92ae245f463cf58727bd3f8b25f1dd64086b32e9bf64e265d068",
+    "initial_model_sha256": "fe7a5fa407bd0a5669d4cca9949a6cda1f9af4c7145e368d956d1c12b414a50b",
+    "historical_initial_model_sha256": "fe7a5fa407bd0a5669d4cca9949a6cda1f9af4c7145e368d956d1c12b414a50b",
+    "historical_digest_match": true,
+    "initialization_limit": "Digest equivalence under the historical model_digest algorithm; historical initial tensors were not saved, so direct tensor-by-tensor proof and complete trajectory replay are unavailable."
+  }
+}

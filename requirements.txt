@@ -1,0 +1,9 @@
+# Colab normally provides these already. No installation cell is run by default.
+# Install torch/torchvision as a compatible pair for your platform (see README).
+torch>=2.3
+torchvision>=0.18
+numpy>=1.26
+matplotlib>=3.8
+# Optional local notebook validation/execution:
+nbformat>=5.10
+ipython>=8.0

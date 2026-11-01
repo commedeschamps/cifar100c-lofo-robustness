@@ -1,0 +1,12 @@
+{
+  "mode": "clean_baseline",
+  "scientific_result": true,
+  "completed": true,
+  "completed_epochs": 100,
+  "planned_epochs": 100,
+  "best_epoch": 90,
+  "best_validation_accuracy_pct": 76.82,
+  "total_training_seconds": 2441.9699357189993,
+  "timing_definition": "Sum of train+validation epoch durations; excludes setup, checkpoint/metric writes, plots, and downtime between sessions.",
+  "test_evaluated": true
+}

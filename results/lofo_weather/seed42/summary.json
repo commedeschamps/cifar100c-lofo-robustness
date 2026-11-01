@@ -1,0 +1,13 @@
+{
+  "mode": "lofo_weather",
+  "scientific_result": true,
+  "experiment_name": "lofo_weather",
+  "completed": true,
+  "completed_epochs": 100,
+  "planned_epochs": 100,
+  "best_epoch": 91,
+  "best_validation_accuracy_pct": 72.4,
+  "total_training_seconds": 9073.492292286945,
+  "timing_definition": "Sum of train+validation epoch durations; excludes setup, checkpoint/metric writes, plots, and downtime between sessions.",
+  "test_evaluated": false
+}

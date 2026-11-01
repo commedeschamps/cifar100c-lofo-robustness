@@ -1,0 +1,6 @@
+model,seed,family,corruption,severity,n_samples,n_correct,accuracy_pct,error_pct,exposure_category,seconds,loss,best_clean_validation_accuracy_pct
+clean_baseline,42,clean,clean,0,10000,7629,76.29,23.71,clean,4.473045874998206,0.940712471294403,76.82
+lofo_noise,42,clean,clean,0,10000,7395,73.95,26.05,clean,3.8402049590076786,1.0735956531524657,73.52
+lofo_blur,42,clean,clean,0,10000,7228,72.28,27.72,clean,3.8367932499968447,1.125364584159851,72.7
+lofo_weather,42,clean,clean,0,10000,7121,71.21,28.79,clean,3.831420833012089,1.2043538385391235,72.4
+lofo_digital,42,clean,clean,0,10000,7387,73.87,26.13,clean,3.8248983330267947,1.0563970126152038,73.96

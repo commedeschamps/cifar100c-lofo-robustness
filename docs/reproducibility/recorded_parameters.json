@@ -1,0 +1,471 @@
+{
+  "method": "Portable scientific fields from the unchanged saved run configurations; original file hashes and omitted location-field names retained.",
+  "runs": [
+    {
+      "method": "Scientific parameters copied from the saved run configuration; filesystem location fields omitted for portability.",
+      "source_path": "results/controlled_v2/all_four_representatives/seed42/config.json",
+      "source_sha256": "2980dc4379ea9679909632c53f261040e61312ccb38b4c1a7d603a637b88d266",
+      "omitted_location_fields": [
+        "artifact_root",
+        "data_root",
+        "initial_state",
+        "split_file"
+      ],
+      "parameters": {
+        "smoke_test": false,
+        "seed": 42,
+        "split_seed": 42,
+        "full_epochs": 100,
+        "smoke_epochs": 2,
+        "smoke_train_per_class": 2,
+        "smoke_val_per_class": 1,
+        "batch_size": 128,
+        "learning_rate": 0.1,
+        "momentum": 0.9,
+        "weight_decay": 0.0005,
+        "num_workers": 2,
+        "use_amp": false,
+        "deterministic": true,
+        "cpu_threads": 4,
+        "run_id": "seed42",
+        "download": false,
+        "device": "mps",
+        "dataset": "CIFAR100",
+        "num_classes": 100,
+        "train_per_class": 450,
+        "val_per_class": 50,
+        "architecture": "cifar_resnet18_scratch",
+        "mean": [
+          0.5071,
+          0.4867,
+          0.4408
+        ],
+        "std": [
+          0.2675,
+          0.2565,
+          0.2761
+        ],
+        "optimizer": "SGD",
+        "scheduler": "CosineAnnealingLR",
+        "eta_min": 0.0,
+        "loss": "CrossEntropyLoss",
+        "selection": "highest_validation_accuracy_first_tie",
+        "protocol_version": "controlled_v2.0.0",
+        "condition": "all_four_representatives",
+        "split_sha256": "ab04334a218db1266d508e8c9adaaf91d45d81e0f4410739243ef4991fdc3ee9",
+        "corruption_selection": "uniform",
+        "severity_selection": "uniform",
+        "allowed_severities": [
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "corruption_implementation": "hendrycks_cifar_c_8190fe3_v1"
+      },
+      "cohort": "controlled_v2",
+      "model": "all_four_representatives"
+    },
+    {
+      "method": "Scientific parameters copied from the saved run configuration; filesystem location fields omitted for portability.",
+      "source_path": "results/controlled_v2/clean_baseline/seed42/config.json",
+      "source_sha256": "81834a60ede2ec5ce18256700151741ec65c9e6742be49876ab0e7c574e4ea9f",
+      "omitted_location_fields": [
+        "artifact_root",
+        "data_root",
+        "initial_state",
+        "split_file"
+      ],
+      "parameters": {
+        "smoke_test": false,
+        "seed": 42,
+        "split_seed": 42,
+        "full_epochs": 100,
+        "smoke_epochs": 2,
+        "smoke_train_per_class": 2,
+        "smoke_val_per_class": 1,
+        "batch_size": 128,
+        "learning_rate": 0.1,
+        "momentum": 0.9,
+        "weight_decay": 0.0005,
+        "num_workers": 2,
+        "use_amp": false,
+        "deterministic": true,
+        "cpu_threads": 4,
+        "run_id": "seed42",
+        "download": false,
+        "device": "mps",
+        "dataset": "CIFAR100",
+        "num_classes": 100,
+        "train_per_class": 450,
+        "val_per_class": 50,
+        "architecture": "cifar_resnet18_scratch",
+        "mean": [
+          0.5071,
+          0.4867,
+          0.4408
+        ],
+        "std": [
+          0.2675,
+          0.2565,
+          0.2761
+        ],
+        "optimizer": "SGD",
+        "scheduler": "CosineAnnealingLR",
+        "eta_min": 0.0,
+        "loss": "CrossEntropyLoss",
+        "selection": "highest_validation_accuracy_first_tie",
+        "protocol_version": "controlled_v2.0.0",
+        "condition": "clean_baseline",
+        "split_sha256": "ab04334a218db1266d508e8c9adaaf91d45d81e0f4410739243ef4991fdc3ee9",
+        "corruption_selection": "uniform",
+        "severity_selection": "uniform",
+        "allowed_severities": [
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "corruption_implementation": "hendrycks_cifar_c_8190fe3_v1"
+      },
+      "cohort": "controlled_v2",
+      "model": "clean_baseline"
+    },
+    {
+      "method": "Scientific parameters copied from the saved run configuration; filesystem location fields omitted for portability.",
+      "source_path": "results/clean_baseline/clean_seed42/config.json",
+      "source_sha256": "1243c4b3d4b479efa3a813476de235dc424a784221d83ec2dff1f6ff939b9e94",
+      "omitted_location_fields": [
+        "artifact_root",
+        "data_root"
+      ],
+      "parameters": {
+        "smoke_test": false,
+        "seed": 42,
+        "split_seed": 42,
+        "full_epochs": 100,
+        "smoke_epochs": 2,
+        "smoke_train_per_class": 2,
+        "smoke_val_per_class": 1,
+        "batch_size": 128,
+        "learning_rate": 0.1,
+        "momentum": 0.9,
+        "weight_decay": 0.0005,
+        "num_workers": 2,
+        "use_amp": true,
+        "deterministic": true,
+        "cpu_threads": 4,
+        "run_id": "clean_seed42",
+        "download": true,
+        "dataset": "CIFAR100",
+        "num_classes": 100,
+        "train_per_class": 450,
+        "val_per_class": 50,
+        "architecture": "cifar_resnet18_scratch",
+        "mean": [
+          0.5071,
+          0.4867,
+          0.4408
+        ],
+        "std": [
+          0.2675,
+          0.2565,
+          0.2761
+        ],
+        "optimizer": "SGD",
+        "scheduler": "CosineAnnealingLR",
+        "eta_min": 0.0,
+        "loss": "CrossEntropyLoss",
+        "selection": "highest_validation_accuracy_first_tie"
+      },
+      "cohort": "historical",
+      "model": "clean_baseline"
+    },
+    {
+      "method": "Scientific parameters copied from the saved run configuration; filesystem location fields omitted for portability.",
+      "source_path": "results/lofo_blur/seed42/config.json",
+      "source_sha256": "2e46f3219238fd28be79c38662c7fb657d140dbbb00224813313e32fa04ab906",
+      "omitted_location_fields": [
+        "artifact_root",
+        "data_root",
+        "split_file"
+      ],
+      "parameters": {
+        "smoke_test": false,
+        "seed": 42,
+        "split_seed": 42,
+        "full_epochs": 100,
+        "smoke_epochs": 2,
+        "smoke_train_per_class": 2,
+        "smoke_val_per_class": 1,
+        "batch_size": 128,
+        "learning_rate": 0.1,
+        "momentum": 0.9,
+        "weight_decay": 0.0005,
+        "num_workers": 2,
+        "use_amp": true,
+        "deterministic": true,
+        "cpu_threads": 4,
+        "run_id": "seed42",
+        "download": true,
+        "device": "auto",
+        "dataset": "CIFAR100",
+        "num_classes": 100,
+        "train_per_class": 450,
+        "val_per_class": 50,
+        "architecture": "cifar_resnet18_scratch",
+        "mean": [
+          0.5071,
+          0.4867,
+          0.4408
+        ],
+        "std": [
+          0.2675,
+          0.2565,
+          0.2761
+        ],
+        "optimizer": "SGD",
+        "scheduler": "CosineAnnealingLR",
+        "eta_min": 0.0,
+        "loss": "CrossEntropyLoss",
+        "selection": "highest_validation_accuracy_first_tie",
+        "experiment_name": "lofo_blur",
+        "held_out_family": "blur",
+        "allowed_corruptions": [
+          "gaussian_noise",
+          "fog",
+          "jpeg_compression"
+        ],
+        "corruption_probability": 0.5,
+        "corruption_selection": "uniform",
+        "severity_selection": "uniform",
+        "allowed_severities": [
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "split_sha256": "ab04334a218db1266d508e8c9adaaf91d45d81e0f4410739243ef4991fdc3ee9",
+        "corruption_implementation": "hendrycks_cifar_c_8190fe3_v1"
+      },
+      "cohort": "historical",
+      "model": "lofo_blur"
+    },
+    {
+      "method": "Scientific parameters copied from the saved run configuration; filesystem location fields omitted for portability.",
+      "source_path": "results/lofo_digital/seed42/config.json",
+      "source_sha256": "fd5b7d05c6d6386b7d9c312075995258d5b6415c35d78ad5f88d655a872537ff",
+      "omitted_location_fields": [
+        "artifact_root",
+        "data_root",
+        "split_file"
+      ],
+      "parameters": {
+        "smoke_test": false,
+        "seed": 42,
+        "split_seed": 42,
+        "full_epochs": 100,
+        "smoke_epochs": 2,
+        "smoke_train_per_class": 2,
+        "smoke_val_per_class": 1,
+        "batch_size": 128,
+        "learning_rate": 0.1,
+        "momentum": 0.9,
+        "weight_decay": 0.0005,
+        "num_workers": 2,
+        "use_amp": true,
+        "deterministic": true,
+        "cpu_threads": 4,
+        "run_id": "seed42",
+        "download": true,
+        "device": "auto",
+        "dataset": "CIFAR100",
+        "num_classes": 100,
+        "train_per_class": 450,
+        "val_per_class": 50,
+        "architecture": "cifar_resnet18_scratch",
+        "mean": [
+          0.5071,
+          0.4867,
+          0.4408
+        ],
+        "std": [
+          0.2675,
+          0.2565,
+          0.2761
+        ],
+        "optimizer": "SGD",
+        "scheduler": "CosineAnnealingLR",
+        "eta_min": 0.0,
+        "loss": "CrossEntropyLoss",
+        "selection": "highest_validation_accuracy_first_tie",
+        "experiment_name": "lofo_digital",
+        "held_out_family": "digital",
+        "allowed_corruptions": [
+          "gaussian_noise",
+          "defocus_blur",
+          "fog"
+        ],
+        "corruption_probability": 0.5,
+        "corruption_selection": "uniform",
+        "severity_selection": "uniform",
+        "allowed_severities": [
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "split_sha256": "ab04334a218db1266d508e8c9adaaf91d45d81e0f4410739243ef4991fdc3ee9",
+        "corruption_implementation": "hendrycks_cifar_c_8190fe3_v1"
+      },
+      "cohort": "historical",
+      "model": "lofo_digital"
+    },
+    {
+      "method": "Scientific parameters copied from the saved run configuration; filesystem location fields omitted for portability.",
+      "source_path": "results/lofo_noise/seed42/config.json",
+      "source_sha256": "613380fa020ec5a9fc4ed9ed44bda776587dfd06e928867b38afaf18eab4b1e8",
+      "omitted_location_fields": [
+        "artifact_root",
+        "data_root",
+        "split_file"
+      ],
+      "parameters": {
+        "smoke_test": false,
+        "seed": 42,
+        "split_seed": 42,
+        "full_epochs": 100,
+        "smoke_epochs": 2,
+        "smoke_train_per_class": 2,
+        "smoke_val_per_class": 1,
+        "batch_size": 128,
+        "learning_rate": 0.1,
+        "momentum": 0.9,
+        "weight_decay": 0.0005,
+        "num_workers": 2,
+        "use_amp": true,
+        "deterministic": true,
+        "cpu_threads": 4,
+        "run_id": "seed42",
+        "download": true,
+        "device": "auto",
+        "dataset": "CIFAR100",
+        "num_classes": 100,
+        "train_per_class": 450,
+        "val_per_class": 50,
+        "architecture": "cifar_resnet18_scratch",
+        "mean": [
+          0.5071,
+          0.4867,
+          0.4408
+        ],
+        "std": [
+          0.2675,
+          0.2565,
+          0.2761
+        ],
+        "optimizer": "SGD",
+        "scheduler": "CosineAnnealingLR",
+        "eta_min": 0.0,
+        "loss": "CrossEntropyLoss",
+        "selection": "highest_validation_accuracy_first_tie",
+        "experiment_name": "lofo_noise",
+        "held_out_family": "noise",
+        "allowed_corruptions": [
+          "defocus_blur",
+          "fog",
+          "jpeg_compression"
+        ],
+        "corruption_probability": 0.5,
+        "corruption_selection": "uniform",
+        "severity_selection": "uniform",
+        "allowed_severities": [
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "split_sha256": "ab04334a218db1266d508e8c9adaaf91d45d81e0f4410739243ef4991fdc3ee9",
+        "corruption_implementation": "hendrycks_cifar_c_8190fe3_v1"
+      },
+      "cohort": "historical",
+      "model": "lofo_noise"
+    },
+    {
+      "method": "Scientific parameters copied from the saved run configuration; filesystem location fields omitted for portability.",
+      "source_path": "results/lofo_weather/seed42/config.json",
+      "source_sha256": "7c6500b1025d610184dccc3e27355d8cc674ab3b9a77d4a5ce132266702feafb",
+      "omitted_location_fields": [
+        "artifact_root",
+        "data_root",
+        "split_file"
+      ],
+      "parameters": {
+        "smoke_test": false,
+        "seed": 42,
+        "split_seed": 42,
+        "full_epochs": 100,
+        "smoke_epochs": 2,
+        "smoke_train_per_class": 2,
+        "smoke_val_per_class": 1,
+        "batch_size": 128,
+        "learning_rate": 0.1,
+        "momentum": 0.9,
+        "weight_decay": 0.0005,
+        "num_workers": 2,
+        "use_amp": true,
+        "deterministic": true,
+        "cpu_threads": 4,
+        "run_id": "seed42",
+        "download": true,
+        "device": "auto",
+        "dataset": "CIFAR100",
+        "num_classes": 100,
+        "train_per_class": 450,
+        "val_per_class": 50,
+        "architecture": "cifar_resnet18_scratch",
+        "mean": [
+          0.5071,
+          0.4867,
+          0.4408
+        ],
+        "std": [
+          0.2675,
+          0.2565,
+          0.2761
+        ],
+        "optimizer": "SGD",
+        "scheduler": "CosineAnnealingLR",
+        "eta_min": 0.0,
+        "loss": "CrossEntropyLoss",
+        "selection": "highest_validation_accuracy_first_tie",
+        "experiment_name": "lofo_weather",
+        "held_out_family": "weather",
+        "allowed_corruptions": [
+          "gaussian_noise",
+          "defocus_blur",
+          "jpeg_compression"
+        ],
+        "corruption_probability": 0.5,
+        "corruption_selection": "uniform",
+        "severity_selection": "uniform",
+        "allowed_severities": [
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "split_sha256": "ab04334a218db1266d508e8c9adaaf91d45d81e0f4410739243ef4991fdc3ee9",
+        "corruption_implementation": "hendrycks_cifar_c_8190fe3_v1"
+      },
+      "cohort": "historical",
+      "model": "lofo_weather"
+    }
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "mode": "clean_baseline",
+  "pipeline_check_only": false,
+  "source_sha256": "91ef3e8cef8f979e4623d7f538408cdf18885cb1c06b61a4c8ca566e3b3e3eac",
+  "scheduler_T_max": 100,
+  "effective_amp": true,
+  "parameter_count": 11220132,
+  "selection": "highest_validation_accuracy_first_tie",
+  "test_set_used_for_selection": false,
+  "train_transforms": [
+    "RandomCrop(32,padding=4)",
+    "RandomHorizontalFlip(p=0.5)",
+    "ToTensor",
+    "Normalize(config.mean,config.std)"
+  ],
+  "eval_transforms": [
+    "ToTensor",
+    "Normalize(config.mean,config.std)"
+  ]
+}
