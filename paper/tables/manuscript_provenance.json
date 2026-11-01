@@ -1,0 +1,36 @@
+{
+  "method": "Recomputed arithmetic from saved integer correct counts; no training or inference; no resampling.",
+  "heatmap_display_rounding": "Exact count-derived rational reconstructed with denominator <=7500; decimal ROUND_HALF_UP at one place. Raw metrics unchanged.",
+  "primary_baseline": "controlled_v2/clean_baseline",
+  "inputs": {
+    "results/evaluation/seed42/metrics/evaluation.json": "ce61d7ae4bd4a5f783e2f1271e9a463e9ed3970daec1a45471d4f181e207c285",
+    "results/evaluation_controlled_v2/seed42/metrics/evaluation.json": "7a0ac4f4c9c75f7b7d046b00f80fe6a99025058d24c939c29c88504a5d908fca",
+    "paper/tables/seed42_results.csv": "4d8b804ef4edae7e277c5ffa2baeff5ede1b245eb0e33dc4212ca7eb37ce0b6e"
+  },
+  "script_sha256": "e2ad598bcd0dac6705d2883329fe27e4aa554a81fa87698f5531f37e36e2294c",
+  "outputs": {
+    "paper/figures/clean_vs_corrupted.pdf": "e84a929a468c728408fa1265705aba8817b8e913abddccd652d18d3726a844a0",
+    "paper/figures/clean_vs_corrupted.png": "0ad6c4a3ed1d1b4f4b68836ab313a684d0facbea51cf9ecdbf36283d75ded35c",
+    "paper/figures/clean_vs_corrupted.svg": "82fe885e650a6d820c4d82c00ea44ece1342835b1d1532a7af74ceb66ad0c478",
+    "paper/figures/corruption_transfer_heatmap.pdf": "289cb12ec6016b1e3851c2db8779e309b4cfca3c6dee6ad2439afceea54379d4",
+    "paper/figures/corruption_transfer_heatmap.png": "05754318db41d7186778e247b6888fd6e8f8e14ac157f0b30ef7d8738a2f5a9b",
+    "paper/figures/corruption_transfer_heatmap.svg": "6dce7146a3f2cc1637c4c196338c35d03a59cdb7d8a868050b9f9fb4f829c492",
+    "paper/figures/family_transfer.pdf": "74933c8ff88c6fc8efc1e81b0aaedffc149772dd9952d7e8f20a477d5d4ccdaa",
+    "paper/figures/family_transfer.png": "7363caf0758f52a4d9d9aea9c23d357b7ce353af40f5be606e7b71e7155450d0",
+    "paper/figures/family_transfer.svg": "73ff54947ecfa0b58c99a332f73c43495ec5d2d0e95b606496766bd3c4656e72",
+    "paper/figures/lofo_design.pdf": "2622d924e7fb1233ae4a5e4db35814c27f27423810b2464a5d4724983091f2f2",
+    "paper/figures/lofo_design.png": "f0ccd83608149af9e72d269983093a39e16e69c8f6204a0eb7855c5535ba9d7c",
+    "paper/figures/lofo_design.svg": "5ae5c47642e10110fc743393365e2fbd1d60f377e6ef42d518155858d0c55654",
+    "paper/figures/severity_transfer.pdf": "b74f233274cf4a0a5a0ea2bec1656bd001ba6542cce5705090cfb39dadac33c6",
+    "paper/figures/severity_transfer.png": "7308ccf3324cc12b34be8199f625c1e711ac41313d807edffaad78ffc42bca09",
+    "paper/figures/severity_transfer.svg": "ed4d66ac1685efabc99a3a60e57b6123cd080bea43cf84f1979a7e3f7f023ace",
+    "paper/tables/conditions.tex": "fdbfbbc5b7b875cf9f0f39113e122af0cb57b00840a27ff95855e7258933134b",
+    "paper/tables/held_out_conditions.csv": "c2ed878dd4da2331d719094316a8abf4329811be8aab874cd2654039292f3c96",
+    "paper/tables/held_out_transfer.csv": "7bb6acd3397e71ab26c9973205aea3d1666daeb8fc75cc2591e92ca2cf7a3665",
+    "paper/tables/held_out_transfer.tex": "80acc1f19c5f66028cfa1b38cd7bf3af5b191074799d0d3501834a8bf9c19491",
+    "paper/tables/overall_performance.tex": "ab6a688251131106e40123e49918a82c942cb411552eb0e2c05aaabbf4c3cb57",
+    "paper/tables/per_corruption_transfer.csv": "a581f419c834fd79436e7a9911c0b97df21b08ad609f193962e230028a1f392a",
+    "paper/tables/plot_data.json": "7554faf5903087849b1fcf08540a3d395aad6e3aa156ca48da99da398b0bbe30",
+    "paper/tables/severity_transfer.csv": "635033b9cf6087825f381b886e4072d8a1abc0bf2b27d12a0384efb251376296"
+  }
+}

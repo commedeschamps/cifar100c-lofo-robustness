@@ -1,0 +1,10 @@
+% Submission-only adjustment to the unmodified official ELCVIA style.
+% The journal supplies volume/issue/pagination/year after acceptance.
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{elcvia-submission}[2026/11/01 Unassigned publication metadata]
+\RequirePackage{etoolbox}
+\makeatletter
+\patchcmd{\@maketitle}{\vol(\num):\begpag-\finpag, \yearp}{}{}
+  {\PackageError{elcvia-submission}{Official title metadata pattern changed}{Inspect elcvia.sty before building.}}
+\makeatother
+\endinput

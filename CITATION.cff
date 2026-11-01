@@ -1,0 +1,21 @@
+cff-version: 1.2.0
+message: "If you use this research code or saved results, please cite the unpublished manuscript."
+type: software
+title: "How Far Does Corruption Robustness Transfer? A Leave-One-Family-Out Study on CIFAR-100-C"
+authors:
+  - family-names: Seidigali
+    given-names: Rakhman
+  - family-names: Khamitov
+    given-names: Yermakhan
+repository-code: "https://github.com/commedeschamps/cifar100c-lofo-robustness"
+url: "https://github.com/commedeschamps/cifar100c-lofo-robustness"
+preferred-citation:
+  type: unpublished
+  title: "How Far Does Corruption Robustness Transfer? A Leave-One-Family-Out Study on CIFAR-100-C"
+  authors:
+    - family-names: Seidigali
+      given-names: Rakhman
+    - family-names: Khamitov
+      given-names: Yermakhan
+  year: 2026
+  url: "https://github.com/commedeschamps/cifar100c-lofo-robustness"

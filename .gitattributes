@@ -1,0 +1,18 @@
+# Preserve bytes used by recorded SHA-256 identities across checkouts.
+src/** -text
+configs/** -text
+splits/** -text
+results/** -text
+requirements*.txt -text
+tests/test_controlled_v2.py -text
+paper/generate_assets.py -text
+paper/figures/* -text
+paper/tables/* -text
+
+# Keep upstream notices and generator-produced formatting verbatim.
+paper/elcvia.sty -text -whitespace
+paper/elcvia-numeric.bst -text -whitespace
+paper/template/README-original.txt -text -whitespace
+paper/third_party/* -text -whitespace
+paper/figures/*.svg -whitespace
+paper/tables/*.csv whitespace=cr-at-eol

@@ -1,0 +1,109 @@
+% ----------------------------------------------------------------------
+% elcvia.sty -- LaTeX Style to ELCVIA articles
+% ----------------------------------------------------------------------
+
+\typeout{Electronic Letters on Computer Vision and Image Analysis, CVC
+(28-August-2002)}
+
+% ----------------------------------------------------------------------
+% Page size.
+% ----------------------------------------------------------------------
+\setlength{\textheight}{23.5cm}
+\setlength{\textwidth}{17cm}
+\setlength{\columnsep}{0.8cm}
+\setlength{\topmargin}{-1cm}
+\setlength{\headheight}{0.8cm}
+\setlength{\headsep}{0.75cm}
+\setlength{\parindent}{1pc}
+\setlength{\oddsidemargin}{-0.5cm}
+\setlength{\evensidemargin}{-0.5cm}
+
+% ----------------------------------------------------------------------
+% Page numbering.
+% ----------------------------------------------------------------------
+
+\pagestyle{plain}
+
+% ----------------------------------------------------------------------
+% Page title modifications.
+% ----------------------------------------------------------------------
+
+\def\@maketitle{}
+\def\@maketitleblind{}
+
+\def\maketitle{\par
+\begingroup
+\def\thefootnote{\fnsymbol{footnote}}
+\def\@makefnmark{\hbox
+to 0pt{$^{\@thefnmark}$\hss}}
+\if@twocolumn
+\twocolumn[\@maketitle]
+\else \newpage
+\global\@topnum\z@
+\@maketitle \fi\thispagestyle{empty}\@thanks
+\endgroup
+\setcounter{footnote}{0}
+%\let\maketitle\relax
+%\let\@maketitle\relax
+%\gdef\@thanks{}\gdef\@author{}\gdef\@title{}
+%\let\thanks\relax
+}
+
+
+\def\maketitleblind{\par
+\begingroup
+\def\thefootnote{\fnsymbol{footnote}}
+\def\@makefnmark{\hbox
+to 0pt{$^{\@thefnmark}$\hss}}
+\if@twocolumn
+\twocolumn[\@maketitleblind]
+\else \newpage
+\global\@topnum\z@
+\@maketitleblind \fi\thispagestyle{empty}\@thanks
+\endgroup
+\setcounter{footnote}{0}
+%\let\maketitleblind\relax
+%\let\@maketitleblind\relax
+%\gdef\@thanks{}\gdef\@author{}\gdef\@title{}
+%\let\thanks\relax
+}
+
+
+\def\@maketitle
+    {
+    \newpage
+    \thispagestyle{empty}
+    \center{\small \it Electronic Letters on Computer Vision and Image Analysis 
+    \vol(\num):\begpag-\finpag, \yearp}
+    \vskip 2em
+    \begin{center}
+      {\LARGE\bf \@title \par}
+      \vskip 1.5em
+      {\large \lineskip .5em
+      \begin{tabular}[t]{c}
+         \@author
+      \end{tabular}\par}
+    \end{center}
+    \par
+%    \vskip 0.5em
+    }
+
+
+\def\@maketitleblind
+    {
+    \newpage
+    \thispagestyle{empty}
+    \begin{center}
+      {\LARGE\bf \@title \par}
+      \vskip 100pt
+    \end{center}
+    \par
+    \vskip 1.5em
+    }
+
+
+ \endinput
+
+% ----------------------------------------------------------------------
+% End of elcvia.sty
+% ----------------------------------------------------------------------

@@ -6,13 +6,92 @@
   url         = {https://cave.cs.toronto.edu/kriz/learning-features-2009-TR.pdf}
 }
 
-@article{he2015resnet,
-  author  = {Kaiming He and Xiangyu Zhang and Shaoqing Ren and Jian Sun},
-  title   = {Deep Residual Learning for Image Recognition},
-  journal = {arXiv preprint arXiv:1512.03385},
-  year    = {2015},
-  doi     = {10.48550/arXiv.1512.03385},
-  url     = {https://arxiv.org/abs/1512.03385}
+@inproceedings{he2016resnet,
+  author    = {Kaiming He and Xiangyu Zhang and Shaoqing Ren and Jian Sun},
+  title     = {Deep Residual Learning for Image Recognition},
+  booktitle = {Proc. IEEE Conf. Computer Vision and Pattern Recognition (CVPR)},
+  pages     = {770--778},
+  year      = {2016},
+  doi       = {10.1109/CVPR.2016.90},
+  url       = {https://openaccess.thecvf.com/content_cvpr_2016/html/He_Deep_Residual_Learning_CVPR_2016_paper.html}
+}
+
+@inproceedings{hendrycks2020augmix,
+  author    = {Dan Hendrycks and Norman Mu and Ekin D. Cubuk and Barret Zoph and Justin Gilmer and Balaji Lakshminarayanan},
+  title     = {{AugMix}: A Simple Data Processing Method to Improve Robustness and Uncertainty},
+  booktitle = {International Conference on Learning Representations},
+  year      = {2020},
+  eprint    = {1912.02781},
+  archivePrefix = {arXiv},
+  url       = {https://openreview.net/forum?id=S1gmrxHFvB}
+}
+
+@inproceedings{rusak2020simple,
+  author    = {Evgenia Rusak and Lukas Schott and Roland S. Zimmermann and Julian Bitterwolf and Oliver Bringmann and Matthias Bethge and Wieland Brendel},
+  title     = {A Simple Way to Make Neural Networks Robust Against Diverse Image Corruptions},
+  booktitle = {Computer Vision---ECCV 2020},
+  series    = {Lecture Notes in Computer Science},
+  volume    = {12348},
+  pages     = {53--69},
+  publisher = {Springer},
+  year      = {2020},
+  doi       = {10.1007/978-3-030-58580-8_4},
+  url       = {https://www.ecva.net/papers/eccv_2020/papers_ECCV/papers/123480052.pdf}
+}
+
+@inproceedings{mintun2021interaction,
+  author    = {Eric Mintun and Alexander Kirillov and Saining Xie},
+  title     = {On Interaction Between Augmentations and Corruptions in Natural Corruption Robustness},
+  booktitle = {Advances in Neural Information Processing Systems},
+  volume    = {34},
+  year      = {2021},
+  url       = {https://proceedings.neurips.cc/paper/2021/hash/1d49780520898fe37f0cd6b41c5311bf-Abstract.html}
+}
+
+@inproceedings{geirhos2018generalisation,
+  author    = {Robert Geirhos and Carlos R. Medina Temme and Jonas Rauber and Heiko H. Sch{\"u}tt and Matthias Bethge and Felix A. Wichmann},
+  title     = {Generalisation in Humans and Deep Neural Networks},
+  booktitle = {Advances in Neural Information Processing Systems},
+  volume    = {31},
+  year      = {2018},
+  url       = {https://proceedings.neurips.cc/paper/2018/hash/0937fb5864ed06ffb59ae5f9b5ed67a9-Abstract.html}
+}
+
+@inproceedings{yin2019fourier,
+  author    = {Dong Yin and Raphael Gontijo Lopes and Jonathon Shlens and Ekin D. Cubuk and Justin Gilmer},
+  title     = {A {Fourier} Perspective on Model Robustness in Computer Vision},
+  booktitle = {Advances in Neural Information Processing Systems},
+  volume    = {32},
+  year      = {2019},
+  url       = {https://proceedings.neurips.cc/paper/2019/hash/b05b57f6add810d3b7490866d74c0053-Abstract.html}
+}
+
+@inproceedings{taori2020measuring,
+  author    = {Rohan Taori and Achal Dave and Vaishaal Shankar and Nicholas Carlini and Benjamin Recht and Ludwig Schmidt},
+  title     = {Measuring Robustness to Natural Distribution Shifts in Image Classification},
+  booktitle = {Advances in Neural Information Processing Systems},
+  volume    = {33},
+  year      = {2020},
+  url       = {https://proceedings.neurips.cc/paper/2020/hash/d8330f857a17c53d217014ee776bfd50-Abstract.html}
+}
+
+@inproceedings{saikia2021frequency,
+  author    = {Tonmoy Saikia and Cordelia Schmid and Thomas Brox},
+  title     = {Improving Robustness Against Common Corruptions With Frequency Biased Models},
+  booktitle = {Proc. IEEE/CVF International Conf. Computer Vision (ICCV)},
+  pages     = {10191--10200},
+  year      = {2021},
+  doi       = {10.1109/ICCV48922.2021.01005},
+  url       = {https://openaccess.thecvf.com/content/ICCV2021/papers/Saikia_Improving_Robustness_Against_Common_Corruptions_With_Frequency_Biased_Models_ICCV_2021_paper.pdf}
+}
+
+@misc{cifarreference,
+  author       = {Dan Hendrycks},
+  title        = {{CIFAR-C} Corruption Generation Reference Implementation},
+  year         = {2022},
+  howpublished = {\texttt{make\_cifar\_c.py}, robustness repository, commit \texttt{8190fe3}},
+  url          = {https://github.com/hendrycks/robustness/blob/8190fe329f5f072a06e3a2aea02bb5dda69aed9f/ImageNet-C/create_c/make_cifar_c.py},
+  note         = {Accessed: Nov. 1, 2026}
 }
 
 @inproceedings{hendrycks2019corruptions,

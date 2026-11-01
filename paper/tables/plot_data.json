@@ -1,0 +1,1010 @@
+{
+  "overall": [
+    {
+      "cohort": "historical",
+      "model": "clean_baseline",
+      "label": "Historical clean",
+      "clean_pct": 76.29,
+      "overall_pct": 47.70146666666667,
+      "best_epoch": 90,
+      "family_accuracy": {
+        "noise": 25.514,
+        "blur": 46.42,
+        "weather": 58.879000000000005,
+        "digital": 54.446
+      }
+    },
+    {
+      "cohort": "controlled_v2",
+      "model": "clean_baseline",
+      "label": "Primary clean",
+      "clean_pct": 76.68,
+      "overall_pct": 47.833466666666666,
+      "best_epoch": 94,
+      "family_accuracy": {
+        "noise": 25.911333333333335,
+        "blur": 46.333,
+        "weather": 59.383,
+        "digital": 54.226
+      }
+    },
+    {
+      "cohort": "historical",
+      "model": "lofo_noise",
+      "label": "LOFO-Noise",
+      "clean_pct": 73.95,
+      "overall_pct": 60.1528,
+      "best_epoch": 100,
+      "family_accuracy": {
+        "noise": 44.14533333333333,
+        "blur": 61.291000000000004,
+        "weather": 66.185,
+        "digital": 64.988
+      }
+    },
+    {
+      "cohort": "historical",
+      "model": "lofo_blur",
+      "label": "LOFO-Blur",
+      "clean_pct": 72.28,
+      "overall_pct": 63.4848,
+      "best_epoch": 100,
+      "family_accuracy": {
+        "noise": 66.52866666666667,
+        "blur": 58.575,
+        "weather": 65.91,
+        "digital": 63.6865
+      }
+    },
+    {
+      "cohort": "historical",
+      "model": "lofo_weather",
+      "label": "LOFO-Weather",
+      "clean_pct": 71.21,
+      "overall_pct": 62.39986666666667,
+      "best_epoch": 91,
+      "family_accuracy": {
+        "noise": 65.96066666666667,
+        "blur": 63.2485,
+        "weather": 60.3315,
+        "digital": 60.949
+      }
+    },
+    {
+      "cohort": "historical",
+      "model": "lofo_digital",
+      "label": "LOFO-Digital",
+      "clean_pct": 73.87,
+      "overall_pct": 64.99493333333334,
+      "best_epoch": 95,
+      "family_accuracy": {
+        "noise": 67.202,
+        "blur": 62.894,
+        "weather": 67.117,
+        "digital": 63.3185
+      }
+    },
+    {
+      "cohort": "controlled_v2",
+      "model": "all_four_representatives",
+      "label": "All-four control",
+      "clean_pct": 72.68,
+      "overall_pct": 65.198,
+      "best_epoch": 98,
+      "family_accuracy": {
+        "noise": 66.464,
+        "blur": 63.7495,
+        "weather": 66.279,
+        "digital": 64.616
+      }
+    }
+  ],
+  "held_out_families": [
+    {
+      "family": "noise",
+      "baseline_pct": 25.911333333333335,
+      "lofo_pct": 44.14533333333333,
+      "gain_pp": 18.233999999999998,
+      "all_four_pct": 66.464,
+      "all_four_minus_lofo_pp": 22.318666666666665
+    },
+    {
+      "family": "blur",
+      "baseline_pct": 46.333,
+      "lofo_pct": 58.575,
+      "gain_pp": 12.242000000000004,
+      "all_four_pct": 63.7495,
+      "all_four_minus_lofo_pp": 5.174499999999995
+    },
+    {
+      "family": "weather",
+      "baseline_pct": 59.383,
+      "lofo_pct": 60.3315,
+      "gain_pp": 0.9484999999999957,
+      "all_four_pct": 66.279,
+      "all_four_minus_lofo_pp": 5.947499999999998
+    },
+    {
+      "family": "digital",
+      "baseline_pct": 54.226,
+      "lofo_pct": 63.3185,
+      "gain_pp": 9.092500000000001,
+      "all_four_pct": 64.616,
+      "all_four_minus_lofo_pp": 1.2974999999999994
+    }
+  ],
+  "per_corruption": [
+    {
+      "family": "noise",
+      "corruption": "gaussian_noise",
+      "baseline_pct": 21.272000000000002,
+      "lofo_pct": 43.772,
+      "gain_pp": 22.499999999999996
+    },
+    {
+      "family": "noise",
+      "corruption": "shot_noise",
+      "baseline_pct": 29.516,
+      "lofo_pct": 50.135999999999996,
+      "gain_pp": 20.619999999999997
+    },
+    {
+      "family": "noise",
+      "corruption": "impulse_noise",
+      "baseline_pct": 26.945999999999998,
+      "lofo_pct": 38.528,
+      "gain_pp": 11.582
+    },
+    {
+      "family": "blur",
+      "corruption": "defocus_blur",
+      "baseline_pct": 58.594,
+      "lofo_pct": 62.848,
+      "gain_pp": 4.253999999999998
+    },
+    {
+      "family": "blur",
+      "corruption": "glass_blur",
+      "baseline_pct": 21.314,
+      "lofo_pct": 52.822,
+      "gain_pp": 31.508000000000003
+    },
+    {
+      "family": "blur",
+      "corruption": "motion_blur",
+      "baseline_pct": 53.796,
+      "lofo_pct": 58.244,
+      "gain_pp": 4.448
+    },
+    {
+      "family": "blur",
+      "corruption": "zoom_blur",
+      "baseline_pct": 51.628,
+      "lofo_pct": 60.386,
+      "gain_pp": 8.758000000000003
+    },
+    {
+      "family": "weather",
+      "corruption": "snow",
+      "baseline_pct": 53.967999999999996,
+      "lofo_pct": 58.955999999999996,
+      "gain_pp": 4.9879999999999995
+    },
+    {
+      "family": "weather",
+      "corruption": "frost",
+      "baseline_pct": 48.126,
+      "lofo_pct": 61.04,
+      "gain_pp": 12.914000000000001
+    },
+    {
+      "family": "weather",
+      "corruption": "fog",
+      "baseline_pct": 62.768,
+      "lofo_pct": 54.536,
+      "gain_pp": -8.232
+    },
+    {
+      "family": "weather",
+      "corruption": "brightness",
+      "baseline_pct": 72.67,
+      "lofo_pct": 66.794,
+      "gain_pp": -5.876000000000005
+    },
+    {
+      "family": "digital",
+      "corruption": "contrast",
+      "baseline_pct": 52.751999999999995,
+      "lofo_pct": 65.13,
+      "gain_pp": 12.378
+    },
+    {
+      "family": "digital",
+      "corruption": "elastic_transform",
+      "baseline_pct": 60.206,
+      "lofo_pct": 65.488,
+      "gain_pp": 5.2819999999999965
+    },
+    {
+      "family": "digital",
+      "corruption": "pixelate",
+      "baseline_pct": 52.26,
+      "lofo_pct": 61.562,
+      "gain_pp": 9.302
+    },
+    {
+      "family": "digital",
+      "corruption": "jpeg_compression",
+      "baseline_pct": 51.686,
+      "lofo_pct": 61.094,
+      "gain_pp": 9.408000000000001
+    }
+  ],
+  "severity": [
+    {
+      "family": "noise",
+      "severity": 1,
+      "baseline_pct": 51.45666666666666,
+      "lofo_pct": 64.94666666666666,
+      "all_four_pct": 70.44333333333333,
+      "gain_pp": 13.489999999999995
+    },
+    {
+      "family": "noise",
+      "severity": 2,
+      "baseline_pct": 34.723333333333336,
+      "lofo_pct": 54.626666666666665,
+      "all_four_pct": 68.86,
+      "gain_pp": 19.90333333333333
+    },
+    {
+      "family": "noise",
+      "severity": 3,
+      "baseline_pct": 20.433333333333334,
+      "lofo_pct": 42.41,
+      "all_four_pct": 66.82666666666667,
+      "gain_pp": 21.976666666666663
+    },
+    {
+      "family": "noise",
+      "severity": 4,
+      "baseline_pct": 13.41,
+      "lofo_pct": 33.343333333333334,
+      "all_four_pct": 64.68666666666667,
+      "gain_pp": 19.933333333333334
+    },
+    {
+      "family": "noise",
+      "severity": 5,
+      "baseline_pct": 9.533333333333333,
+      "lofo_pct": 25.4,
+      "all_four_pct": 61.50333333333333,
+      "gain_pp": 15.866666666666665
+    },
+    {
+      "family": "blur",
+      "severity": 1,
+      "baseline_pct": 57.1175,
+      "lofo_pct": 65.8775,
+      "all_four_pct": 67.34,
+      "gain_pp": 8.759999999999998
+    },
+    {
+      "family": "blur",
+      "severity": 2,
+      "baseline_pct": 53.1975,
+      "lofo_pct": 63.739999999999995,
+      "all_four_pct": 66.5175,
+      "gain_pp": 10.542499999999997
+    },
+    {
+      "family": "blur",
+      "severity": 3,
+      "baseline_pct": 47.925,
+      "lofo_pct": 60.4775,
+      "all_four_pct": 65.08500000000001,
+      "gain_pp": 12.552500000000002
+    },
+    {
+      "family": "blur",
+      "severity": 4,
+      "baseline_pct": 40.6475,
+      "lofo_pct": 54.4025,
+      "all_four_pct": 60.995,
+      "gain_pp": 13.755000000000003
+    },
+    {
+      "family": "blur",
+      "severity": 5,
+      "baseline_pct": 32.7775,
+      "lofo_pct": 48.3775,
+      "all_four_pct": 58.81,
+      "gain_pp": 15.599999999999994
+    },
+    {
+      "family": "weather",
+      "severity": 1,
+      "baseline_pct": 71.3325,
+      "lofo_pct": 69.11,
+      "all_four_pct": 70.895,
+      "gain_pp": -2.2224999999999966
+    },
+    {
+      "family": "weather",
+      "severity": 2,
+      "baseline_pct": 63.3825,
+      "lofo_pct": 65.2575,
+      "all_four_pct": 68.3575,
+      "gain_pp": 1.874999999999993
+    },
+    {
+      "family": "weather",
+      "severity": 3,
+      "baseline_pct": 60.36,
+      "lofo_pct": 61.1175,
+      "all_four_pct": 66.03,
+      "gain_pp": 0.7575000000000003
+    },
+    {
+      "family": "weather",
+      "severity": 4,
+      "baseline_pct": 56.865,
+      "lofo_pct": 57.075,
+      "all_four_pct": 64.5775,
+      "gain_pp": 0.21000000000000085
+    },
+    {
+      "family": "weather",
+      "severity": 5,
+      "baseline_pct": 44.974999999999994,
+      "lofo_pct": 49.0975,
+      "all_four_pct": 61.535,
+      "gain_pp": 4.122500000000002
+    },
+    {
+      "family": "digital",
+      "severity": 1,
+      "baseline_pct": 69.0,
+      "lofo_pct": 70.5275,
+      "all_four_pct": 70.3375,
+      "gain_pp": 1.5275000000000034
+    },
+    {
+      "family": "digital",
+      "severity": 2,
+      "baseline_pct": 63.0,
+      "lofo_pct": 68.6175,
+      "all_four_pct": 68.9675,
+      "gain_pp": 5.617500000000007
+    },
+    {
+      "family": "digital",
+      "severity": 3,
+      "baseline_pct": 57.5125,
+      "lofo_pct": 66.66,
+      "all_four_pct": 67.4975,
+      "gain_pp": 9.147499999999994
+    },
+    {
+      "family": "digital",
+      "severity": 4,
+      "baseline_pct": 47.9875,
+      "lofo_pct": 60.945,
+      "all_four_pct": 63.495,
+      "gain_pp": 12.957500000000003
+    },
+    {
+      "family": "digital",
+      "severity": 5,
+      "baseline_pct": 33.63,
+      "lofo_pct": 49.8425,
+      "all_four_pct": 52.7825,
+      "gain_pp": 16.2125
+    }
+  ],
+  "held_out_conditions": [
+    {
+      "family": "noise",
+      "corruption": "gaussian_noise",
+      "severity": 1,
+      "baseline_pct": 43.56,
+      "lofo_pct": 63.22,
+      "gain_pp": 19.659999999999997
+    },
+    {
+      "family": "noise",
+      "corruption": "gaussian_noise",
+      "severity": 2,
+      "baseline_pct": 25.89,
+      "lofo_pct": 51.47,
+      "gain_pp": 25.58
+    },
+    {
+      "family": "noise",
+      "corruption": "gaussian_noise",
+      "severity": 3,
+      "baseline_pct": 15.46,
+      "lofo_pct": 39.94,
+      "gain_pp": 24.479999999999997
+    },
+    {
+      "family": "noise",
+      "corruption": "gaussian_noise",
+      "severity": 4,
+      "baseline_pct": 11.71,
+      "lofo_pct": 34.88,
+      "gain_pp": 23.17
+    },
+    {
+      "family": "noise",
+      "corruption": "gaussian_noise",
+      "severity": 5,
+      "baseline_pct": 9.74,
+      "lofo_pct": 29.35,
+      "gain_pp": 19.61
+    },
+    {
+      "family": "noise",
+      "corruption": "shot_noise",
+      "severity": 1,
+      "baseline_pct": 54.98,
+      "lofo_pct": 67.88,
+      "gain_pp": 12.899999999999999
+    },
+    {
+      "family": "noise",
+      "corruption": "shot_noise",
+      "severity": 2,
+      "baseline_pct": 42.1,
+      "lofo_pct": 61.38,
+      "gain_pp": 19.28
+    },
+    {
+      "family": "noise",
+      "corruption": "shot_noise",
+      "severity": 3,
+      "baseline_pct": 22.43,
+      "lofo_pct": 47.36,
+      "gain_pp": 24.93
+    },
+    {
+      "family": "noise",
+      "corruption": "shot_noise",
+      "severity": 4,
+      "baseline_pct": 16.87,
+      "lofo_pct": 41.8,
+      "gain_pp": 24.929999999999996
+    },
+    {
+      "family": "noise",
+      "corruption": "shot_noise",
+      "severity": 5,
+      "baseline_pct": 11.2,
+      "lofo_pct": 32.26,
+      "gain_pp": 21.06
+    },
+    {
+      "family": "noise",
+      "corruption": "impulse_noise",
+      "severity": 1,
+      "baseline_pct": 55.83,
+      "lofo_pct": 63.74,
+      "gain_pp": 7.910000000000004
+    },
+    {
+      "family": "noise",
+      "corruption": "impulse_noise",
+      "severity": 2,
+      "baseline_pct": 36.18,
+      "lofo_pct": 51.03,
+      "gain_pp": 14.850000000000001
+    },
+    {
+      "family": "noise",
+      "corruption": "impulse_noise",
+      "severity": 3,
+      "baseline_pct": 23.41,
+      "lofo_pct": 39.93,
+      "gain_pp": 16.52
+    },
+    {
+      "family": "noise",
+      "corruption": "impulse_noise",
+      "severity": 4,
+      "baseline_pct": 11.65,
+      "lofo_pct": 23.35,
+      "gain_pp": 11.700000000000001
+    },
+    {
+      "family": "noise",
+      "corruption": "impulse_noise",
+      "severity": 5,
+      "baseline_pct": 7.66,
+      "lofo_pct": 14.59,
+      "gain_pp": 6.93
+    },
+    {
+      "family": "blur",
+      "corruption": "defocus_blur",
+      "severity": 1,
+      "baseline_pct": 75.99,
+      "lofo_pct": 72.05,
+      "gain_pp": -3.9399999999999977
+    },
+    {
+      "family": "blur",
+      "corruption": "defocus_blur",
+      "severity": 2,
+      "baseline_pct": 72.58,
+      "lofo_pct": 70.14,
+      "gain_pp": -2.4399999999999977
+    },
+    {
+      "family": "blur",
+      "corruption": "defocus_blur",
+      "severity": 3,
+      "baseline_pct": 62.42,
+      "lofo_pct": 66.31,
+      "gain_pp": 3.8900000000000006
+    },
+    {
+      "family": "blur",
+      "corruption": "defocus_blur",
+      "severity": 4,
+      "baseline_pct": 50.52,
+      "lofo_pct": 60.21,
+      "gain_pp": 9.689999999999998
+    },
+    {
+      "family": "blur",
+      "corruption": "defocus_blur",
+      "severity": 5,
+      "baseline_pct": 31.46,
+      "lofo_pct": 45.53,
+      "gain_pp": 14.07
+    },
+    {
+      "family": "blur",
+      "corruption": "glass_blur",
+      "severity": 1,
+      "baseline_pct": 21.27,
+      "lofo_pct": 57.53,
+      "gain_pp": 36.260000000000005
+    },
+    {
+      "family": "blur",
+      "corruption": "glass_blur",
+      "severity": 2,
+      "baseline_pct": 22.62,
+      "lofo_pct": 58.19,
+      "gain_pp": 35.56999999999999
+    },
+    {
+      "family": "blur",
+      "corruption": "glass_blur",
+      "severity": 3,
+      "baseline_pct": 27.16,
+      "lofo_pct": 58.59,
+      "gain_pp": 31.430000000000003
+    },
+    {
+      "family": "blur",
+      "corruption": "glass_blur",
+      "severity": 4,
+      "baseline_pct": 16.03,
+      "lofo_pct": 43.58,
+      "gain_pp": 27.549999999999997
+    },
+    {
+      "family": "blur",
+      "corruption": "glass_blur",
+      "severity": 5,
+      "baseline_pct": 19.49,
+      "lofo_pct": 46.22,
+      "gain_pp": 26.73
+    },
+    {
+      "family": "blur",
+      "corruption": "motion_blur",
+      "severity": 1,
+      "baseline_pct": 67.42,
+      "lofo_pct": 67.82,
+      "gain_pp": 0.3999999999999915
+    },
+    {
+      "family": "blur",
+      "corruption": "motion_blur",
+      "severity": 2,
+      "baseline_pct": 58.91,
+      "lofo_pct": 62.08,
+      "gain_pp": 3.1700000000000017
+    },
+    {
+      "family": "blur",
+      "corruption": "motion_blur",
+      "severity": 3,
+      "baseline_pct": 50.12,
+      "lofo_pct": 55.83,
+      "gain_pp": 5.710000000000001
+    },
+    {
+      "family": "blur",
+      "corruption": "motion_blur",
+      "severity": 4,
+      "baseline_pct": 50.36,
+      "lofo_pct": 55.93,
+      "gain_pp": 5.57
+    },
+    {
+      "family": "blur",
+      "corruption": "motion_blur",
+      "severity": 5,
+      "baseline_pct": 42.17,
+      "lofo_pct": 49.56,
+      "gain_pp": 7.390000000000001
+    },
+    {
+      "family": "blur",
+      "corruption": "zoom_blur",
+      "severity": 1,
+      "baseline_pct": 63.79,
+      "lofo_pct": 66.11,
+      "gain_pp": 2.3200000000000003
+    },
+    {
+      "family": "blur",
+      "corruption": "zoom_blur",
+      "severity": 2,
+      "baseline_pct": 58.68,
+      "lofo_pct": 64.55,
+      "gain_pp": 5.869999999999997
+    },
+    {
+      "family": "blur",
+      "corruption": "zoom_blur",
+      "severity": 3,
+      "baseline_pct": 52.0,
+      "lofo_pct": 61.18,
+      "gain_pp": 9.18
+    },
+    {
+      "family": "blur",
+      "corruption": "zoom_blur",
+      "severity": 4,
+      "baseline_pct": 45.68,
+      "lofo_pct": 57.89,
+      "gain_pp": 12.21
+    },
+    {
+      "family": "blur",
+      "corruption": "zoom_blur",
+      "severity": 5,
+      "baseline_pct": 37.99,
+      "lofo_pct": 52.2,
+      "gain_pp": 14.21
+    },
+    {
+      "family": "weather",
+      "corruption": "snow",
+      "severity": 1,
+      "baseline_pct": 67.57,
+      "lofo_pct": 67.97,
+      "gain_pp": 0.4000000000000057
+    },
+    {
+      "family": "weather",
+      "corruption": "snow",
+      "severity": 2,
+      "baseline_pct": 50.16,
+      "lofo_pct": 63.15,
+      "gain_pp": 12.990000000000002
+    },
+    {
+      "family": "weather",
+      "corruption": "snow",
+      "severity": 3,
+      "baseline_pct": 55.49,
+      "lofo_pct": 58.58,
+      "gain_pp": 3.0899999999999963
+    },
+    {
+      "family": "weather",
+      "corruption": "snow",
+      "severity": 4,
+      "baseline_pct": 52.71,
+      "lofo_pct": 53.01,
+      "gain_pp": 0.29999999999999716
+    },
+    {
+      "family": "weather",
+      "corruption": "snow",
+      "severity": 5,
+      "baseline_pct": 43.91,
+      "lofo_pct": 52.07,
+      "gain_pp": 8.160000000000004
+    },
+    {
+      "family": "weather",
+      "corruption": "frost",
+      "severity": 1,
+      "baseline_pct": 65.44,
+      "lofo_pct": 67.86,
+      "gain_pp": 2.4200000000000017
+    },
+    {
+      "family": "weather",
+      "corruption": "frost",
+      "severity": 2,
+      "baseline_pct": 55.57,
+      "lofo_pct": 63.24,
+      "gain_pp": 7.670000000000002
+    },
+    {
+      "family": "weather",
+      "corruption": "frost",
+      "severity": 3,
+      "baseline_pct": 44.06,
+      "lofo_pct": 59.41,
+      "gain_pp": 15.349999999999994
+    },
+    {
+      "family": "weather",
+      "corruption": "frost",
+      "severity": 4,
+      "baseline_pct": 42.31,
+      "lofo_pct": 59.37,
+      "gain_pp": 17.059999999999995
+    },
+    {
+      "family": "weather",
+      "corruption": "frost",
+      "severity": 5,
+      "baseline_pct": 33.25,
+      "lofo_pct": 55.32,
+      "gain_pp": 22.07
+    },
+    {
+      "family": "weather",
+      "corruption": "fog",
+      "severity": 1,
+      "baseline_pct": 75.77,
+      "lofo_pct": 69.88,
+      "gain_pp": -5.890000000000001
+    },
+    {
+      "family": "weather",
+      "corruption": "fog",
+      "severity": 2,
+      "baseline_pct": 72.4,
+      "lofo_pct": 64.83,
+      "gain_pp": -7.570000000000007
+    },
+    {
+      "family": "weather",
+      "corruption": "fog",
+      "severity": 3,
+      "baseline_pct": 67.79,
+      "lofo_pct": 58.35,
+      "gain_pp": -9.440000000000005
+    },
+    {
+      "family": "weather",
+      "corruption": "fog",
+      "severity": 4,
+      "baseline_pct": 60.6,
+      "lofo_pct": 49.94,
+      "gain_pp": -10.660000000000004
+    },
+    {
+      "family": "weather",
+      "corruption": "fog",
+      "severity": 5,
+      "baseline_pct": 37.28,
+      "lofo_pct": 29.68,
+      "gain_pp": -7.600000000000001
+    },
+    {
+      "family": "weather",
+      "corruption": "brightness",
+      "severity": 1,
+      "baseline_pct": 76.55,
+      "lofo_pct": 70.73,
+      "gain_pp": -5.819999999999993
+    },
+    {
+      "family": "weather",
+      "corruption": "brightness",
+      "severity": 2,
+      "baseline_pct": 75.4,
+      "lofo_pct": 69.81,
+      "gain_pp": -5.590000000000003
+    },
+    {
+      "family": "weather",
+      "corruption": "brightness",
+      "severity": 3,
+      "baseline_pct": 74.1,
+      "lofo_pct": 68.13,
+      "gain_pp": -5.969999999999999
+    },
+    {
+      "family": "weather",
+      "corruption": "brightness",
+      "severity": 4,
+      "baseline_pct": 71.84,
+      "lofo_pct": 65.98,
+      "gain_pp": -5.859999999999999
+    },
+    {
+      "family": "weather",
+      "corruption": "brightness",
+      "severity": 5,
+      "baseline_pct": 65.46,
+      "lofo_pct": 59.32,
+      "gain_pp": -6.1399999999999935
+    },
+    {
+      "family": "digital",
+      "corruption": "contrast",
+      "severity": 1,
+      "baseline_pct": 75.1,
+      "lofo_pct": 73.95,
+      "gain_pp": -1.1499999999999915
+    },
+    {
+      "family": "digital",
+      "corruption": "contrast",
+      "severity": 2,
+      "baseline_pct": 67.41,
+      "lofo_pct": 72.53,
+      "gain_pp": 5.1200000000000045
+    },
+    {
+      "family": "digital",
+      "corruption": "contrast",
+      "severity": 3,
+      "baseline_pct": 59.33,
+      "lofo_pct": 70.13,
+      "gain_pp": 10.799999999999997
+    },
+    {
+      "family": "digital",
+      "corruption": "contrast",
+      "severity": 4,
+      "baseline_pct": 46.11,
+      "lofo_pct": 65.07,
+      "gain_pp": 18.959999999999994
+    },
+    {
+      "family": "digital",
+      "corruption": "contrast",
+      "severity": 5,
+      "baseline_pct": 15.81,
+      "lofo_pct": 43.97,
+      "gain_pp": 28.159999999999997
+    },
+    {
+      "family": "digital",
+      "corruption": "elastic_transform",
+      "severity": 1,
+      "baseline_pct": 66.81,
+      "lofo_pct": 68.55,
+      "gain_pp": 1.7399999999999949
+    },
+    {
+      "family": "digital",
+      "corruption": "elastic_transform",
+      "severity": 2,
+      "baseline_pct": 66.67,
+      "lofo_pct": 70.05,
+      "gain_pp": 3.3799999999999955
+    },
+    {
+      "family": "digital",
+      "corruption": "elastic_transform",
+      "severity": 3,
+      "baseline_pct": 60.94,
+      "lofo_pct": 69.41,
+      "gain_pp": 8.469999999999999
+    },
+    {
+      "family": "digital",
+      "corruption": "elastic_transform",
+      "severity": 4,
+      "baseline_pct": 56.42,
+      "lofo_pct": 63.41,
+      "gain_pp": 6.989999999999995
+    },
+    {
+      "family": "digital",
+      "corruption": "elastic_transform",
+      "severity": 5,
+      "baseline_pct": 50.19,
+      "lofo_pct": 56.02,
+      "gain_pp": 5.830000000000005
+    },
+    {
+      "family": "digital",
+      "corruption": "pixelate",
+      "severity": 1,
+      "baseline_pct": 72.6,
+      "lofo_pct": 72.38,
+      "gain_pp": -0.21999999999999886
+    },
+    {
+      "family": "digital",
+      "corruption": "pixelate",
+      "severity": 2,
+      "baseline_pct": 63.88,
+      "lofo_pct": 68.92,
+      "gain_pp": 5.039999999999999
+    },
+    {
+      "family": "digital",
+      "corruption": "pixelate",
+      "severity": 3,
+      "baseline_pct": 58.46,
+      "lofo_pct": 66.22,
+      "gain_pp": 7.759999999999998
+    },
+    {
+      "family": "digital",
+      "corruption": "pixelate",
+      "severity": 4,
+      "baseline_pct": 41.3,
+      "lofo_pct": 56.78,
+      "gain_pp": 15.480000000000004
+    },
+    {
+      "family": "digital",
+      "corruption": "pixelate",
+      "severity": 5,
+      "baseline_pct": 25.06,
+      "lofo_pct": 43.51,
+      "gain_pp": 18.45
+    },
+    {
+      "family": "digital",
+      "corruption": "jpeg_compression",
+      "severity": 1,
+      "baseline_pct": 61.49,
+      "lofo_pct": 67.23,
+      "gain_pp": 5.740000000000002
+    },
+    {
+      "family": "digital",
+      "corruption": "jpeg_compression",
+      "severity": 2,
+      "baseline_pct": 54.04,
+      "lofo_pct": 62.97,
+      "gain_pp": 8.93
+    },
+    {
+      "family": "digital",
+      "corruption": "jpeg_compression",
+      "severity": 3,
+      "baseline_pct": 51.32,
+      "lofo_pct": 60.88,
+      "gain_pp": 9.560000000000002
+    },
+    {
+      "family": "digital",
+      "corruption": "jpeg_compression",
+      "severity": 4,
+      "baseline_pct": 48.12,
+      "lofo_pct": 58.52,
+      "gain_pp": 10.400000000000006
+    },
+    {
+      "family": "digital",
+      "corruption": "jpeg_compression",
+      "severity": 5,
+      "baseline_pct": 43.46,
+      "lofo_pct": 55.87,
+      "gain_pp": 12.409999999999997
+    }
+  ],
+  "negative_held_out_cells": 14,
+  "zero_held_out_cells": 0,
+  "blur_gain_without_glass_pp": 5.82
+}

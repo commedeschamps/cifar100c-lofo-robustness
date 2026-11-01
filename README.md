@@ -2,69 +2,107 @@
 
 **A Leave-One-Family-Out Study on CIFAR-100-C**
 
-Does training with representative corruptions from three families improve robustness to a fourth, excluded family? This repository contains seven completed seed-42 models, their training records, and two separately identified evaluations.
+This repository contains the code, saved experimental results and manuscript for an unpublished study of corruption-robustness transfer. Seven scratch-trained CIFAR-adapted ResNet-18 runs compare representative-operator leave-one-family-out (LOFO) augmentation with clean-only training and an all-four-representative control. Results are reported by corruption family, type and severity, including negative transfer and the cost in clean accuracy.
+
+## Research question
+
+Does training with representatives from three corruption families improve classification on a fourth family excluded from explicit augmentation?
 
 ## Data and method
 
-The official CIFAR-100 training set contains 50,000 images. A fixed stratified [split](splits/cifar100_seed42.json) assigns 45,000 to fitting and 5,000 to validation (450/50 per class). The separate official test set contains 10,000 images, 100 per class.
-
-Evaluation uses 15 primary CIFAR-100-C types, each at five severity levels and 10,000 test identities per condition:
+[CIFAR-100](https://cave.cs.toronto.edu/kriz/cifar.html) contains 50,000 training and 10,000 test images in 100 classes. The persisted seed-42 [split](splits/cifar100_seed42.json) assigns 45,000 training-file images to fitting and 5,000 to clean validation, exactly 450/50 per class. Evaluation uses the released [CIFAR-100-C version 1](https://zenodo.org/records/3555552) arrays: 15 primary corruption types at five severities, each applied to the same 10,000 test identities.
 
 | Family | Evaluated types | Training representative |
 |---|---|---|
-| Noise | gaussian_noise, shot_noise, impulse_noise | gaussian_noise |
-| Blur | defocus_blur, glass_blur, motion_blur, zoom_blur | defocus_blur |
-| Weather | snow, frost, fog, brightness | fog |
-| Digital | contrast, elastic_transform, pixelate, jpeg_compression | jpeg_compression |
+| Noise | Gaussian noise, shot noise, impulse noise | Gaussian noise |
+| Blur | Defocus, glass, motion, zoom blur | Defocus blur |
+| Weather | Snow, frost, fog, brightness | Fog |
+| Digital | Contrast, elastic transform, pixelate, JPEG | JPEG compression |
 
-The release also contains gaussian_blur, saturate, spatter and speckle_noise; these four additional types are excluded from primary metrics. Dataset fingerprints are preserved with the original data and evaluation manifests.
+Four additional released types—Gaussian blur, saturate, spatter and speckle noise—are excluded from primary metrics.
 
-Each LOFO model excludes one family's representative and trains with the other three. This is representative-operator training, not training on every type in the retained families. After random crop (32 pixels, padding 4) and horizontal flip, corruption is applied with probability 0.5; one allowed operator and severity 1–5 are selected uniformly. Validation remains clean. The all-four control uses all four representatives at the same total probability; clean controls use none. All models are evaluated on all 15 types; the excluded family's mean is the LOFO comparison of interest. See [operator details](docs/CORRUPTIONS.md).
+Each LOFO model omits one family's representative and trains with the remaining three. After random crop and horizontal flip, one allowed operator is applied with probability 0.5, with operator and severity sampled uniformly. The all-four control uses all four representatives at the same total probability; clean controls use no corruption augmentation. See [operator definitions](docs/CORRUPTIONS.md).
 
-All models use a scratch ResNet-18 with a 3×3, stride-1 input convolution, no initial max-pooling, and 100 outputs (11,220,132 parameters). Training uses 100 epochs, batch 128, SGD (learning rate 0.1, momentum 0.9, weight decay 0.0005), cosine annealing to zero, and cross-entropy. RGB tensors are divided by 255 and normalized with mean (0.5071, 0.4867, 0.4408), standard deviation (0.2675, 0.2565, 0.2761). The selected checkpoint is the first maximum of clean-validation accuracy. The recorded selection rule does not use corruption-test metrics.
+Models have a 3×3, stride-1 stem, no initial max-pooling, 100 outputs and 11,220,132 parameters. All runs use 100 epochs, batch size 128, SGD with learning rate 0.1, momentum 0.9 and weight decay 0.0005, cosine annealing and cross-entropy. Checkpoints are selected by the first maximum of clean-validation accuracy.
 
 ## Results
 
-Accuracy is in percent. Overall corruption accuracy is the equally weighted mean of 75 type/severity conditions. These are descriptive results from one training seed.
+The **primary comparator is the controlled-v2 MPS/FP32 clean baseline**. Accuracy is in percent; overall corrupted accuracy averages all 75 type–severity conditions equally.
 
-| Cohort | Model | Best epoch | Validation | Clean test | Overall corruption |
-|---|---|---:|---:|---:|---:|
-| Historical | Clean baseline (CUDA/AMP) | 90 | 76.82 | 76.29 | 47.70 |
-| Historical | LOFO-Noise (MPS/FP32) | 100 | 73.52 | 73.95 | 60.15 |
-| Historical | LOFO-Blur (MPS/FP32) | 100 | 72.70 | 72.28 | 63.48 |
-| Historical | LOFO-Weather (MPS/FP32) | 91 | 72.40 | 71.21 | 62.40 |
-| Historical | LOFO-Digital (MPS/FP32) | 95 | 73.96 | 73.87 | 64.99 |
-| Controlled-v2 | Clean baseline (MPS/FP32) | 94 | 77.20 | 76.68 | 47.83 |
-| Controlled-v2 | All-four representatives (MPS/FP32) | 98 | 73.34 | 72.68 | 65.20 |
+| Model | Clean | Corrupted |
+|---|---:|---:|
+| Primary clean baseline, MPS/FP32 | 76.68 | 47.83 |
+| LOFO-Noise | 73.95 | 60.15 |
+| LOFO-Blur | 72.28 | 63.48 |
+| LOFO-Weather | 71.21 | 62.40 |
+| LOFO-Digital | 73.87 | 64.99 |
+| All-four representatives | 72.68 | 65.20 |
+| Historical clean reference, CUDA/AMP | 76.29 | 47.70 |
 
-[Full-precision seven-model table](paper/tables/seed42_results.csv), [historical evaluation](results/evaluation/seed42/metrics/evaluation.json), and [controlled-v2 evaluation](results/evaluation_controlled_v2/seed42/metrics/evaluation.json) retain family and condition results. Historical runs are under `results/clean_baseline/clean_seed42/` and `results/lofo_{noise,blur,weather,digital}/seed42/`; the two controls are under `results/controlled_v2/{clean_baseline,all_four_representatives}/seed42/`.
+Held-out-family results use the corresponding LOFO network and the primary baseline:
 
-## Reproducibility
+| Held-out family | Primary baseline | LOFO | Gain (pp) |
+|---|---:|---:|---:|
+| Noise | 25.91 | 44.15 | +18.23 |
+| Blur | 46.33 | 58.58 | +12.24 |
+| Weather | 59.38 | 60.33 | +0.95 |
+| Digital | 54.23 | 63.32 | +9.09 |
 
-`src/`, `configs/`, `splits/` and per-run source/environment records define the implementation. The [frozen v2 protocol](results/controlled_v2/PROTOCOL_v2.0.0.md) specifies the bridge controls. Exact reproduction requires the recorded hardware, precision, package versions and data, not merely compatible current dependencies.
+All-four training gains 17.36 pp in overall corrupted accuracy and loses 4.00 pp in clean accuracy. Transfer is uneven: glass blur gains 31.51 pp, but fog loses 8.23 pp and brightness loses 5.88 pp. Fourteen of the 75 held-out type–severity differences are negative.
 
-From a Git clone, verify saved metric arithmetic, manuscript table provenance, the split and available frozen inputs using Python 3.10 or later (standard library only):
+[Full-precision model summary](paper/tables/seed42_results.csv), [held-out comparisons](paper/tables/held_out_transfer.csv) and [per-type comparisons](paper/tables/per_corruption_transfer.csv) retain the underlying values. Historical evaluation files and plots under `results/evaluation/` use the historical clean comparator; current manuscript comparisons use the primary baseline.
+
+## Repository structure
+
+```text
+configs/        Training configurations
+src/            Training, augmentation and evaluation implementations
+splits/         Persisted fitting/validation indices
+results/        Saved metrics, histories, protocols and source snapshots
+notebooks/      Baseline and LOFO training notebooks
+paper/          ELCVIA manuscript, figures, tables and asset generator
+docs/           Operator details, artifact identities and reproduction instructions
+tools/          Saved-result verification and reproduction utilities
+tests/          Protocol and output-isolation tests
+third_party/    Corruption reference code and license notices
+```
+
+## Setup and reproducibility
+
+Saved-result checks require Python 3.10 or later and the standard library only:
 
 ```sh
 python3 -B tools/verify_repository.py
+python3 -B tools/verify_manuscript.py
+python3 -B -m unittest discover -s tests -p test_submission.py
 ```
 
-The repository includes scientific metadata, histories, source snapshots and figures. Dataset images, checkpoint tensors, prediction caches, machine-specific execution manifests and internal planning records are not distributed through Git. [Artifact identities](docs/reproducibility/models.json), [recorded training parameters](docs/reproducibility/recorded_parameters.json) and [dataset fingerprints](docs/reproducibility/data_identities.json) document the retained full research records. No checkpoint download endpoint is supplied.
+These commands check existing records without fitting models or running inference. The full test suite also contains model-execution tests; it is not the lightweight verification command above.
 
-In the complete local research archive and recorded environment, verify checkpoint tensors, histories and evaluation completeness without training or inference:
+To regenerate manuscript figures and tables from saved correct counts:
 
 ```sh
-PYTHONDONTWRITEBYTECODE=1 .venv/bin/python tools/verify_saved_results.py
+python3 -m venv .venv
+.venv/bin/python -m pip install numpy matplotlib
+.venv/bin/python paper/generate_assets.py
 ```
 
-The full-archive check requires the omitted data, checkpoints and original hash-bound planning files; it is not a standalone Git-clone check. See [evaluation reproduction](docs/EVALUATION.md) for separate-output evaluation and [manuscript instructions](paper/README.md) for IEEE compilation. Scientific figures and tables remain in the canonical project tree; the local `submission/` copy is excluded from Git.
+Research-code dependencies are listed in [requirements-lofo.txt](requirements-lofo.txt). Per-run environment records and [requirements-local-lock.txt](requirements-local-lock.txt) preserve the completed environment; a compatible installation alone does not reproduce a training trajectory. [Evaluation instructions](docs/EVALUATION.md) describe the original artifact requirements and isolated-output reproduction command.
+
+## Manuscript and citation
+
+The complete [manuscript source](paper/main.tex) follows the official **ELCVIA** LaTeX article template. [Compilation instructions](paper/README.md), vector figures, tables and twelve references are included. The article is unpublished; no acceptance or publication is claimed. Citation metadata are provided in [CITATION.cff](CITATION.cff).
 
 ## Limitations
 
-- Only training seed 42 is completed; there is no estimate of training-seed variance or established seed-level significance. Repeated corruptions of 10,000 test identities are not independent training replications.
-- The historical baseline used CUDA/AMP; LOFO used MPS/FP32. The v2 controls match the LOFO software stack but use a separately versioned RNG schedule. The four LOFO models were not retrained as part of v2; the seven models are not a fully matched cohort.
-- The v2 initializer matches the historical LOFO digest, but historical initial tensors were not retained. Digest equivalence does not prove direct tensor identity or trajectory replay; no comparable initializer digest exists for the historical clean baseline.
-- At total corruption probability 0.5, a retained operator has probability 1/6 in LOFO and 1/8 in all-four. Exclusion and dose redistribution are intertwined.
-- Transfer is heterogeneous. Historical held-out-weather fog and brightness differences are −8.072 and −5.600 percentage points against the historical clean baseline, despite a positive weather-family mean. Families are taxonomic groups, not physically disjoint effects.
-- Official data contain 4 shared exact pixel contents across fitted/validation roles, 8 across fitted/test and 2 across validation/test, including conflicting labels. Indices are disjoint; no deduplication or relabeling was applied. Archived sensitivity analysis changes held-out gains by less than 0.008 percentage points after excluding affected test identities.
-- Pilot test outcomes were known before the prospective v2 bridge. The recorded checkpoint rule uses clean validation; artifact inspection cannot reconstruct all unlogged historical human decisions. Conclusions are limited to this architecture and benchmark.
+- One training seed (42) per condition; repeated corruptions do not estimate training-seed variability.
+- The primary baseline matches MPS/FP32, but legacy LOFO and controlled-v2 RNG schedules differ. Pilot outcomes were known before the v2 protocol was frozen.
+- A retained operator has probability 1/6 in LOFO versus 1/8 in all-four, so the control is not dose matched. No augmentation-probability ablation was run. LOFO-Noise and LOFO-Blur select epoch 100 at the budget boundary.
+- Official data contain exact-content overlaps across disjoint index partitions. Excluding ten affected test identities changes primary held-out gains by less than 0.006 pp; validation-selection effects and near-duplicates remain unresolved.
+- Four representatives, one architecture and one synthetic benchmark limit generalization. The study establishes descriptive transfer patterns, not a universal robustness mechanism or state-of-the-art result.
+
+## Code and data availability
+
+The repository includes source code, configurations, the split, training histories, frozen source snapshots, saved evaluation counts, manuscript assets and artifact fingerprints. Dataset images, checkpoint tensors and prediction caches remain in the full local research record and are not distributed here. No public model-download endpoint is supplied. Dataset sources are linked above; [artifact identities](docs/reproducibility/models.json) and [data fingerprints](docs/reproducibility/data_identities.json) identify the retained records.
+
+Third-party notices are preserved in [third_party/](third_party/NOTICE.md) and [paper/THIRD_PARTY.md](paper/THIRD_PARTY.md). A license for the original project code has not been selected.
