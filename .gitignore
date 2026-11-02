@@ -91,6 +91,8 @@ research_cv_archive*/
 # Local manuscript review materials and compiled article PDFs
 /paper/audit_*/
 /paper/revision_*/
+/paper/quick_addition_*/
+/paper/followup_*/
 /paper/review.json
 /paper/source_checks.json
 /paper/verification.json

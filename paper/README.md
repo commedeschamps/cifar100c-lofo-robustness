@@ -2,7 +2,7 @@
 
 **How Far Does Corruption Robustness Transfer? A Leave-One-Family-Out Study on CIFAR-100-C**
 
-[main.tex](main.tex) is the complete, unpublished manuscript by Rakhman Seidigali and Yermakhan Khamitov. It uses the official ELCVIA LaTeX 2e style: single-column A4, 11-point body text and single spacing. The verified build has 11 pages, five figures, three tables, Appendix A and twelve references.
+[main.tex](main.tex) is Version 4 of the complete, unpublished manuscript by Rakhman Seidigali and Yermakhan Khamitov. It uses the official ELCVIA LaTeX 2e style: single-column A4, 11-point body text and single spacing. The verified named and blinded builds each have 12 pages, four figures, five tables, Appendix A and twenty-four references.
 
 ## Compile
 
@@ -35,10 +35,14 @@ python3 -B tools/verify_manuscript.py
 python3 paper/generate_assets.py
 ```
 
-Asset generation requires NumPy and matplotlib and reads only saved integer correct counts. `--only-figure clean_vs_corrupted` limits figure export to one requested figure. PDF/SVG and PNG assets are supplied; [tables/plot_data.json](tables/plot_data.json) and the CSV files retain full precision. [tables/manuscript_provenance.json](tables/manuscript_provenance.json) binds inputs, generator and output hashes. The primary comparator is the new MPS/FP32 clean baseline.
+Asset generation requires NumPy and matplotlib and reads only saved integer correct counts. `--only-figure clean_vs_corrupted` limits figure export to one requested figure. PDF/SVG and PNG assets are supplied; [tables/plot_data.json](tables/plot_data.json) and the CSV files retain full precision, including descriptive transfer ratios, all five augmented models by corruption type, and ungenerated types within represented families. The optional held-out gain bar-chart export is retained; Table 3 presents those gains in the article. [tables/manuscript_provenance.json](tables/manuscript_provenance.json) binds inputs, generator and output hashes. The primary comparator is the new MPS/FP32 clean baseline.
+
+[paired_bootstrap.py](paired_bootstrap.py) reads only saved prediction caches and hash-verified official labels. Run `.venv/bin/python -B paper/paired_bootstrap.py` from the full repository root. It resamples the 10,000 test identities 2,000 times with NumPy PCG64 seed 42, using common indices across models, types and severities. [paired_bootstrap.csv](paired_bootstrap.csv) retains full-precision point estimates and 95% percentile intervals; [paired_bootstrap_provenance.json](paired_bootstrap_provenance.json) records input/output identities. Table 4 reports family gains, transfer ratios, denominator intervals and the four discussed type gains. The intervals reflect test-image sampling uncertainty only; they do not capture training-seed variability and are not significance tests. The compact submission omits the private caches needed to rerun this analysis.
+
+The manuscript checker verifies saved arithmetic, bootstrap outputs and all available input hashes. Private bootstrap inputs omitted from Git are reported as unavailable; `python3 -B tools/verify_manuscript.py --require-bootstrap-inputs` requires the complete local input set. Before-edit copies and change reports are retained locally in `quick_addition_20261102/` and `followup_20261102/`, outside Git.
 
 ## Manuscript status
 
-The manuscript names Codex in its AI-assistance disclosure, following the authors' confirmed tool list. Author order, affiliation, correspondence, CRediT, funding and competing-interest statements are included. The article has not been accepted or published by ELCVIA.
+The authors confirmed Codex for research programming and computational verification, and ChatGPT and Claude for literature discovery and review. The disclosure also records AI assistance with manuscript preparation, editing and figures. Author order, affiliation, correspondence, CRediT, funding and competing-interest statements are included. The article has not been accepted or published by ELCVIA.
 
 This repository and its source manuscript identify the authors. Journal review materials must be prepared separately according to the journal's double-blind process; no anonymous-review artifact is published here.

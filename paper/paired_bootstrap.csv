@@ -1,0 +1,17 @@
+scope,family,corruption,model,metric,units,estimate,lower_95,upper_95,n_images,n_resamples,seed
+family,noise,,lofo_noise,delta,pp,18.234000000000048,17.765999999999995,18.72941666666671,10000,2000,42
+family,noise,,all_four_representatives,denominator,pp,40.5526666666667,39.84975000000012,41.225483333333266,10000,2000,42
+family,noise,,lofo_noise,transfer_ratio,ratio,0.44963750842525846,0.43965789771378117,0.4596165910353708,10000,2000,42
+family,blur,,lofo_blur,delta,pp,12.242,11.752424999999999,12.753,10000,2000,42
+family,blur,,all_four_representatives,denominator,pp,17.4165,16.8524875,17.9621375,10000,2000,42
+family,blur,,lofo_blur,transfer_ratio,ratio,0.7028966784371143,0.6797351397104537,0.7268523374177909,10000,2000,42
+family,weather,,lofo_weather,delta,pp,0.9485,0.4539625,1.4340249999999999,10000,2000,42
+family,weather,,all_four_representatives,denominator,pp,6.896,6.373475,7.382187499999999,10000,2000,42
+family,weather,,lofo_weather,transfer_ratio,ratio,0.1375435034802784,0.06810060203176196,0.20089522689221045,10000,2000,42
+family,digital,,lofo_digital,delta,pp,9.0925,8.673974999999999,9.5100125,10000,2000,42
+family,digital,,all_four_representatives,denominator,pp,10.39,9.9049125,10.847024999999999,10000,2000,42
+family,digital,,lofo_digital,transfer_ratio,ratio,0.8751203079884503,0.8400870125450746,0.9116342290882183,10000,2000,42
+type,blur,glass_blur,lofo_blur,gain,pp,31.508,30.7139,32.3281,10000,2000,42
+type,weather,fog,lofo_weather,gain,pp,-8.232,-8.80005,-7.6679,10000,2000,42
+type,weather,brightness,lofo_weather,gain,pp,-5.876,-6.54005,-5.218,10000,2000,42
+type,digital,contrast,lofo_weather,gain,pp,-5.664,-6.216,-5.126,10000,2000,42

@@ -91,7 +91,7 @@ Research-code dependencies are listed in [requirements-lofo.txt](requirements-lo
 
 ## Manuscript and citation
 
-The complete [manuscript source](paper/main.tex) follows the official **ELCVIA** LaTeX article template. [Compilation instructions](paper/README.md), vector figures, tables and twelve references are included. The article is unpublished; no acceptance or publication is claimed. Citation metadata are provided in [CITATION.cff](CITATION.cff).
+The complete [manuscript source](paper/main.tex) follows the official **ELCVIA** LaTeX article template. [Compilation instructions](paper/README.md), vector figures, five tables and twenty-four references are included. The article is unpublished; no acceptance or publication is claimed. Citation metadata are provided in [CITATION.cff](CITATION.cff).
 
 ## Limitations
 

@@ -6,6 +6,7 @@ results/** -text
 requirements*.txt -text
 tests/test_controlled_v2.py -text
 paper/generate_assets.py -text
+paper/paired_bootstrap* -text
 paper/figures/* -text
 paper/tables/* -text
 
@@ -16,3 +17,4 @@ paper/template/README-original.txt -text -whitespace
 paper/third_party/* -text -whitespace
 paper/figures/*.svg -whitespace
 paper/tables/*.csv whitespace=cr-at-eol
+paper/paired_bootstrap.csv whitespace=cr-at-eol

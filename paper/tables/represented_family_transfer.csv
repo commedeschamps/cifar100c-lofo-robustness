@@ -1,0 +1,5 @@
+model,n_types,corruption_types,baseline_pct,lofo_pct,gain_pp
+lofo_noise,9,glass_blur;motion_blur;zoom_blur;snow;frost;brightness;contrast;elastic_transform;pixelate,51.85777777777778,61.92755555555556,10.06977777777778
+lofo_blur,8,shot_noise;impulse_noise;snow;frost;brightness;contrast;elastic_transform;pixelate,49.5555,63.816,14.2605
+lofo_weather,8,shot_noise;impulse_noise;glass_blur;motion_blur;zoom_blur;contrast;elastic_transform;pixelate,43.55225,61.34175,17.789499999999997
+lofo_digital,8,shot_noise;impulse_noise;glass_blur;motion_blur;zoom_blur;snow;frost;brightness,44.7455,63.40225,18.656750000000002

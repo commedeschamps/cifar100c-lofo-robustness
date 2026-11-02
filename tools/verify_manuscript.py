@@ -32,7 +32,7 @@ def close(actual, expected):
         raise ValueError(f"Metric mismatch: {actual} != {expected}")
 
 
-def verify(root):
+def verify(root, require_bootstrap_inputs=False):
     root = Path(root).resolve(strict=True)
     paper = root / "paper"
     counts = {}
@@ -60,6 +60,15 @@ def verify(root):
         close(row["overall_pct"], accuracy(row["cohort"], row["model"], all_types))
         for family, types in FAMILIES.items():
             close(row["family_accuracy"][family], accuracy(row["cohort"], row["model"], types))
+        if row['cohort'] == 'controlled_v2':
+            run = root / 'results/controlled_v2' / row['model'] / 'seed42'
+        elif row['model'] == 'clean_baseline':
+            run = root / 'results/clean_baseline/clean_seed42'
+        else:
+            run = root / 'results' / row['model'] / 'seed42'
+        best = max(read(run / 'metrics.json'), key=lambda r: r['val_accuracy_pct'])
+        close(row['best_epoch'], best['epoch'])
+        close(row['best_validation_pct'], best['val_accuracy_pct'])
     if len(data["overall"]) != 7:
         raise ValueError("Expected seven model summaries")
     gains = {}
@@ -80,6 +89,10 @@ def verify(root):
                 if field in row:
                     close(row[field], value)
             if group == "held_out_families":
+                if control == baseline:
+                    raise ValueError('Undefined transfer ratio')
+                close(row['all_four_gain_pp'], control - baseline)
+                close(row['transfer_ratio'], (lofo - baseline) / (control - baseline))
                 gains[family] = float(lofo - baseline)
     negative = sum(row["gain_pp"] < 0 for row in data["held_out_conditions"])
     if data["negative_held_out_cells"] != negative or negative != 14:
@@ -88,10 +101,38 @@ def verify(root):
                              if row["family"] == "blur" and row["corruption"] != "glass_blur") / 3
     close(data["blur_gain_without_glass_pp"], blur_without_glass)
 
+    if len(data['operator_comparison']) != 15:
+        raise ValueError('Expected all fifteen operator rows')
+    for row in data['operator_comparison']:
+        baseline = accuracy('controlled_v2', 'clean_baseline', [row['corruption']])
+        close(row['baseline_pct'], baseline)
+        for family in FAMILIES:
+            model = 'lofo_' + family
+            close(row[model+'_gain_pp'], accuracy('historical', model, [row['corruption']])-baseline)
+        close(row['all_four_representatives_gain_pp'],
+              accuracy('controlled_v2', 'all_four_representatives', [row['corruption']])-baseline)
+    representatives = dict(noise='gaussian_noise', blur='defocus_blur',
+                           weather='fog', digital='jpeg_compression')
+    if len(data['represented_family_transfer']) != 4:
+        raise ValueError('Expected four represented-family summaries')
+    for row in data['represented_family_transfer']:
+        held_out = row['model'][5:]
+        types = [c for f, cs in FAMILIES.items() if f != held_out for c in cs
+                 if c != representatives[f]]
+        if row['corruption_types'].split(';') != types or row['n_types'] != len(types):
+            raise ValueError('Represented-family evaluation subset differs')
+        baseline = accuracy('controlled_v2', 'clean_baseline', types)
+        lofo = accuracy('historical', row['model'], types)
+        close(row['baseline_pct'], baseline)
+        close(row['lofo_pct'], lofo)
+        close(row['gain_pp'], lofo-baseline)
+
     for filename, group in (("held_out_transfer.csv", "held_out_families"),
                             ("per_corruption_transfer.csv", "per_corruption"),
                             ("severity_transfer.csv", "severity"),
-                            ("held_out_conditions.csv", "held_out_conditions")):
+                            ("held_out_conditions.csv", "held_out_conditions"),
+                            ("operator_comparison.csv", "operator_comparison"),
+                            ("represented_family_transfer.csv", "represented_family_transfer")):
         with (paper / "tables" / filename).open() as stream:
             rows = list(csv.DictReader(stream))
         if len(rows) != len(data[group]):
@@ -120,12 +161,12 @@ def verify(root):
     bib = (paper / "references.bib").read_text()
     cited = {key for group in re.findall(r"\\cite\{([^}]+)\}", tex) for key in group.split(",")}
     entries = set(re.findall(r"@\w+\s*\{([^,]+),", bib))
-    if cited != entries or len(entries) != 12:
-        raise ValueError("Expected twelve complete manuscript references")
+    if cited != entries or len(entries) != 24:
+        raise ValueError("Expected twenty-four complete manuscript references")
     figures = re.findall(r"\\includegraphics(?:\[[^]]*\])?\{([^}]+)\}", tex)
     tables = re.findall(r"\\input\{([^}]+)\}", tex)
-    if len(figures) != 5 or len(tables) != 3:
-        raise ValueError("Expected five figures and three tables")
+    if len(figures) != 4 or len(tables) != 5:
+        raise ValueError("Expected four figures and five tables")
     for relative in figures + tables:
         if not (paper / relative).is_file():
             raise ValueError(f"Missing manuscript asset: {relative}")
@@ -136,13 +177,54 @@ def verify(root):
     for family, gain in gains.items():
         if f"{family.title()} +{gain:.2f} pp" not in tex:
             raise ValueError(f"Missing held-out conclusion value: {family}")
+    bootstrap = read(paper / "paired_bootstrap_provenance.json")
+    if bootstrap["script_sha256"] != sha(paper / "paired_bootstrap.py"):
+        raise ValueError("Bootstrap script identity differs")
+    bootstrap_inputs_checked = 0
+    unavailable_private_inputs = 0
+    for relative, digest in bootstrap["inputs"].items():
+        path = root / relative
+        if not path.resolve().is_relative_to(root):
+            raise ValueError(f"Bootstrap input escapes repository: {relative}")
+        private_input = (relative.startswith("data/") or relative.startswith(
+            ("results/evaluation/seed42/cache/", "results/evaluation_controlled_v2/seed42/cache/")))
+        if not path.is_file() and private_input and not require_bootstrap_inputs:
+            unavailable_private_inputs += 1
+            continue
+        if not path.is_file() or sha(path) != digest:
+            raise ValueError(f"Bootstrap input identity differs: {relative}")
+        bootstrap_inputs_checked += 1
+    for relative, digest in bootstrap["outputs"].items():
+        path = paper / relative
+        if not path.resolve().is_relative_to(paper) or sha(path) != digest:
+            raise ValueError(f"Bootstrap output identity differs: {relative}")
+    with (paper / "paired_bootstrap.csv").open() as stream:
+        bootstrap_rows = list(csv.DictReader(stream))
+    if len(bootstrap_rows) != 16:
+        raise ValueError("Expected twelve family and four type bootstrap rows")
+    for row in bootstrap_rows:
+        if (int(row["n_images"]), int(row["n_resamples"]), int(row["seed"])) != (10000, 2000, 42):
+            raise ValueError("Unexpected bootstrap design")
+        if not float(row["lower_95"]) <= float(row["upper_95"]):
+            raise ValueError("Invalid bootstrap interval")
+    if "The intervals reflect test-image sampling uncertainty only; they do not capture training-seed variability and are not significance tests." not in tex:
+        raise ValueError("Missing bootstrap uncertainty qualification")
     return {"models": 7, "saved_conditions": len(counts), "held_out_gain_pp": gains,
             "negative_held_out_cells": negative, "asset_hashes_verified": len(provenance["outputs"]),
+            "operator_table_numeric_cells": 90, "histories_checked": 7,
+            "transfer_ratios": {r['family']: r['transfer_ratio'] for r in data['held_out_families']},
             "references": len(entries), "figures": len(figures), "tables": len(tables),
+            "bootstrap_rows": len(bootstrap_rows),
+            "bootstrap_input_hashes_verified": bootstrap_inputs_checked,
+            "bootstrap_unavailable_private_inputs": unavailable_private_inputs,
+            "bootstrap_full_input_check": unavailable_private_inputs == 0,
             "training_or_inference": False}
 
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--root", type=Path, default=Path(__file__).resolve().parents[1])
-    print(json.dumps(verify(parser.parse_args().root), indent=2))
+    parser.add_argument("--require-bootstrap-inputs", action="store_true",
+                        help="Require private official labels and prediction caches as well as public inputs")
+    args = parser.parse_args()
+    print(json.dumps(verify(args.root, args.require_bootstrap_inputs), indent=2))
