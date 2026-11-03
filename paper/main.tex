@@ -8,15 +8,20 @@
 \usepackage{graphicx}
 \usepackage{booktabs}
 \usepackage[numbers,sort&compress]{natbib}
-\setlength{\bibsep}{0pt}
 \usepackage[hidelinks,breaklinks]{hyperref}
 \usepackage{xurl}
 \usepackage{placeins}
+% Prevent isolated first or last paragraph lines at page breaks.
+\clubpenalty=10000
+\widowpenalty=10000
 \renewcommand{\topfraction}{0.9}
 \renewcommand{\bottomfraction}{0.8}
 \renewcommand{\textfraction}{0.1}
 \renewcommand{\floatpagefraction}{0.8}
 \urlstyle{same}
+% Break DOIs at their prefix separator, keeping identifier suffixes intact.
+\newcommand{\doi}{doi: \begingroup\urlstyle{rm}%
+  \def\UrlBreaks{\do\/}\def\UrlBigBreaks{\do\/}\Url}
 \hypersetup{pdftitle={How Far Does Corruption Robustness Transfer? A Leave-One-Family-Out Study on CIFAR-100-C}}
 \newif\ifblindreview
 \ifdefined\ELCVIABlindReview\blindreviewtrue\else\blindreviewfalse\fi
@@ -42,7 +47,7 @@ A Leave-One-Family-Out Study on CIFAR-100-C\ifblindreview\else
 \raggedbottom
 \noindent\hrulefill
 \begin{abstract}
-We test how corruption robustness transfers to an omitted family using 15 CIFAR-100-C types at five severities. We train four CIFAR-adapted ResNet-18 models from scratch, each withholding one family represented by Gaussian noise, defocus blur, fog, or JPEG compression. Against the primary clean-trained Metal Performance Shaders (MPS), 32-bit floating-point (FP32) baseline, gains are 18.23, 12.24, 0.95, and 9.09 percentage points (pp) for Noise, Blur, Weather, and Digital, with ratios to the observed all-four gains of 0.45, 0.70, 0.14, and 0.88; fog and brightness lose accuracy, while glass blur drives Blur's gain. The all-four control reaches 65.20\% corrupted accuracy against 47.83\% for the baseline, while clean accuracy falls from 76.68\% to 72.68\%. These results use one training seed under different random-number schedules and operator training frequencies across the model cohorts.
+We test how corruption robustness transfers to an omitted family using 15 CIFAR-100-C types at five severities. We train four CIFAR-adapted ResNet-18 models from scratch, each withholding one family represented by Gaussian noise, defocus blur, fog, or JPEG compression. Compared with the primary clean-trained baseline on Metal Performance Shaders (MPS) with 32-bit floating-point (FP32) precision, held-out-family gains are 18.23, 12.24, 0.95, and 9.09 percentage points (pp) for Noise, Blur, Weather, and Digital. Ratios to the observed all-four gains are 0.45, 0.70, 0.14, and 0.88. Transfer is partial and varies by type: fog and brightness lose accuracy, while glass blur accounts for most of Blur's gain. The all-four control, trained with every representative, reaches 65.20\% mean corrupted accuracy against 47.83\% for the baseline, while its clean accuracy falls from 76.68\% to 72.68\%. These results use one training seed, with different random-number schedules and operator training frequencies across model cohorts.
 
 \vspace{0.5cm}
 \noindent\emph{Key Words}: Computer Vision, Image Classification, Corruption Robustness, Data Augmentation, Distribution Shift, Leave-One-Family-Out Evaluation.
@@ -50,30 +55,30 @@ We test how corruption robustness transfers to an omitted family using 15 CIFAR-
 \noindent\hrulefill
 
 \section{Introduction}
-Image classifiers lose accuracy on noisy and blurred inputs~\cite{dodge2017distortions,vasiljevic2016blur}. Common-corruption benchmarks measure these losses using fixed noise, blur, weather, and digital transformations~\cite{hendrycks2019corruptions}.
+Improved accuracy on training-related corruptions does not necessarily mean that a model will be robust to unseen distortions. Common-corruption benchmarks standardize evaluation~\cite{hendrycks2019corruptions}, but transfer depends on the similarity between augmentations and corruptions~\cite{geirhos2018generalisation,mintun2021interaction}. Recent CIFAR-100 experiments likewise show gains on some distortions and losses on others~\cite{trinh2024damp}, while model rankings can change with severity under continuous nuisance shifts~\cite{dunkel2025cns}.
 
-Geirhos et al.~\cite{geirhos2018generalisation} found poor transfer between trained and untrained distortions. Suitable noise augmentation improved several corruption types in Rusak et al.'s experiments~\cite{rusak2020simple}. Mintun et al.~\cite{mintun2021interaction} linked robustness gains to similarity between training augmentations and test corruptions. We ask how much transfers when a model trains on representatives from three families and is tested on a fourth.
-
-We use Gaussian noise, defocus blur, fog, and JPEG compression as family representatives on CIFAR-100-C~\cite{hendrycks2019cifar100c}. Our three contributions are:
+We use a leave-one-family-out (LOFO) design to test transfer from three represented families to an excluded fourth. Overall corrupted accuracy can improve mainly through types explicitly used in augmentation. Holding out a family separates performance on trained operators from transfer to related types absent from augmentation. Family labels provide a reproducible omission rule, but shared visual effects make this an imperfect test of perceptual novelty~\cite{mintun2021interaction}. On CIFAR-100-C~\cite{hendrycks2019cifar100c}, our representatives are Gaussian noise, defocus blur, fog, and JPEG compression. Our three contributions are:
 \begin{enumerate}
 \item A representative-operator LOFO evaluation with a CIFAR-adapted ResNet-18 across six principal conditions.
 \item Held-out-family gains and transfer ratios relative to the all-four control, measured across severity levels.
-\item A comparison of all five augmented models by corruption type, including negative transfer and ungenerated types within represented families.
+\item A comparison of all five augmented models by corruption type, including negative transfer and corruption types within represented families that were never used during training.
 \end{enumerate}
 
 \section{Related Work}
-\subsection{Corruption benchmarks and distribution shift}
-Hendrycks and Dietterich~\cite{hendrycks2019corruptions} standardized evaluation of common corruptions and perturbations, distinct from adversarial attacks. CIFAR-100-C~\cite{hendrycks2019cifar100c} provides corrupted test images at five severities. Later benchmarks incorporate scene geometry~\cite{kar2022common} or real-world shifts~\cite{hendrycks2021faces}. Taori et al.~\cite{taori2020measuring} found that gains on synthetic corruptions often fail to transfer to natural shifts.
+\subsection{Corruption benchmarks and evaluation}
+ImageNet-C and CIFAR-100-C evaluate fixed transformations at five severities~\cite{hendrycks2019corruptions,hendrycks2019cifar100c}. Later work broadens evaluation with geometry-aware corruptions~\cite{kar2022common} and natural distribution shifts~\cite{hendrycks2021faces}. Gains on synthetic corruptions do not necessarily predict robustness to natural shifts~\cite{taori2020measuring}.
 
-\subsection{Augmentation and adaptation}
-AutoAugment~\cite{cubuk2019autoaugment} learns augmentation policies from data. AugMix~\cite{hendrycks2020augmix} mixes random operation chains and adds a consistency loss, excluding operations that overlap with its corruption evaluation. DeepAugment perturbs image-to-image networks~\cite{hendrycks2021faces}. AugMax learns adversarial mixtures of random augmentations~\cite{wang2021augmax}, and PRIME samples transformations from a few primitives~\cite{modas2022prime}. Patch Gaussian adds noise to random patches, improving robustness and clean accuracy~\cite{lopes2019patch}. We use one corruption per image and cross-entropy.
+Recent benchmarks examine what fixed grids leave unmeasured. Shen et al.~\cite{shen2025continuous} index corruption effects by visual quality relative to human performance, revealing previously missed robustness gaps. CNS-Bench~\cite{dunkel2025cns} uses diffusion-model nuisance sliders and finds that model rankings change with shift magnitude. Its released levels and generators, which can vary shifts continuously, differ from CIFAR-C's pixel transformations. Our five-level grid measures neither continuous failure points nor transfer to natural shifts.
 
-Schneider et al.~\cite{schneider2020adaptation} update batch-normalization statistics using unlabeled test inputs; we keep our models fixed at test time. We do not compare numbers with these methods.
+\subsection{Augmentation for robustness}
+Policy learning~\cite{cubuk2019autoaugment} and the composition of transformations broaden augmentation coverage. AugMix~\cite{hendrycks2020augmix} regularizes stochastic mixtures for consistency, AugMax~\cite{wang2021augmax} optimizes these mixtures adversarially, and PRIME~\cite{modas2022prime} samples primitive transformations. DeepAugment operates through perturbed image-to-image networks~\cite{hendrycks2021faces}, while Patch Gaussian~\cite{lopes2019patch} adds noise to local patches. Their coverage and objectives differ from our one-operator, cross-entropy transfer study.
 
-\subsection{Why transfer is selective}
-Transfer depends on the training transformations. Rusak et al.~\cite{rusak2020simple} report generalization from tuned noise augmentation, while Geirhos et al.~\cite{geirhos2018generalisation} find poor transfer between other distortions. Yin et al.~\cite{yin2019fourier} link Gaussian augmentation to high-frequency gains and low-frequency losses. Saikia et al.~\cite{saikia2021frequency} combine models with complementary frequency biases.
+Recent work also changes augmentation composition and supervision. NoisyMix~\cite{erichson2024noisymix} combines noise in input and feature mixing with stability training, improving clean and corrupted CIFAR-100 performance. Heinonen et al.~\cite{heinonen2025mollification} couple noise and blur to degradation-dependent label smoothing; the effect on clean accuracy varies with the augmentation combination. Siedel et al.~\cite{siedel2026stylized} combine synthetic images, stylization, and TrivialAugment on CIFAR-100-C, but adding Mixup/CutMix can degrade performance. Augmentation diversity and composition therefore need to be evaluated together.
 
-Mintun et al.~\cite{mintun2021interaction} relate augmentation--corruption similarity to performance and find weaker gains on dissimilar corruptions. They also identify noise-like behavior in glass blur despite its Blur label.
+\subsection{Transfer to unseen corruptions and frequency effects}
+Transfer is selective: Geirhos et al.~\cite{geirhos2018generalisation} report failures on untrained distortions, while tuned noise augmentation generalizes more broadly~\cite{rusak2020simple}. Mintun et al.~\cite{mintun2021interaction} link transfer to augmentation--corruption similarity and construct dissimilar corruptions on which gains weaken. Trinh et al.~\cite{trinh2024damp} compare direct augmentation with multiplicative weight perturbations using a train--test corruption matrix for ResNet-18 on CIFAR-100. Our four-family omission study examines a specific representative-operator setting within this established problem.
+
+Frequency analyses also show the limits of family labels. Trade-offs between high- and low-frequency corruptions~\cite{yin2019fourier} motivate combining models with complementary frequency biases~\cite{saikia2021frequency}. Auxiliary Fourier-basis augmentation complements visual transformations~\cite{vaish2024fourier}. Family omission therefore does not by itself isolate frequency effects or perceptual novelty.
 
 \section{Methodology}
 \subsection{Data and corruption families}
@@ -89,7 +94,7 @@ Let $\mathcal{F}=\{N,B,W,D\}$ denote Noise, Blur, Weather, and Digital, with cor
 These 15 primary types follow the CIFAR-C grouping~\cite{hendrycks2019corruptions}. We exclude the release's four additional types: Gaussian blur, saturate, spatter, and speckle noise. Five severities give 75 conditions per model, all using the same 10,000 test identities. We use the released Zenodo version 1 arrays~\cite{hendrycks2019cifar100c}.
 
 \subsection{Representative-operator LOFO augmentation}
-The fixed mapping is $r(N)=$ Gaussian noise, $r(B)=$ defocus blur, $r(W)=$ fog, and $r(D)=$ JPEG compression. For held-out family $F$, the allowed representatives are
+The fixed mapping is $r(N)=$ Gaussian noise, $r(B)=$ defocus blur, $r(W)=$ fog, and $r(D)=$ JPEG compression. We selected these operators for practical reasons: they provide a compact, reproducible design spanning the four categories. They apply additive noise, disk-kernel blur, a spatial fog field with intensity rescaling, and lossy compression, respectively. The mapping was not empirically optimized, and each representative covers only part of its family's mechanisms. For held-out family $F$, the allowed representatives are
 \begin{equation}
 \mathcal{R}_{-F}=\{r(G):G\in\mathcal{F},\ G\ne F\}.
 \end{equation}
@@ -161,14 +166,14 @@ Table~\ref{tab:overall} and Figure~\ref{fig:tradeoff} show the trade-off across 
 \label{fig:tradeoff}
 \end{figure}
 
-LOFO-Digital scores 0.20 pp below all-four on corrupted data and retains more clean accuracy. With one seed we cannot tell whether this 0.20 pp gap is real.
+LOFO-Digital scores 0.20 pp below all-four on corrupted data and retains more clean accuracy. With one seed, we cannot tell whether this 0.20 pp gap would persist across training seeds.
 
 \subsection{Transfer to the excluded family}
 Noise has the largest held-out-family gain and Weather the smallest (Table~\ref{tab:transfer}). The primary baseline also starts lowest on Noise.
 
 \input{tables/held_out_transfer.tex}
 
-The transfer ratios show a different contrast: Digital recovers 0.88 of the all-four family gain, compared with 0.14 for Weather. Noise improves substantially over clean training but stays furthest from its all-four score.
+The transfer ratios order the families differently: Digital recovers 0.88 of the all-four family gain, compared with 0.14 for Weather. Noise improves substantially over clean training but remains furthest below its all-four score.
 
 Table~\ref{tab:bootstrap} reports paired 95\% percentile intervals from 2,000 bootstrap resamples of the 10,000 test identities, retaining all types and severities and using common indices across models. The intervals reflect test-image sampling uncertainty only; they do not capture training-seed variability and are not significance tests. Weather's denominator interval, $[6.37,7.38]$ pp, stays away from zero.
 
@@ -176,22 +181,27 @@ Table~\ref{tab:bootstrap} reports paired 95\% percentile intervals from 2,000 bo
 
 \subsection{Corruption-specific gains and negative transfer}
 \label{sec:types}
-All 15 held-out Noise cells improve (Figure~\ref{fig:heatmap}). Glass blur drives much of Blur's gain: it improves by 31.51 pp, while the mean gain across the other three Blur types is 5.82 pp.
+All 15 held-out Noise cells improve (Figure~\ref{fig:heatmap}). Glass blur accounts for much of Blur's gain: it improves by 31.51 pp, while the mean gain across the other three Blur types is 5.82 pp.
 
 \begin{figure}[!htbp]
 \centering
-\includegraphics[width=0.66\textwidth]{figures/corruption_transfer_heatmap.pdf}
+% Use the available page width for the dense heatmap's labels and cell values.
+\includegraphics[width=0.90\textwidth]{figures/corruption_transfer_heatmap.pdf}
 \caption{Held-out gains (pp) over the primary baseline by severity and their mean. Each row uses the model excluding its family; groups are Noise, Blur, Weather, and Digital. Red/blue denote negative/positive gains. Labels use exact-count rounding (half up).}
 \label{fig:heatmap}
 \end{figure}
 
 Fog ($-8.23$ pp) and brightness ($-5.88$ pp) lose accuracy at every severity; snow and frost offset these losses in Weather's mean. All four Digital type means improve. Of the 75 held-out cells, 14 are negative: defocus at severities 1--2, all ten fog/brightness cells, and contrast and pixelate at severity 1.
 
+% Keep the held-out heatmap with its discussion before the operator comparison.
+\FloatBarrier
 \subsection{Operator-level comparisons across augmented models}
 \label{sec:operators}
 Table~\ref{tab:operators} compares all five augmented models on every corruption type, including both represented and omitted families.
 
 \input{tables/operator_comparison.tex}
+% Present the comparison table before its detailed interpretation.
+\FloatBarrier
 
 \paragraph{Fog and contrast.}
 Every model trained with fog improves contrast, while LOFO-Weather loses 5.66 pp on contrast and 8.23 pp on fog.
@@ -202,8 +212,8 @@ All five augmented models lose brightness accuracy; even all-four loses 3.69 pp.
 \paragraph{Gaussian noise and glass blur.}
 Models trained with Gaussian noise gain 35.30--36.41 pp on impulse noise, compared with 11.58 pp for LOFO-Noise. LOFO-Blur also gains 31.51 pp on glass blur without any explicit Blur augmentation.
 
-\paragraph{Ungenerated types in represented families.}
-We exclude each model's held-out family and its three generated operators, leaving nine ungenerated types for LOFO-Noise and eight for each other model. Mean gains are 10.07, 14.26, 17.79, and 18.66 pp for LOFO-Noise, Blur, Weather, and Digital. The last three exceed their held-out-family gains (over different type sets).
+\paragraph{Corruption types never used during training.}
+For each LOFO model, the corruption types fall into three groups: all types in the excluded family, the three representatives used for augmentation, and the remaining types in represented families, which were never explicitly generated during training. The third group contains nine types for LOFO-Noise and eight for each other LOFO model. On these types, mean gains are 10.07, 14.26, 17.79, and 18.66 pp for LOFO-Noise, Blur, Weather, and Digital. For the last three models, these gains exceed their held-out-family gains, although the averages cover different type sets.
 
 \subsection{Severity-dependent behavior}
 The absolute gain in percentage points grows with severity for Blur (8.76 to 15.60 pp) and Digital (1.53 to 16.21 pp), while their accuracies decline (Figure~\ref{fig:severity}). Noise's gain rises from 13.49 pp at severity 1 to 21.98 pp at severity 3, then falls to 15.87 pp at severity 5. LOFO-Noise reaches 25.40\% at severity 5.
@@ -218,38 +228,40 @@ The absolute gain in percentage points grows with severity for Blur (8.76 to 15.
 Weather's gain is $-2.22$ pp at severity 1 and positive at severities 2--5, reaching +4.12 pp at severity 5. Snow and frost offset the fog and brightness losses.
 
 \section{Discussion}
-\subsection{Transfer across family boundaries}
-The fog/contrast and Gaussian-noise/glass-blur patterns cross family boundaries. Models trained with JPEG also gain more on pixelate (12.23--13.51 pp) than LOFO-Digital (9.30 pp). Mintun et al.~\cite{mintun2021interaction} describe glass blur's pixel permutations as noise-like, matching the large gain without explicit Blur augmentation.
+Noise improves across all three member types without explicit Noise augmentation. Its low baseline leaves more room for an absolute gain, but the gap to the all-four control shows that transfer is incomplete. Shared perturbation properties are a possible explanation~\cite{mintun2021interaction}, but our scores do not identify which properties the models learned.
 
-Yin et al.~\cite{yin2019fourier} link Gaussian augmentation to high-frequency gains and low-frequency losses, including contrast. Saikia et al.~\cite{saikia2021frequency} combine complementary frequency biases. Fog changes global contrast, which is consistent with a frequency-based explanation of the fog/contrast pattern; we treat this as a hypothesis.
+The Gaussian-noise/glass-blur pattern agrees with Mintun et al.'s~\cite{mintun2021interaction} observation that glass blur's pixel permutations behave like noise. Models trained with JPEG also gain more on pixelate (12.23--13.51 pp) than LOFO-Digital (9.30 pp). These associations show why an omitted family is not necessarily visually dissimilar to the retained operators.
 
-\subsection{Aggregation and practical interpretation}
-Overall accuracy averages 75 conditions; held-out accuracy uses each model's omitted family. Weather combines gains and losses, while glass blur drives much of Blur's improvement. Reporting each type and severity shows what those averages contain.
+Fog adds a spatial field and rescales intensity. Shared intensity changes may help on contrast, but other operators, unequal exposure, and different RNG schedules prevent a causal interpretation. Frequency augmentation~\cite{vaish2024fourier} could help test this possibility. However, frequency shortcuts can improve performance on ImageNet-C and harm transfer to renditions~\cite{wang2025shortcuts}. Our scores do not identify a frequency mechanism.
 
-All augmented models gain corrupted accuracy and lose clean accuracy in our runs. AugMix~\cite{hendrycks2020augmix} and Patch Gaussian~\cite{lopes2019patch} preserve or improve clean performance under their own protocols. A deployment decision also depends on how often clean and corrupted inputs occur and what each error costs.
+Weather's small gain masks opposing effects: snow and frost improve, while fog and brightness deteriorate. A positive family mean therefore does not guarantee improvement on each member. Glass blur similarly dominates Blur's gain, obscuring smaller improvements on its other types. All five augmented models lose brightness accuracy. Trinh et al.~\cite{trinh2024damp} also report brightness losses with direct augmentation. This recurrence provides context but does not identify the cause in our models.
+
+The cost in clean accuracy varies with the training recipe. NoisyMix~\cite{erichson2024noisymix} raises clean and corrupted CIFAR-100 accuracy, while multiplicative weight noise~\cite{trinh2024damp} improves robustness with little loss on clean data. Wiemann et al.'s 2026 preprint~\cite{wiemann2026interleaved} suggests gains from interleaved clean/noisy epochs. Mollification~\cite{heinonen2025mollification} and stylized synthetic augmentation~\cite{siedel2026stylized} do not always yield gains in both clean and corrupted accuracy when combined with other methods. Differences in models, data, losses, training budgets, and metrics prevent fair score rankings against our runs; matched controls are still needed.
 
 \section{Limitations and Threats to Validity}
 \label{sec:limitations}
 \paragraph{Single-seed evidence and training budget.}
-We completed one training seed, 42, per condition. The 75 conditions repeat test identities, so training-seed variability is unknown~\cite{bouthillier2021variance}. LOFO-Noise and LOFO-Blur selected epoch 100; this alone establishes neither convergence nor undertraining.
+We completed one training seed, 42, per condition. The 75 conditions reuse the same test identities, so they do not establish variability across training seeds~\cite{bouthillier2021variance}. LOFO-Noise and LOFO-Blur selected epoch 100; this alone establishes neither convergence nor undertraining.
 
 \paragraph{Cohorts, exposure, and exploratory timing.}
-Legacy LOFO and controlled-v2 use different RNG schedules; LOFO initial tensors were not retained. At $p=0.5$, shared operators have probabilities $1/6$ in LOFO and $1/8$ in all-four. We ran no ablation over $p$, so we cannot say how much of the 4.00 pp clean loss comes from $p=0.5$. These comparisons do not isolate operator effects. Pilot outcomes were known before the 29 October 2026 protocol freeze; saved records omit unlogged human decisions.
+Legacy LOFO and controlled-v2 use different RNG schedules, and the initial LOFO tensors were not retained. At $p=0.5$, each shared operator is used with probability $1/6$ in LOFO and $1/8$ in all-four. We ran no ablation over $p$, so we cannot say how much of the 4.00 pp clean loss comes from $p=0.5$. These comparisons do not isolate operator effects. Pilot outcomes were known before the 29 October 2026 protocol freeze, and saved records cannot account for unlogged human decisions.
 
 \paragraph{Dataset overlap.}
-Exact-pixel hashing found four fitting/validation shared contents, eight fitting/test, and two validation/test, some with conflicting labels; split indices are disjoint. Removing ten affected test identities changes primary gains by less than 0.006 pp, preserving their directions. Fitting/validation overlap may still affect checkpoint selection; near-duplicates remain unchecked~\cite{barz2020duplicates}.
+Exact-pixel hashing found four image contents shared between fitting and validation, eight between fitting and test, and two between validation and test. Some have conflicting labels; the split indices themselves are disjoint. Removing ten affected test identities changes primary gains by less than 0.006 pp and preserves their directions. Fitting/validation overlap may still affect checkpoint selection, and near-duplicates remain unchecked~\cite{barz2020duplicates}.
 
 \paragraph{Representatives and scope.}
-We study four representatives, one architecture, one split, and one $32\times32$ synthetic benchmark. Family effects overlap, and severity scales differ between operators. Generated training images may differ numerically from the released arrays. We measured neither frequency responses nor representation similarity and made no matched comparison with advanced augmentation methods.
+We study four representatives, one architecture, one split, and one $32\times32$ synthetic benchmark. Family effects overlap, and severity scales differ between operators. Five levels do not establish coverage across visual quality~\cite{shen2025continuous} or locate continuous nuisance-shift failure points~\cite{dunkel2025cns}. Generated training images may differ numerically from the released arrays. We measured neither frequency responses nor representation similarity, made no matched comparison with advanced augmentation methods, and did not test transfer to natural shifts~\cite{taori2020measuring}.
 
 \section{Conclusion}
-All four LOFO models exceed the primary MPS/FP32 baseline on held-out-family mean accuracy: Noise +18.23 pp, Blur +12.24 pp, Weather +0.95 pp, and Digital +9.09 pp. Transfer varies by type: fog and brightness lose accuracy, while glass blur improves strongly. All-four has the highest mean corrupted accuracy and lower clean accuracy. These results come from one seed with different RNG schedules and operator training frequencies. The next steps are multiple seeds, a common RNG schedule, matched operator training frequencies, and more representatives.
+Training with representatives from three families improves the excluded family's mean accuracy in this measured setting. All four LOFO models exceed the primary MPS/FP32 baseline: Noise +18.23 pp, Blur +12.24 pp, Weather +0.95 pp, and Digital +9.09 pp. Transfer varies by type: fog and brightness lose accuracy, while glass blur improves strongly. The all-four control has the highest mean corrupted accuracy and lower clean accuracy. Cross-family gains therefore provide partial protection whose value depends on the corruption type. These results come from one seed with different RNG schedules and operator training frequencies. The next step is a multi-seed replication with a common RNG schedule and matched operator frequencies, to test whether the patterns persist under equal exposure before broadening representative coverage.
 
 \section*{Data and Code Availability}
-CIFAR-100 and CIFAR-100-C are available from their original sources~\cite{krizhevsky2009tiny,hendrycks2019cifar100c}. \ifblindreview Code and supporting materials will be identified upon acceptance.\else The public repository, \url{https://github.com/commedeschamps/cifar100c-lofo-robustness}, provides training/evaluation code, split indices, source snapshots, the frozen protocol, histories, and saved condition metrics. Manuscript sources include the figure/table generator and derived assets.\fi\ Checkpoints and prediction caches are retained locally and are not publicly distributed.
+CIFAR-100 and CIFAR-100-C are available from their original sources~\cite{krizhevsky2009tiny,hendrycks2019cifar100c}. \ifblindreview Code and supporting materials will be identified upon acceptance.\else The public repository, \url{https://github.com/commedeschamps/cifar100c-lofo-robustness}, provides training/evaluation code, split indices, source snapshots, the frozen protocol, histories, and saved condition metrics. It also includes the figure/table generator, bootstrap analysis script, and derived assets.\fi\ Checkpoints and prediction caches are retained locally and are not publicly distributed.
 
+% Keep the short declarations block together at the normal journal font size.
+\par\noindent\begin{minipage}{\linewidth}
 \section*{Declarations}
-\noindent\textbf{AI assistance.} OpenAI Codex assisted with research code development and computational verification. OpenAI ChatGPT and Anthropic Claude supported literature discovery and review. The authors retain responsibility for the reported results, references, and final text.
+\noindent\textbf{AI assistance.} OpenAI Codex assisted with research code development, and computational verification. OpenAI ChatGPT and Anthropic Claude supported literature discovery and review. The authors retain responsibility for the reported results, references, and final text.
 
 \noindent\textbf{Ethics.} This study uses existing, publicly available image-classification benchmarks without new participant recruitment.
 
@@ -258,6 +270,7 @@ CIFAR-100 and CIFAR-100-C are available from their original sources~\cite{krizhe
 \noindent\textbf{Funding.} This research received no external funding.
 
 \noindent\textbf{Competing interests.} The authors declare no competing interests.
+\end{minipage}
 
 \appendix
 \section{Reproducibility details}

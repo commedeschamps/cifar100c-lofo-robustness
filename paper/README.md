@@ -2,7 +2,7 @@
 
 **How Far Does Corruption Robustness Transfer? A Leave-One-Family-Out Study on CIFAR-100-C**
 
-[main.tex](main.tex) is Version 4 of the complete, unpublished manuscript by Rakhman Seidigali and Yermakhan Khamitov. It uses the official ELCVIA LaTeX 2e style: single-column A4, 11-point body text and single spacing. The verified named and blinded builds each have 12 pages, four figures, five tables, Appendix A and twenty-four references.
+[main.tex](main.tex) is the final editorial revision of Version 5 of the complete, unpublished manuscript by Rakhman Seidigali and Yermakhan Khamitov, with a focused literature update through 2 November 2026. It uses the official ELCVIA LaTeX 2e style: single-column A4, 11-point body text and single spacing. The verified named build has 13 pages, four figures, five tables, Appendix A and thirty references. Nine recent works comprise three 2024 papers, four 2025 papers and two 2026 works (one explicitly identified preprint). The editorial revision preserves the verified experimental values, equations, bootstrap intervals and scientific assets.
 
 ## Compile
 
@@ -43,6 +43,6 @@ The manuscript checker verifies saved arithmetic, bootstrap outputs and all avai
 
 ## Manuscript status
 
-The authors confirmed Codex for research programming and computational verification, and ChatGPT and Claude for literature discovery and review. The disclosure also records AI assistance with manuscript preparation, editing and figures. Author order, affiliation, correspondence, CRediT, funding and competing-interest statements are included. The article has not been accepted or published by ELCVIA.
+The manuscript records Codex for research programming and computational verification, and ChatGPT and Claude for literature discovery and review. The authors retain responsibility for the reported results, references and final text. Author order, affiliation, correspondence, CRediT, funding and competing-interest statements are included. The article has not been accepted or published by ELCVIA.
 
 This repository and its source manuscript identify the authors. Journal review materials must be prepared separately according to the journal's double-blind process; no anonymous-review artifact is published here.

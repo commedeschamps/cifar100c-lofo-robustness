@@ -54,6 +54,9 @@ Thumbs.db
 /results/**/.run.lock
 /results/**/.evaluation.lock
 /results/**/sessions.json
+/tmp/
+/output/
+/backups/
 
 # Original machine-specific manifests are preserved locally, never rewritten
 /results/clean_baseline/clean_seed42/config.json
@@ -93,6 +96,8 @@ research_cv_archive*/
 /paper/revision_*/
 /paper/quick_addition_*/
 /paper/followup_*/
+/paper/editorial_merge_*/
+/paper/final_refinement_*/
 /paper/review.json
 /paper/source_checks.json
 /paper/verification.json

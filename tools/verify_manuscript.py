@@ -160,9 +160,10 @@ def verify(root, require_bootstrap_inputs=False):
     tex = (paper / "main.tex").read_text()
     bib = (paper / "references.bib").read_text()
     cited = {key for group in re.findall(r"\\cite\{([^}]+)\}", tex) for key in group.split(",")}
-    entries = set(re.findall(r"@\w+\s*\{([^,]+),", bib))
-    if cited != entries or len(entries) != 24:
-        raise ValueError("Expected twenty-four complete manuscript references")
+    entry_keys = re.findall(r"@\w+\s*\{([^,]+),", bib)
+    entries = set(entry_keys)
+    if not entries or len(entry_keys) != len(entries) or cited != entries:
+        raise ValueError("Manuscript citations must match unique bibliography entries")
     figures = re.findall(r"\\includegraphics(?:\[[^]]*\])?\{([^}]+)\}", tex)
     tables = re.findall(r"\\input\{([^}]+)\}", tex)
     if len(figures) != 4 or len(tables) != 5:
