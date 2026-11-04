@@ -1,0 +1,4 @@
+# Install in addition to the existing research project's requirements-lofo.txt.
+# The installed PyTorch/torchvision pair must match the chosen CUDA/MPS platform.
+filelock>=3.16
+pytest>=8
