@@ -1,0 +1,12 @@
+{
+  "at": "2026-11-04T19:08:40.468749+00:00",
+  "epoch": 2,
+  "total_epochs": 2,
+  "seed": 52,
+  "condition": "lofo_noise",
+  "train_accuracy_pct": 2.34375,
+  "val_accuracy_pct": 0.78125,
+  "last_epoch_seconds": 1.052947584015783,
+  "best_epoch": 1,
+  "device": "mps"
+}

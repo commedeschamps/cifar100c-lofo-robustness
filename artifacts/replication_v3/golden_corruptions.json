@@ -1,0 +1,25 @@
+{
+  "version": "v3_golden_1",
+  "operators": {
+    "gaussian_noise:1": "0dfc2e83c4161ff9c907d6f9eda1033714ed8c77c5b3aea77cb26ac099f93d4a",
+    "gaussian_noise:2": "a8985084f529b56092f54815edfa821d8b2220be5ab44a84b19989f285399657",
+    "gaussian_noise:3": "963214e846dcb7f6a6224dfce9bb146fe64883fa30b91ae83220d7fc78ba4fe0",
+    "gaussian_noise:4": "b56217db3214bbb33645909c17abdf422658e6ef40ce48a1980da027b06cbe9e",
+    "gaussian_noise:5": "ac29351313659a4ffd321dce71c8ef95976e2231568c4df5efd1099fd19d692c",
+    "defocus_blur:1": "ea842b97dd9b6817bd2f32c197ba950cde4cd061bb8b7cce02341c8a9497d30d",
+    "defocus_blur:2": "a5e8b56121322dd718d443e0b6adb88a49e5932ce8fa5040c8b9ec652456a603",
+    "defocus_blur:3": "3f62fdb8c5c90a8d3a9036b2134979446b8feff8817154f2cc4b1b60192b2a05",
+    "defocus_blur:4": "2e9761355ee2b14a1b6aec2d4ff9b3770e2fc10e5cd1b9cc03afb261c383191d",
+    "defocus_blur:5": "49d2b0e94d0a9931179840fe08a4131913bb92ce4e8e39b72b39b0e9b5a4713d",
+    "fog:1": "7ca054431ac481c72518a0b60d442c6f3e52ec94812a51e4a202b5d32d0b1311",
+    "fog:2": "4f328519d192f4932f896121eb4d8c1e66f445c6fff4290d13459ced96168895",
+    "fog:3": "6d0588d9c0d3fba1dcc3d7165dd2c43bb5c263f80a494595e5fb5ccd48b5d4cc",
+    "fog:4": "60825cce5f01ec88ecd6526c1cd6ba51f8269fa0254a89e6dd0485edd22a0608",
+    "fog:5": "db97b08074de92fa73cbd7e389d00c2aaf73e2d503e0871aa30e6c8bebc0de11",
+    "jpeg_compression:1": "096346d3acacac655d3e2775e58430159bc35306a7d4d006bb1d1d57a3ccf165",
+    "jpeg_compression:2": "387c90e7949f1e40eba75705c4e171d7d672839b8274e2f24aed06fef063d56c",
+    "jpeg_compression:3": "40a5dc1e42748cc29289a9dcdc700c9b5db58b859e0ee65e6545d97b95c777dd",
+    "jpeg_compression:4": "2b2a293389c69f6a8dfcb4e763a0ecc1767a087fc90d746614ef8c36ffc44e78",
+    "jpeg_compression:5": "c114c327da8fef7cafb1a1f5b2126f0bbedd68ebb31664b28485791c6a92a43b"
+  }
+}

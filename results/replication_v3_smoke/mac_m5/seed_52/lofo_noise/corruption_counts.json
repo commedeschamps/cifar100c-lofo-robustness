@@ -1,0 +1,46 @@
+[
+  {
+    "epoch": 1,
+    "counts": {
+      "fog:severity1": 15,
+      "clean": 397,
+      "defocus_blur:severity5": 20,
+      "defocus_blur:severity2": 14,
+      "fog:severity4": 19,
+      "defocus_blur:severity1": 13,
+      "fog:severity5": 17,
+      "fog:severity3": 13,
+      "jpeg_compression:severity3": 18,
+      "jpeg_compression:severity1": 17,
+      "jpeg_compression:severity5": 22,
+      "jpeg_compression:severity4": 22,
+      "defocus_blur:severity4": 15,
+      "jpeg_compression:severity2": 14,
+      "defocus_blur:severity3": 10,
+      "fog:severity2": 14
+    },
+    "consumed": 640
+  },
+  {
+    "epoch": 2,
+    "counts": {
+      "clean": 394,
+      "defocus_blur:severity4": 20,
+      "jpeg_compression:severity5": 16,
+      "defocus_blur:severity5": 16,
+      "fog:severity3": 22,
+      "jpeg_compression:severity1": 19,
+      "defocus_blur:severity2": 17,
+      "fog:severity5": 15,
+      "fog:severity1": 24,
+      "jpeg_compression:severity3": 7,
+      "jpeg_compression:severity4": 13,
+      "jpeg_compression:severity2": 18,
+      "defocus_blur:severity3": 17,
+      "fog:severity2": 9,
+      "defocus_blur:severity1": 20,
+      "fog:severity4": 13
+    },
+    "consumed": 640
+  }
+]

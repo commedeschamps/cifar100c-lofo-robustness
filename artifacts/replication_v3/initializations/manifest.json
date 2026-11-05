@@ -1,0 +1,22 @@
+{
+  "52": {
+    "path": "artifacts/replication_v3/initializations/seed_52.pt",
+    "sha256": "fd56ebc2f2b3873ef89a92ba24506e070ba5cc764358bf53967fd9042d603374"
+  },
+  "67": {
+    "path": "artifacts/replication_v3/initializations/seed_67.pt",
+    "sha256": "afad3229161996d70b301471e68febba145dfd4dbdf743aa31f5ed00425788f5"
+  },
+  "999": {
+    "path": "artifacts/replication_v3/initializations/seed_999.pt",
+    "sha256": "10ed3c5f7ac70177a738ecd5ba70429175b0ca86ec2830aa55a70ffdce668280"
+  },
+  "555": {
+    "path": "artifacts/replication_v3/initializations/seed_555.pt",
+    "sha256": "6ba685327414e063f7039dac586b17bf74cbb43d72bf3da1cdb9d768252d3c41"
+  },
+  "1666": {
+    "path": "artifacts/replication_v3/initializations/seed_1666.pt",
+    "sha256": "853a638d821cf63d41129834bfb54c1f7eb68879f1878b276dffe92d5f34f883"
+  }
+}

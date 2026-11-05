@@ -1,0 +1,73 @@
+{
+  "design": {
+    "protocol_version": "replication_v3.0.0",
+    "study_status": "post_exploratory_controlled_replication",
+    "seeds": [
+      52,
+      67,
+      999,
+      555,
+      1666
+    ],
+    "conditions": [
+      "clean_baseline",
+      "lofo_noise",
+      "lofo_blur",
+      "lofo_weather",
+      "lofo_digital",
+      "all_four"
+    ],
+    "epochs": 100,
+    "batch_size": 128,
+    "learning_rate": 0.1,
+    "momentum": 0.9,
+    "weight_decay": 0.0005,
+    "scheduler": "CosineAnnealingLR",
+    "scheduler_eta_min": 0.0,
+    "num_classes": 100,
+    "architecture": "cifar_resnet18_scratch",
+    "train_per_class": 450,
+    "val_per_class": 50,
+    "mean": [
+      0.5071,
+      0.4867,
+      0.4408
+    ],
+    "std": [
+      0.2675,
+      0.2565,
+      0.2761
+    ],
+    "augmentation": {
+      "design": "four_slots_independent_exposure",
+      "sampling": "P(clean_slot)=0.5; P(each four representative slot)=0.125",
+      "representatives": [
+        "gaussian_noise",
+        "defocus_blur",
+        "fog",
+        "jpeg_compression"
+      ],
+      "lofo_excluded_slot": "identity_no_op",
+      "spatial": "zero-pad4_randomcrop32_random_horizontal_flip_0.5",
+      "severity": "uniform_integer_1_to_5",
+      "one_operator_per_presentation": true,
+      "limitation": "Each retained operator has equal unconditional exposure (1/8) in LOFO and all-four; LOFO has 5/8 clean presentations, all-four 1/2, so total corrupted exposure is not matched. Causal interpretation remains limited."
+    },
+    "precision": "FP32; AMP disabled",
+    "deterministic_algorithms": true,
+    "selection": "first_strict_maximum_clean_val_accuracy",
+    "split": "splits/replication_v3_split.json",
+    "initializations": "artifacts/replication_v3/initializations",
+    "golden": "artifacts/replication_v3/golden_corruptions.json",
+    "train_uses_test": false
+  },
+  "split_file_sha256": "6929ed610470a67c06a969211b1a4b8016bb37b492bc2944bd2cde85d3f1cd04",
+  "initial_manifest_sha256": "eb5aeb49dc9d562679adb2af8cb152cfbd28cdb48bd7b44f0f6d96cad43c9e64",
+  "golden_file_sha256": "6bc9b097776eaec8f6d3e14833d5031a4fe3e89db53ad819d8ee49e75668faf7",
+  "source_sha256": "a4254af9dee7ccc81a5568794b81f921dc200f3f96a157b7860577ed4c2ba659",
+  "git_commit": "070e28e046bfbc9eb384d0db2133c806aa3598e4",
+  "git_dirty_at_freeze": false,
+  "cifar_train_sha256": "735e79b04f092ca3d2e6d07f368c0a7d70d48c48d28865950cc24454cf45129b",
+  "cifar_meta_sha256": "a5d4786345c961390f865e93b434dbd5c6904ce880667e0cb888c97d449f28b9",
+  "protocol_sha256": "4e59eed03a2922fc1ffdcbc63ad88a4eb9e9c9d161f9dff19dfe2803e51a2ca1"
+}

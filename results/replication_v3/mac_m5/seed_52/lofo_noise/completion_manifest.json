@@ -1,0 +1,17 @@
+{
+  "protocol_sha256": "4e59eed03a2922fc1ffdcbc63ad88a4eb9e9c9d161f9dff19dfe2803e51a2ca1",
+  "manifest_sha256": "c7cfeaad767806557741f5469820a2b5d55d42acefad25a2330a07850fac54ca",
+  "at": "2026-11-04T22:48:29.897799+00:00",
+  "seed": 52,
+  "condition": "lofo_noise",
+  "machine": "mac_m5",
+  "best_epoch": 100,
+  "completed_epochs": 100,
+  "files": {
+    "run_manifest.json": "689d945beafbbdb9e420d7c767dd0ec7420708f1cbb07fd6f7875a19e0f458ea",
+    "checkpoints/last_checkpoint.pt": "15237435d671d33bb88bf2b2cef9131b4fb2f37eda29efea0f6bcc10d0ea4d07",
+    "checkpoints/best_model.pt": "ec4ed3789ced327c7ce0ced1bc4d815f3a865744d5b3313f50dc84312a10eff7",
+    "history.csv": "a0e7c16c97e3b1fb306c04c471709dc7bddb25a4d9ba8b7742d38082d718a677",
+    "corruption_counts.json": "40a6c957f08752a76626de9cfe5f06efe96fb425ce6a2edaa506e8a561d6563b"
+  }
+}

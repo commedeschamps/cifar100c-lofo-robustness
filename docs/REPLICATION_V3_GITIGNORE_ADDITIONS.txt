@@ -1,0 +1,9 @@
+# Suggested additions to the existing .gitignore (review before appending)
+# Keep code/configs/frozen protocol and compact statistics in Git by explicit add.
+# Local training artifacts, caches and model weights stay off ordinary Git.
+results/replication_v3/
+results/replication_v3_smoke/
+data/replication_v3/
+artifacts/replication_v3/initializations/*.pt
+*.v3_training_backup.partial
+.venv-v3/

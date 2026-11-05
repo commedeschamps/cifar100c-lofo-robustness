@@ -1,0 +1,12 @@
+{
+  "at": "2026-11-05T02:25:53.804216+00:00",
+  "epoch": 100,
+  "total_epochs": 100,
+  "seed": 52,
+  "condition": "lofo_weather",
+  "train_accuracy_pct": 99.63555555555556,
+  "val_accuracy_pct": 73.18,
+  "last_epoch_seconds": 64.85338604199933,
+  "best_epoch": 98,
+  "device": "mps"
+}

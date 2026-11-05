@@ -1,0 +1,17 @@
+{
+  "protocol_sha256": "4e59eed03a2922fc1ffdcbc63ad88a4eb9e9c9d161f9dff19dfe2803e51a2ca1",
+  "manifest_sha256": "dada645e60206bff52960ce12f487c328b0591012f04095fd508f4e5b888daf3",
+  "at": "2026-11-05T04:14:38.749437+00:00",
+  "seed": 52,
+  "condition": "lofo_digital",
+  "machine": "mac_m5",
+  "best_epoch": 96,
+  "completed_epochs": 100,
+  "files": {
+    "run_manifest.json": "d4d2c5794bdfcb56b4c7dd7074d67f54dbcfe07773eab09925a0c059dcf151d8",
+    "checkpoints/last_checkpoint.pt": "33d103922f4c85e733e80142dce3d7c9962894430a412a93618f5ed73bbb1335",
+    "checkpoints/best_model.pt": "3a4b0dd6c23d3e00c8b9baae56075719c8366b6ab2b2a7fd1ac63f9338a070bc",
+    "history.csv": "1a4ed9dd36fb3fb2123fd732670f25d93a50f5c6215d9ce44c24e1fdf87e6f74",
+    "corruption_counts.json": "c2a4f6a1b4762ded9769eaf494d04758803a2d08e67051182652890bb226b50c"
+  }
+}
