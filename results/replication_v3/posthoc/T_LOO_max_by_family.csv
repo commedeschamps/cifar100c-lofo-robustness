@@ -1,0 +1,9 @@
+platform,family,max_absolute_change,deleted_seed_at_max,analysis_status
+mac_m5,noise,0.009346133604442697,999,"post-hoc analysis, specified before computation, not confirmatory"
+mac_m5,blur,0.0126840131329915,67,"post-hoc analysis, specified before computation, not confirmatory"
+mac_m5,weather,0.01221355981365757,1666,"post-hoc analysis, specified before computation, not confirmatory"
+mac_m5,digital,0.02196875681754873,999,"post-hoc analysis, specified before computation, not confirmatory"
+win_rtx3050ti,noise,0.006413253914522465,52,"post-hoc analysis, specified before computation, not confirmatory"
+win_rtx3050ti,blur,0.011272265839912032,67,"post-hoc analysis, specified before computation, not confirmatory"
+win_rtx3050ti,weather,0.014198854336959943,555,"post-hoc analysis, specified before computation, not confirmatory"
+win_rtx3050ti,digital,0.014020382411028431,52,"post-hoc analysis, specified before computation, not confirmatory"

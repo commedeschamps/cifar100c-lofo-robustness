@@ -1,0 +1,25 @@
+\begin{table}[!htbp]
+\centering
+\small
+\setlength{\tabcolsep}{5pt}
+\caption{Selection and late optimization, five seeds per row. Best epochs follow seed order 52,67,999,555,1666. Val100 is mean clean-validation accuracy (\%); $\Delta$ is epoch100 minus epoch91. Losses are cross entropy.}
+\label{tab:convergence}
+\begin{tabular}{lllr rrr}
+\toprule
+Training & Condition & Best epochs & Val100 & $\Delta$val pp & $\Delta$train loss & $\Delta$val loss \\
+\midrule
+Mac & Clean & 97,92,97,93,97 & 76.90 & 0.20 & -0.0006 & -0.0039 \\
+Mac & LOFO-Noise & 100,95,100,98,94 & 74.52 & 0.12 & -0.0069 & -0.0090 \\
+Mac & LOFO-Blur & 92,96,98,98,99 & 73.20 & 0.17 & -0.0088 & -0.0131 \\
+Mac & LOFO-Weather & 98,97,97,98,96 & 72.87 & 0.11 & -0.0052 & -0.0112 \\
+Mac & LOFO-Digital & 96,95,87,98,99 & 74.77 & 0.28 & -0.0074 & -0.0145 \\
+Mac & All-Four & 96,100,97,98,92 & 72.64 & 0.25 & -0.0092 & -0.0122 \\
+Windows & Clean & 94,92,94,95,90 & 77.17 & 0.14 & -0.0006 & -0.0036 \\
+Windows & LOFO-Noise & 97,97,96,98,95 & 74.36 & 0.12 & -0.0068 & -0.0118 \\
+Windows & LOFO-Blur & 98,99,99,93,100 & 73.16 & 0.28 & -0.0091 & -0.0087 \\
+Windows & LOFO-Weather & 92,97,99,91,98 & 72.74 & 0.16 & -0.0050 & -0.0096 \\
+Windows & LOFO-Digital & 92,97,93,98,91 & 74.88 & 0.20 & -0.0076 & -0.0108 \\
+Windows & All-Four & 96,95,99,98,98 & 72.76 & 0.08 & -0.0085 & -0.0120 \\
+\bottomrule
+\end{tabular}
+\end{table}

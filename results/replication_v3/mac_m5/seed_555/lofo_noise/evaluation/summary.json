@@ -1,0 +1,16 @@
+{
+  "at": "2026-11-08T15:05:37.512684+00:00",
+  "machine": "mac_m5",
+  "seed": 555,
+  "condition": "lofo_noise",
+  "identity": {
+    "protocol_sha256": "4e59eed03a2922fc1ffdcbc63ad88a4eb9e9c9d161f9dff19dfe2803e51a2ca1",
+    "best_checkpoint_sha256": "b5845a9fde8ca1f19e8759a6f40f9700af762ef85f0b9034ebb1f3f4fc5f2710",
+    "test_sha256": "4b67687d9933c4db8f0831104447f15b93774f4f464bd0516f0f0f2ac83b7864",
+    "cifar_c_archive_md5": "11f0ed0f1191edbf9fa23466ae6021d3"
+  },
+  "completed_conditions": 76,
+  "clean_accuracy_pct": 74.37,
+  "mean_corrupted_accuracy_pct": 59.173066666666664,
+  "per_condition_sha256": "01440d48bbb6e264b2895710798ad04beae6ef255d828e7604f075a2d104beeb"
+}

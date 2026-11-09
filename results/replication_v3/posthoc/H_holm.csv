@@ -1,0 +1,4 @@
+hypothesis,n_components,p_conjunction,p_holm,analysis_status
+H1,2,1.3702502533924148e-06,4.110750760177245e-06,"post-hoc analysis, specified before computation, not confirmatory"
+H2,4,3.5317336151639463e-05,7.063467230327893e-05,"post-hoc analysis, specified before computation, not confirmatory"
+H3,10,0.0005139444615558221,0.0005139444615558221,"post-hoc analysis, specified before computation, not confirmatory"

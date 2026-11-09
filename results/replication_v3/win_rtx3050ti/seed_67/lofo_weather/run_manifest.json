@@ -1,0 +1,27 @@
+{
+  "protocol_sha256": "4e59eed03a2922fc1ffdcbc63ad88a4eb9e9c9d161f9dff19dfe2803e51a2ca1",
+  "source_sha256": "a4254af9dee7ccc81a5568794b81f921dc200f3f96a157b7860577ed4c2ba659",
+  "git_commit": "070e28e046bfbc9eb384d0db2133c806aa3598e4",
+  "split_sha256": "6929ed610470a67c06a969211b1a4b8016bb37b492bc2944bd2cde85d3f1cd04",
+  "initial_file_sha256": "afad3229161996d70b301471e68febba145dfd4dbdf743aa31f5ed00425788f5",
+  "machine": "win_rtx3050ti",
+  "seed": 67,
+  "condition": "lofo_weather",
+  "device": "cuda",
+  "environment": {
+    "platform": "Windows-11-10.0.26300-SP0",
+    "python": "3.14.8",
+    "torch": "2.14.1+cu130",
+    "torchvision": "0.29.1+cu130",
+    "numpy": "2.5.4",
+    "pillow": "13.0.0",
+    "opencv": "5.0.0",
+    "device": "cuda",
+    "cuda_version": "13.0",
+    "gpu": "NVIDIA GeForce RTX 3050 Ti Laptop GPU",
+    "cuda_tf32": false,
+    "amp": false,
+    "num_workers": 2
+  },
+  "workers": 2
+}

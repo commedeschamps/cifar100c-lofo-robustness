@@ -1,0 +1,16 @@
+{
+  "at": "2026-11-08T14:48:43.386675+00:00",
+  "machine": "mac_m5",
+  "seed": 999,
+  "condition": "lofo_weather",
+  "identity": {
+    "protocol_sha256": "4e59eed03a2922fc1ffdcbc63ad88a4eb9e9c9d161f9dff19dfe2803e51a2ca1",
+    "best_checkpoint_sha256": "6037968aabe14a3413af57182a237e6fad274ce846f135962c6c2f3901ef2237",
+    "test_sha256": "4b67687d9933c4db8f0831104447f15b93774f4f464bd0516f0f0f2ac83b7864",
+    "cifar_c_archive_md5": "11f0ed0f1191edbf9fa23466ae6021d3"
+  },
+  "completed_conditions": 76,
+  "clean_accuracy_pct": 71.81,
+  "mean_corrupted_accuracy_pct": 62.79173333333333,
+  "per_condition_sha256": "ecf278d47b65f9313b2062be4226a65bfff6737f9619e007569d1e010096b055"
+}

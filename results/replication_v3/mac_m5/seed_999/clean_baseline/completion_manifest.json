@@ -1,0 +1,17 @@
+{
+  "protocol_sha256": "4e59eed03a2922fc1ffdcbc63ad88a4eb9e9c9d161f9dff19dfe2803e51a2ca1",
+  "manifest_sha256": "305997b5421eccd364f332efa047d1f2fcf0b0f3239e6c83dea87603d5bc7d58",
+  "at": "2026-11-06T11:43:07.227841+00:00",
+  "seed": 999,
+  "condition": "clean_baseline",
+  "machine": "mac_m5",
+  "best_epoch": 97,
+  "completed_epochs": 100,
+  "files": {
+    "run_manifest.json": "93655ab73109f0c6facb41b287eb9bf8fdc3b6e72a6c16719184e3a452c3a8dd",
+    "checkpoints/last_checkpoint.pt": "12773b546c6f2c0fd430e09c16dbbda439c8020d12ee3ae77f2ef676ac34f65e",
+    "checkpoints/best_model.pt": "9443faf8cd02a25c794438b9f2e530adafe6a290dc727a2082d774ea372a3476",
+    "history.csv": "96c9446b68baab551a0927ced220df89a62fd538cd4e6264d289bdf60348a651",
+    "corruption_counts.json": "af02eed7fc53aba2c2279bc22f2b8945c3df127dd494c0bd48139734554c1256"
+  }
+}

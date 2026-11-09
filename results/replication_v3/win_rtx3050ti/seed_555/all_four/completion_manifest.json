@@ -1,0 +1,17 @@
+{
+  "protocol_sha256": "4e59eed03a2922fc1ffdcbc63ad88a4eb9e9c9d161f9dff19dfe2803e51a2ca1",
+  "manifest_sha256": "c2ba41460ba28c771bb538dd60aeb2d843c45a7a50c54c1b35beb550ed78553d",
+  "at": "2026-11-07T13:29:09.247819+00:00",
+  "seed": 555,
+  "condition": "all_four",
+  "machine": "win_rtx3050ti",
+  "best_epoch": 98,
+  "completed_epochs": 100,
+  "files": {
+    "run_manifest.json": "6af6cc5a6e330536d425a8026b0759392f48f582b1b90db023b22bd695a76367",
+    "checkpoints/last_checkpoint.pt": "3626530f15a05e3a2622424ffdde08deb3f4c9133df4c7be6c71937f402fe277",
+    "checkpoints/best_model.pt": "499ad44aa0904969bb8eb05de6dafd0e567e71cab6995e5a7fa7b73c9b1f5834",
+    "history.csv": "589fefb166569ee3771003b750adee143374ec64893d73360748ea24a7183214",
+    "corruption_counts.json": "4eb9abe2a1277a2e9bdd11870b4893c51793ee88447f5570ad537e2e62ace299"
+  }
+}

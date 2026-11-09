@@ -27,9 +27,10 @@
   "files": {
     "elcvia.sty": "8c31c4f50e6ef196e4f124cea56e7bbfcf3954a6fbbba9828697f18784c24386",
     "elcvia-submission.sty": "1eb1be4b40614e0f39c7d63d36779a34ccf0f7bd9b8162ec1e53afe37ef94fd7",
-    "elcvia-numeric.bst": "d6acb315e61cefbb01bf29249f871a59d81e9633ed62bccb6eeb3c06e0095315",
+    "elcvia-numeric.bst": "c0126d83051410c98fe1fc3035464059c9407c8d1e37124189003d64866f37d2",
     "template/README-original.txt": "432ec3c1a175da1774873bb4589f01eb2d56ded13658fb603313897166196697",
     "third_party/unsrtnat.bst": "2b257bc5d35c5716691f67615b3b29cc718d05b6b998f87473c924dec0a652e9",
     "third_party/LPPL-1.3c.txt": "3d262cdf34dafa6955f703c634a8c238ec44109bc8dd6ef34fb7aa54809f7e66"
-  }
+  },
+  "final_revision_note": "Official elcvia.sty unchanged; local numeric BibTeX style now abbreviates rosters over six authors. Full rosters remain in references.bib."
 }

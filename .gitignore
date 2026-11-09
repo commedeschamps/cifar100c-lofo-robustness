@@ -102,7 +102,6 @@ research_cv_archive*/
 /paper/source_checks.json
 /paper/verification.json
 /paper/*.pdf
-/paper/main_blinded.tex
 /paper/sanitize_blinded_pdf.py
 /paper/template/official-elcvia-template.zip
 /paper/template/official-example.tex
@@ -113,3 +112,18 @@ research_cv_archive*/
 # Local publication/review inputs
 *similarity_*.pdf
 *ai_detection_*.pdf
+
+# Local manuscript revisions, audits and submission packages
+/audit/
+/final_hardening/
+/paper_revision_v3/
+/submission_v3_final/
+/handoff/
+
+# Disposable replication runtime state (saved scientific outputs remain tracked)
+/results/**/progress.json
+/results/**/verification_report.json
+/results/**/error_before_attempt_*.json
+/results/**/dashboard.html
+/results/**/queue.sqlite3*
+/results/**/.queue.lock

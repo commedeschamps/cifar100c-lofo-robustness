@@ -1,0 +1,229 @@
+\documentclass[twoside,a4paper,11pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage{times}
+\usepackage{elcvia}
+\usepackage{elcvia-submission}
+\usepackage[english]{babel}
+\usepackage{amsmath,amssymb}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage[numbers,sort&compress]{natbib}
+\usepackage[hidelinks,breaklinks]{hyperref}
+\usepackage{xurl}
+\usepackage{placeins}
+% Prevent isolated first or last paragraph lines at page breaks.
+\clubpenalty=10000
+\widowpenalty=10000
+\renewcommand{\topfraction}{0.9}
+\renewcommand{\bottomfraction}{0.8}
+\renewcommand{\textfraction}{0.1}
+\renewcommand{\floatpagefraction}{0.8}
+\urlstyle{same}
+% Break DOIs at their prefix separator, keeping identifier suffixes intact.
+\newcommand{\doi}{doi: \begingroup\urlstyle{rm}%
+  \def\UrlBreaks{\do\/}\def\UrlBigBreaks{\do\/}\Url}
+\hypersetup{pdftitle={Supplementary Material: How Far Does Corruption Robustness Transfer? A Leave-One-Family-Out Study on CIFAR-100-C}}
+\newif\ifblindreview
+\ifdefined\ELCVIABlindReview\blindreviewtrue\else\blindreviewfalse\fi
+\ifblindreview
+\hypersetup{pdfauthor={}}
+\else
+\hypersetup{pdfauthor={Rakhman Seidigali and Yermakhan Khamitov}}
+\fi
+
+\title{Supplementary Material\\How Far Does Corruption Robustness Transfer?\\A Leave-One-Family-Out Study on CIFAR-100-C}
+\author{Rakhman Seidigali and Yermakhan Khamitov\\[1ex]
+\small\emph{School of Software Engineering, Astana IT University}\\
+\small\emph{Astana, Kazakhstan}}
+\date{}
+\input{numbers}
+\usepackage{longtable}
+\usepackage{xr}
+\externaldocument[M-]{main}
+\newcommand{\posthoc}{post-hoc analysis, specified before computation, not confirmatory}
+\newcommand{\posthocshort}{post-hoc; not confirmatory}
+
+\begin{document}
+\ifblindreview\maketitleblind\else\maketitle\fi
+\pagestyle{plain}\raggedbottom
+This supplement preserves the original numerical tables and figures and reports the separately frozen addendum. Appendices A--D contain original reproducibility and descriptive material. All results in Sections E--J have status: \posthoc. No training or inference was performed for the addendum. The five seed identifiers form matched observations across training platforms.
+\appendix
+
+\section{Reproducibility details}
+\label{app:records}
+Mac training records specify Python 3.14.5, PyTorch 2.15.0 and torchvision 0.29.2 on macOS 26.5.2 arm64 with MPS. Windows records specify Python 3.14.8, PyTorch 2.14.1+cu130 and torchvision 0.29.1+cu130, CUDA 13.0 and an NVIDIA GeForce RTX 3050 Ti Laptop GPU. Both record NumPy 2.5.4, OpenCV 5.0.0 and Pillow 13.0.0, with two persistent data-loader workers. These are training environments; both final evaluation cohorts use Mac MPS.
+
+The five training severities follow the CIFAR-specific code~\cite{cifarreference} at commit \texttt{8190fe3}. Gaussian noise uses standard deviations $(0.04,0.06,0.08,0.09,0.10)$ on $[0,1]$. Defocus uses antialiased disk kernels with (radius, alias sigma) pairs $(0.3,0.4)$, $(0.4,0.5)$, $(0.5,0.6)$, $(1,0.2)$ and $(1.5,0.1)$. Fog uses a $32\times32$ diamond-square plasma map with (strength, decay) pairs $(0.2,3)$, $(0.5,3)$, $(0.75,2.5)$, $(1,2)$ and $(1.5,1.75)$. JPEG qualities are $(80,65,58,50,40)$.
+
+The frozen scientific training commit is \texttt{070e28e}; the accepted analysis revision is \texttt{f773298}. The training protocol canonical SHA-256 is \path{4e59eed03a2922fc1ffdcbc63ad88a4eb9e9c9d161f9dff19dfe2803e51a2ca1}. The accepted analysis-plan SHA-256 is \path{a276876c4673645d967a5dc8ce5d3383e8b9c14739a2c90b56d9b4faf6d4bef8}. The split SHA-256 is \path{6929ed610470a67c06a969211b1a4b8016bb37b492bc2944bd2cde85d3f1cd04}. The CIFAR-100-C version1 archive MD5 is \texttt{11f0ed0f1191edbf9fa23466ae6021d3}. The supplementary manifests retain per-run checkpoint and CSV hashes, source identities and the exact commands. A separate full-content manifest supplements the original freeze, whose source hash did not include the evaluator's transitive configuration dependency. Current normalization agrees with the frozen training values.
+
+The original files are read from \path{results/replication_v3/<platform>/seed_<seed>/<condition>/evaluation/per_condition.csv}, with corresponding prediction caches and training histories. The revision's \path{verification/} directory contains independently recomputed per-cell, per-model, family, type, severity and paired tables, plus the content-overlap sensitivity. \path{provenance/figure_provenance.json} maps every figure to its exact inputs. The official benchmark analysis remains fixed at 10,000 images; deletion results are stored separately.
+
+\section{Seed-level estimates and ratio definitions}
+\label{app:seed}
+\input{tables/seed_gains.tex}
+Exploratory deletion of any one seed preserves the signs of mean $D$, $G$ and $H$ in every platform/family. The supplied leave-one-out means and ratios retain every seed deletion. Table~\ref{tab:ratios} distinguishes the primary ratio of mean gains from the mean of seed ratios. Figure~\ref{fig:ratios} shows their underlying dispersion without assigning a prespecified ratio interval.
+\input{tables/ratios.tex}
+\begin{figure}[!htbp]
+\centering
+\includegraphics[width=0.86\textwidth]{figures/transfer_ratios.pdf}
+\caption{Observed transfer ratios. Diamonds show $\overline D/\overline G$ over five seeds; small points show the five $D_k/G_k$ values. The diamond is not their arithmetic mean. No ratio confidence interval is implied by this display. All eight reference-gain intervals are above zero. Both cohorts use Mac MPS inference.}
+\label{fig:ratios}
+\end{figure}
+\FloatBarrier
+
+\section{Complete held-out-type comparison}
+\label{app:types}
+\input{tables/type_gains.tex}
+The accompanying CSVs retain all model/type accuracies and all 75 type--severity cells per model, including negative gains. Figure~\ref{fig:tradeoff} complements main Table~\ref{M-tab:overall} by showing the individual clean/robustness pairs.
+\begin{figure}[!htbp]
+\centering
+\includegraphics[width=0.83\textwidth]{figures/clean_robustness.pdf}
+\caption{Clean versus mean corrupted accuracy. Each point is a trained seed: circles denote Mac training and squares Windows training. Color denotes condition. Axes deliberately show the observed accuracy ranges, with no fitted causal relationship. All 60 points use the same Mac MPS inference pipeline. Source: independently recomputed model scores.}
+\label{fig:tradeoff}
+\end{figure}
+\FloatBarrier
+
+\FloatBarrier
+\section{Optimization and environment diagnostics}
+\label{app:convergence}
+\input{tables/convergence.tex}
+\begin{figure}[!htbp]
+\centering
+\includegraphics[width=0.98\textwidth]{figures/convergence.pdf}
+\caption{Mean training and clean-validation trajectories over five seeds per condition. Solid curves: Mac training; dashed: Windows training. The final panel expands epochs91--100; it is not a separate experiment. All 60 histories contribute. Small late improvements limit claims of complete convergence. Source: original100-epoch history CSVs.}
+\label{fig:convergence}
+\end{figure}
+\label{app:platform}
+\begin{figure}[!htbp]
+\centering
+\includegraphics[width=0.85\textwidth]{figures/cross_platform.pdf}
+\caption{Matched-seed differences in held-out gain $D$: Mac-trained minus Windows-trained. Small points are five seed differences, with means and nominal95\% $t$ intervals. Intervals including zero do not establish equivalence. Training hardware and dependencies differ, while inference is common Mac MPS.}
+\label{fig:platform}
+\end{figure}
+\FloatBarrier
+
+
+\FloatBarrier
+\section{Operator-policy association matrix}
+\label{supp:operator}
+\posthoc. For family $F$ and type $c$, define $A_{p,k,F,c}=\overline{\mathrm{Acc}}_{p,k,\mathrm{AllFour},c}-\overline{\mathrm{Acc}}_{p,k,\mathrm{LOFO}_F,c}$, where each bar averages five severities. Reported means, SDs and nominal 95\% $t$ intervals over five training seeds use $t_{0.975,4}$ and paired seed differences. Each policy contrast combines the omitted representative's content with 12.5 percentage points more corruption dose (37.5\% versus 50\%). CSVs contain all seed and cell estimates.
+\begin{figure}[!htbp]\centering
+\includegraphics[width=\textwidth]{figures/operator_matrix.pdf}
+\caption{Operator association matrices: All-Four minus LOFO, in pp, averaged over severities and then seeds. Rows identify the family omitted in LOFO. Both panels use the same zero-centered scale. Tables~\ref{tab:a1mac} and~\ref{tab:a1win} report SDs and nominal 95\% $t$ intervals over five training seeds. \posthoc.}
+\label{fig:operator}\end{figure}
+\FloatBarrier
+\input{tables/A1_mac}
+\input{tables/A1_win}
+\subsection{Directional hypotheses and exploratory multiplicity}
+H1 requires positive Weather/contrast policy differences in both platforms. H2 requires positive Noise/impulse-noise and Noise/glass-blur differences in both platforms. H3 requires negative brightness gains relative to Clean in every augmented condition in both platforms. For each claim the largest component one-sided paired $t$ probability is the intersection--union probability. Holm adjusts only the three conjunctions. All component directions agree in the observed seed values; the hypotheses concern mean differences. Remaining matrix cells form a single exploratory BH family of 114 cells; designated H1/H2 cells are excluded. The claims retain their post-hoc exploratory status after adjustment.
+\input{tables/H_components}
+\input{tables/H_holm}
+\FloatBarrier
+\section{Transfer groups and clean-accuracy costs}
+\label{supp:groups}
+\posthoc. Within each LOFO condition, the three disjoint groups partition all 15 types: (a) the three training representatives, (b) the held-out family, and (c) untrained types in represented families. Each seed's gain averages type-level LOFO-minus-Clean differences equally. Group sizes differ; types are not independent training repetitions. Group (c) means are positive in all platform/LOFO combinations. Negative held-out fog and brightness gains and heterogeneous policy contrasts remain visible. Regularization remains a plausible explanation for these observations.
+\input{tables/A2_groups}
+\begin{figure}[!htbp]\centering
+\includegraphics[width=.93\textwidth]{figures/clean_loss_heldout_gain.pdf}
+\caption{Per-seed clean-accuracy loss versus held-out-family gain. Positive horizontal values indicate less clean accuracy than matched Clean. Seed identifiers label points; shape and color indicate training environment. No regression or causal interpretation is fitted. Source: A2\_group\_seed.csv, group (b). \posthoc.}
+\label{fig:lossscatter}\end{figure}
+\FloatBarrier
+\begin{figure}[!htbp]\centering
+\includegraphics[width=\textwidth]{figures/all_condition_clean_family_scatter.pdf}
+\caption{Clean-accuracy loss versus family-accuracy gain for all six conditions and all five seeds, separately for each training environment and family. The five Clean points coincide at the origin. Only LOFO for the panel's named family holds that family out; other policies may train on its representative. This display therefore labels family gains rather than calling every point held-out transfer. No regression or mechanism is inferred. Source: all\_condition\_clean\_family\_scatter.csv. Post-hoc exploratory; \posthoc.}
+\label{fig:allscatter}\end{figure}
+\FloatBarrier
+\section{Matched-seed platform equivalence}
+\label{supp:equivalence}
+\posthoc. Differences are computed for each matched seed: \[z_{k,F}=D_{\mathrm{Mac},k,F}-D_{\mathrm{Windows},k,F}.\] TOST compares their mean with fixed bounds $\pm\delta$ using df=4, with primary $\delta=1.0$ pp and sensitivity $\delta=0.5$ pp. Both one-sided probabilities must be below 0.05, equivalent to the 90\% interval lying strictly within the bounds. The 95\% interval estimates the mean difference; TOST separately assesses equivalence. Blur and Weather meet both margins; Noise and Digital do not. Power is low with five matched seeds, so a negative TOST decision is inconclusive. These exploratory decisions apply to individual families. Hardware and software differ together, and inference uses a common backend; hardware-only effects and inference portability require separate evaluation.
+\input{tables/A3_tost}
+\paragraph{Independent numerical verification.}
+Post-hoc exploratory equivalence analysis, specified before computation of the additional statistics, not confirmatory. We independently reconstruct $D$ from saved type accuracies, average types within each seed, and form $z_k=D_{\mathrm{Mac},k}-D_{\mathrm{Windows},k}$. For $n=5$ and df=4, $p_L=1-F_{t_4}((\bar z+\delta)/\mathrm{SE})$, $p_U=F_{t_4}((\bar z-\delta)/\mathrm{SE})$, and $p_{\mathrm{TOST}}=\max(p_L,p_U)$. Equivalence requires both one-sided probabilities below 0.05, or the unrounded 90\% interval strictly inside $(-\delta,\delta)$. Equivalence therefore rests on the stated margin and both one-sided tests. Table~\ref{tab:tostverify} gives both probabilities at both margins; Table~\ref{tab:tostseeds} retains the five matched differences. All original A3 statistics agree within $10^{-11}$. Weather's sensitivity-margin decision is close to the boundary and is based on unrounded values. Low power and uncertain paired normality with five seeds limit interpretation; software and hardware differ together.
+\input{tables/tost_verification}
+\input{tables/tost_matched_seeds}
+
+\section{Variance structure}
+\label{supp:variance}
+\posthoc. $D$ is LOFO-minus-Clean and $G$ is All-Four-minus-Clean on the named family. The platform shift divided by within-platform RMS seed SD expresses the shift relative to seed variation. It is a descriptive scale summary; variance components would require a separate model. Only two training environments are observed, with hardware and dependencies confounded; both use common Mac MPS inference.
+\input{tables/A4_variance}
+\section{Addendum sensitivity}
+\label{supp:sensitivity}
+\posthoc. Deleting one seed at a time changes the A1 cell mean by at most 0.776100 pp. The largest absolute change in $T=\overline D/\overline G$ is 0.021969; all retained reference means are positive. Excluding the ten previously identified exact-overlap identities, leaving 9,990 images, changes an A1 cell mean by at most 0.016142 pp and an individual seed cell by at most 0.025241 pp. Official results are unchanged. The complete deletion and overlap tables retain every cell; near-duplicate and validation-selection effects remain possible.
+\input{tables/A5_maxima}
+\section{Additional original figures and implementation detail}
+\label{supp:implementation}
+This section contains the original figures and implementation details moved from the main manuscript.
+\begin{figure}[!htbp]
+\centering
+\includegraphics[width=\textwidth]{figures/overall_accuracy.pdf}
+\caption{Overall test accuracy by condition and training environment. Small points are five seed results per condition; larger points and bars show means and nominal 95\% $t$ intervals. Corrupted accuracy averages 75 cells within each seed. Both cohorts use Mac MPS inference. Axes start at zero. Source: independently recounted per-condition predictions.}
+\label{fig:overall}
+\end{figure}
+\begin{figure}[!htbp]
+\centering
+\includegraphics[width=0.96\textwidth]{figures/type_heterogeneity.pdf}
+\caption{Held-out-type gains over Clean, averaged over five severities within each seed. Points and bars show means and nominal 95\% $t$ intervals for five paired seed differences. Each type uses the model excluding its family; horizontal separators mark Noise, Blur, Weather and Digital. All types are shown, including negative fog and brightness results. These marginal intervals are descriptive, not multiplicity-adjusted tests.}
+\label{fig:types}
+\end{figure}
+\begin{figure}[!htbp]
+\centering
+\includegraphics[width=0.94\textwidth]{figures/severity_gains.pdf}
+\caption{Excluded-family LOFO$-$Clean gains by severity. Each seed first averages member corruption types; curves and shaded bands show the mean and nominal 95\% $t$ interval over five paired seeds. Zero marks no gain. Severity indices do not define a common physical scale across corruption types. Source: all held-out type--severity cells, without selection of favorable levels.}
+\label{fig:severity}
+\end{figure}
+\FloatBarrier
+The random streams are keyed by training seed, epoch and original image index. Separate BLAKE2b-derived 32-bit seeds control spatial choices, branch selection, severity, operator parameters and minibatch order. The condition is absent from these keys, so retained operator choices and pixels match across conditions for the same presentation. The operator name additionally keys its parameter stream. Across all saved epochs, operator-by-severity counts match exactly in every condition retaining the operator, and the count histories match between training platforms for each seed. Independent regeneration of two complete seed-52 exposure epochs and sampled transform checks support the implementation; counts alone do not reconstruct every training pixel.
+
+We adapt the CIFAR-specific reference code~\cite{cifarreference} and give each operator an explicit random generator. We clip and truncate its output to unsigned 8-bit RGB before tensor conversion. Appendix~\ref{app:records} gives the source identity and severity settings. Shared-operator matching fixes retained-operator frequencies while preserving the difference in total corruption rates.
+
+
+We train for 100 epochs with batch size 128 and stochastic gradient descent: initial learning rate 0.1, momentum 0.9, and weight decay $5\times10^{-4}$. We disable Nesterov momentum, automatic mixed precision (AMP) and label smoothing. Cosine annealing uses $T_{\max}=100$ and $\eta_{\min}=0$, stepped at epoch end. Each epoch consumes all fitting images, retaining the last partial batch, for 352 updates and 35,200 updates per run. After augmentation, we normalize FP32 RGB values in $[0,1]$ with mean $(0.5071,0.4867,0.4408)$ and standard deviation $(0.2675,0.2565,0.2761)$. Clean validation uses only tensor conversion and normalization. We minimize cross-entropy and select the first epoch with the highest clean-validation accuracy, using a strict-improvement rule.
+
+Python, NumPy and PyTorch generators are seeded. Deterministic algorithms are requested, cuDNN benchmarking and TensorFloat-32 are disabled, and epoch IDs are passed explicitly to two persistent data-loader workers. Saved checkpoints contain optimizer, scheduler and RNG states for resumption. These controls standardize the training procedure across heterogeneous backends and library versions; bitwise reproducibility remains unverified.
+
+
+For model condition $m$, corruption $c$, severity $s$, and $n=10{,}000$ identities, percentage accuracy is
+\begin{equation}
+A_{m,c,s}=\frac{100}{n}\sum_{i=1}^{n}\mathbf{1}\{f_m(x_i^{c,s})=y_i\}.
+\end{equation}
+Platform and training-seed indices are suppressed in this equation. Family accuracy and overall corrupted accuracy are
+\begin{equation}
+A_{m,F}=\frac{1}{5|\mathcal{C}_F|}\sum_{c\in\mathcal{C}_F}\sum_{s=1}^{5}A_{m,c,s},\qquad
+A_{m,\mathcal C}=\frac1{75}\sum_{F\in\mathcal F}\sum_{c\in\mathcal C_F}\sum_{s=1}^{5}A_{m,c,s}.
+\end{equation}
+We weight corruption types and severities equally: Noise contributes $3/15$ and each other family $4/15$ to overall corrupted accuracy. We report clean accuracy separately. The error $100-A_{m,\mathcal C}$ is unnormalized; mean corruption error (mCE) additionally normalizes errors against a reference model.
+
+
+\subsection{Original cohort and protocol account}
+\paragraph{Training cohorts and common evaluation.}
+\label{supp:cohortrecord}
+The replication contains $6\times5\times2=60$ completed training runs. Mac training uses MPS with PyTorch 2.15.0 and torchvision 0.29.2; Windows training uses an RTX 3050 Ti Laptop GPU with PyTorch 2.14.1+cu130 and torchvision 0.29.1+cu130. Both use FP32, identical frozen source, split, initialization files and augmentation schedules. Python versions also differ, as recorded in Appendix~\ref{app:records}. The replications compare training environments with joint differences in hardware and software.
+
+Both sets of selected checkpoints were evaluated on Mac MPS with FP32, batch size 128, fixed normalization and model evaluation mode. We used no resizing, test-time augmentation, calibration, adaptation or checkpoint reselection. Each cohort's evaluation was gated on completion of all 30 training runs. Fifteen corruption types at five severities plus clean give 76 settings per checkpoint and 4,560 model--setting combinations. Every setting evaluates 10,000 predictions against official labels. Recounting all 45.6 million cached decisions reproduces every saved correct count. The training-platform label in a result file does not denote its inference platform.
+
+\paragraph{Frozen protocol and independent checks.}
+\label{supp:protocolrecord}
+The original seed-42 outcomes were exploratory and informed the study design. The v3 training source, split, initializations and operator references were frozen before production training. A separate analysis protocol was accepted on 8 November 2026 at 13:41:38 UTC, before all saved v3 evaluation completion summaries, which run from 13:46:32 to 17:52:50 UTC. Its accepted SHA-256 matches the preserved document. This is a frozen analysis protocol for a controlled post-exploratory replication, not a preregistration of the original research idea. Local records cannot establish the absence of all earlier unlogged result access.
+
+Independent scripts recompute the aggregates directly from all raw per-condition CSVs and prediction caches. The checks cover the 60-run grid, 100-epoch histories, manifest and checkpoint identities, first-maximum validation selection, official dataset hashes and label ordering, common operator counts, and all reported aggregates. Existing analysis outputs agree within floating-point reduction error. New overlap-deletion and leave-one-seed-out analyses are labeled exploratory. No new training or inference was performed during the revision.
+
+
+The cost in clean accuracy varies with the training recipe. NoisyMix~\cite{erichson2024noisymix} combines noisy augmentation with mixing, while multiplicative weight perturbations~\cite{trinh2024damp} provide a different route to corruption robustness. Wiemann et al.'s 2026 preprint~\cite{wiemann2026interleaved} studies interleaved clean/noisy training. Mollification~\cite{heinonen2025mollification} and stylized synthetic augmentation~\cite{siedel2026stylized} change the augmentation and supervision together. Differences in models, data, losses, training budgets and metrics prevent fair score rankings against our runs; matched controls are still needed.
+
+
+The new implementation matches RNG procedures and retained-operator frequencies. All-Four replaces identity presentations with the omitted representative while preserving other operator exposures, so the LOFO--All-Four contrast combines content and total dose. LOFO gains over Clean may also include generic regularization. Here, ``transfer'' denotes improved performance on the excluded family under the compared policies; its mechanism remains open.
+
+
+\subsection{Deferred experimental plan}
+\label{supp:future}
+The first priority is a separately frozen standard augmentation and matched-strength generic-regularization control, using the same seed pairing and clean-validation selection. A second priority is a dose/replacement experiment: retain each common operator at probability $1/8$ and replace the omitted slot with a specified generic augmentation. This compares the family representative with that replacement at fixed common exposure; its conclusion would remain replacement-specific. Increasing LOFO's retained operators to a total rate of $1/2$ provides a useful dose sensitivity check, but changes their frequencies and is not the same estimand.
+
+Representative rotation should then test a prespecified alternative mapping, such as shot noise, motion blur, frost and pixelate, across the six conditions. A longer schedule from initialization would test optimization-horizon sensitivity more directly than continuing a cosine schedule already at zero. Other architectures, datasets and natural shifts would address external validity after these controls. These experiments form a proposed extension of the present replication.
+
+
+\FloatBarrier
+\clearpage
+\bibliographystyle{elcvia-numeric}
+\bibliography{references}
+\end{document}

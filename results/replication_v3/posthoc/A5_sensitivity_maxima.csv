@@ -1,0 +1,13 @@
+platform,analysis,max_absolute_change,units,max_location,analysis_status
+mac_m5,A1_LOO_mean,0.6830000000000005,pp,"{""platform"": ""mac_m5"", ""family"": ""weather"", ""corruption"": ""glass_blur"", ""deleted_seed"": 999}","post-hoc analysis, specified before computation, not confirmatory"
+mac_m5,A1_overlap_mean,0.012438438438426402,pp,"{""platform"": ""mac_m5"", ""family"": ""noise"", ""corruption"": ""gaussian_noise""}","post-hoc analysis, specified before computation, not confirmatory"
+mac_m5,A1_overlap_seed,0.018874874874882153,pp,"{""platform"": ""mac_m5"", ""family"": ""blur"", ""corruption"": ""motion_blur"", ""seed"": 1666}","post-hoc analysis, specified before computation, not confirmatory"
+mac_m5,T_LOO,0.02196875681754873,ratio,"{""platform"": ""mac_m5"", ""family"": ""digital"", ""deleted_seed"": 999}","post-hoc analysis, specified before computation, not confirmatory"
+win_rtx3050ti,A1_LOO_mean,0.7760999999999996,pp,"{""platform"": ""win_rtx3050ti"", ""family"": ""noise"", ""corruption"": ""glass_blur"", ""deleted_seed"": 999}","post-hoc analysis, specified before computation, not confirmatory"
+win_rtx3050ti,A1_overlap_mean,0.016142142142136606,pp,"{""platform"": ""win_rtx3050ti"", ""family"": ""weather"", ""corruption"": ""fog""}","post-hoc analysis, specified before computation, not confirmatory"
+win_rtx3050ti,A1_overlap_seed,0.025241241241246826,pp,"{""platform"": ""win_rtx3050ti"", ""family"": ""noise"", ""corruption"": ""gaussian_noise"", ""seed"": 555}","post-hoc analysis, specified before computation, not confirmatory"
+win_rtx3050ti,T_LOO,0.014198854336959943,ratio,"{""platform"": ""win_rtx3050ti"", ""family"": ""weather"", ""deleted_seed"": 555}","post-hoc analysis, specified before computation, not confirmatory"
+all,A1_LOO_mean,0.7760999999999996,pp,"{""platform"": ""win_rtx3050ti"", ""family"": ""noise"", ""corruption"": ""glass_blur"", ""deleted_seed"": 999}","post-hoc analysis, specified before computation, not confirmatory"
+all,A1_overlap_mean,0.016142142142136606,pp,"{""platform"": ""win_rtx3050ti"", ""family"": ""weather"", ""corruption"": ""fog""}","post-hoc analysis, specified before computation, not confirmatory"
+all,A1_overlap_seed,0.025241241241246826,pp,"{""platform"": ""win_rtx3050ti"", ""family"": ""noise"", ""corruption"": ""gaussian_noise"", ""seed"": 555}","post-hoc analysis, specified before computation, not confirmatory"
+all,T_LOO,0.02196875681754873,ratio,"{""platform"": ""mac_m5"", ""family"": ""digital"", ""deleted_seed"": 999}","post-hoc analysis, specified before computation, not confirmatory"

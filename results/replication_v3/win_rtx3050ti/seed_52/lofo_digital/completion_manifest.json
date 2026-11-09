@@ -1,0 +1,17 @@
+{
+  "protocol_sha256": "4e59eed03a2922fc1ffdcbc63ad88a4eb9e9c9d161f9dff19dfe2803e51a2ca1",
+  "manifest_sha256": "8debd80577075b2cec87cfb0497918392093146acc737148e5b0bde5b60fe7d0",
+  "at": "2026-11-05T22:52:25.557155+00:00",
+  "seed": 52,
+  "condition": "lofo_digital",
+  "machine": "win_rtx3050ti",
+  "best_epoch": 92,
+  "completed_epochs": 100,
+  "files": {
+    "run_manifest.json": "144265ce70038b3dfb18a01d361973e0ec79397896e02a7de068c9d982f38532",
+    "checkpoints/last_checkpoint.pt": "ecdecf74333a7dc4309213c25a0e0504bb17faf4d3aff1ac0a078275160102b7",
+    "checkpoints/best_model.pt": "fe6cbedd73644b27b4f3932bbebfdd938244c223cb6472b45c869c0a0496f908",
+    "history.csv": "945600ecbeb6f93d3e3ff19536de6f844ab0031d09d9249df7fe6c61459f0980",
+    "corruption_counts.json": "c2a4f6a1b4762ded9769eaf494d04758803a2d08e67051182652890bb226b50c"
+  }
+}

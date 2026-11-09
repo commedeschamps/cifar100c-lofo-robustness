@@ -1,3 +1,4 @@
+%% Final revision modification (2026-11-09): display first six authors, then et al.; full rosters retained in references.bib.
 %% File: `elcvia-numeric.bst'
 %% Locally adapted from unsrtnat.bst, 2026-11-01.
 %% Initials, numeric citation order, DOI preferred over redundant URL; misc DOI retained.
@@ -218,31 +219,31 @@ INTEGERS { nameptr namesleft numnames }
 
 FUNCTION {format.names}
 { 's :=
-  #1 'nameptr :=
   s num.names$ 'numnames :=
-  numnames 'namesleft :=
+  numnames #6 >
+  { s #1 "{f.~}{vv~}{ll}{, jj}" format.name$
+    #2 'nameptr :=
+    { nameptr #7 < }
+    { ", " * s nameptr "{f.~}{vv~}{ll}{, jj}" format.name$ *
+      nameptr #1 + 'nameptr := }
+    while$
+    ", et~al." *
+  }
+  { #1 'nameptr :=
+    numnames 'namesleft :=
     { namesleft #0 > }
     { s nameptr "{f.~}{vv~}{ll}{, jj}" format.name$ 't :=
       nameptr #1 >
         { namesleft #1 >
             { ", " * t * }
-            { numnames #2 >
-                { "," * }
-                'skip$
-              if$
-              t "others" =
-                { " et~al." * }
-                { " and " * t * }
-              if$
-            }
-          if$
-        }
-        't
-      if$
+            { numnames #2 > { "," * } 'skip$ if$
+              t "others" = { " et~al." * } { " and " * t * } if$ }
+          if$ }
+        't if$
       nameptr #1 + 'nameptr :=
-      namesleft #1 - 'namesleft :=
-    }
-  while$
+      namesleft #1 - 'namesleft := }
+    while$
+  } if$
 }
 
 FUNCTION {format.key}

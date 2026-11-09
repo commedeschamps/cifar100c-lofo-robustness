@@ -1,0 +1,16 @@
+{
+  "at": "2026-11-08T17:28:35.835198+00:00",
+  "machine": "win_rtx3050ti",
+  "seed": 555,
+  "condition": "all_four",
+  "identity": {
+    "protocol_sha256": "4e59eed03a2922fc1ffdcbc63ad88a4eb9e9c9d161f9dff19dfe2803e51a2ca1",
+    "best_checkpoint_sha256": "499ad44aa0904969bb8eb05de6dafd0e567e71cab6995e5a7fa7b73c9b1f5834",
+    "test_sha256": "4b67687d9933c4db8f0831104447f15b93774f4f464bd0516f0f0f2ac83b7864",
+    "cifar_c_archive_md5": "11f0ed0f1191edbf9fa23466ae6021d3"
+  },
+  "completed_conditions": 76,
+  "clean_accuracy_pct": 72.5,
+  "mean_corrupted_accuracy_pct": 65.23826666666666,
+  "per_condition_sha256": "c845a6b8d9fdecb14ef996178ef388fc9709c8c309379c915862806eca380f0e"
+}

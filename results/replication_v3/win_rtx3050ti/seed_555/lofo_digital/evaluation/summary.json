@@ -1,0 +1,16 @@
+{
+  "at": "2026-11-08T17:24:27.253648+00:00",
+  "machine": "win_rtx3050ti",
+  "seed": 555,
+  "condition": "lofo_digital",
+  "identity": {
+    "protocol_sha256": "4e59eed03a2922fc1ffdcbc63ad88a4eb9e9c9d161f9dff19dfe2803e51a2ca1",
+    "best_checkpoint_sha256": "48d1b6e2e83929aa1b79cad197c11579c1b82a506bd4b4e177224af7932eac1f",
+    "test_sha256": "4b67687d9933c4db8f0831104447f15b93774f4f464bd0516f0f0f2ac83b7864",
+    "cifar_c_archive_md5": "11f0ed0f1191edbf9fa23466ae6021d3"
+  },
+  "completed_conditions": 76,
+  "clean_accuracy_pct": 74.1,
+  "mean_corrupted_accuracy_pct": 65.00573333333334,
+  "per_condition_sha256": "361b7dd693950c29890eccf5d65f0ff6f827fa0e50f2891798f879befb3cbd45"
+}

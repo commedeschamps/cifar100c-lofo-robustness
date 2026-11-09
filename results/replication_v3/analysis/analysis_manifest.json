@@ -1,0 +1,14 @@
+{
+  "at": "2026-11-09T02:41:18.975499+00:00",
+  "machines": [
+    "mac_m5",
+    "win_rtx3050ti"
+  ],
+  "unique_seed_count": 5,
+  "observations_per_condition": 10,
+  "independent_training_seeds_per_condition": 5,
+  "interpretation": "Descriptive paired contrasts per platform, not ten independent-seed replicates.",
+  "uncertainty": "Sample SD and approximate two-sided 95% t intervals (df=4) over five seeds within each platform; strong small-n assumptions; no significance claim.",
+  "total_evaluated_runs": 60,
+  "heldout_differences": 40
+}

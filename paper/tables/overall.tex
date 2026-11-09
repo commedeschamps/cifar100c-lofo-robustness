@@ -1,0 +1,19 @@
+\begin{table}[!htbp]
+\centering
+\small
+\setlength{\tabcolsep}{5pt}
+\caption{Clean and mean corrupted accuracy (\%), mean $\pm$ sample SD over five seeds per training platform. Corrupted accuracy averages all 75 type--severity cells. Both cohorts use Mac MPS inference.}
+\label{tab:overall}
+\begin{tabular}{lrrrr}
+\toprule
+Condition & Mac clean & Mac corrupt. & Windows clean & Windows corrupt. \\
+\midrule
+Clean & 76.38 $\pm$ 0.16 & 47.99 $\pm$ 0.38 & 76.29 $\pm$ 0.28 & 47.88 $\pm$ 0.30 \\
+LOFO-Noise & 73.83 $\pm$ 0.33 & 59.13 $\pm$ 0.31 & 73.83 $\pm$ 0.27 & 58.91 $\pm$ 0.41 \\
+LOFO-Blur & 72.54 $\pm$ 0.24 & 63.11 $\pm$ 0.26 & 72.43 $\pm$ 0.36 & 63.01 $\pm$ 0.39 \\
+LOFO-Weather & 72.15 $\pm$ 0.25 & 62.91 $\pm$ 0.14 & 71.99 $\pm$ 0.39 & 62.78 $\pm$ 0.31 \\
+LOFO-Digital & 74.13 $\pm$ 0.39 & 64.71 $\pm$ 0.57 & 74.16 $\pm$ 0.17 & 64.72 $\pm$ 0.28 \\
+All-Four & 72.26 $\pm$ 0.28 & 65.06 $\pm$ 0.18 & 72.17 $\pm$ 0.22 & 64.97 $\pm$ 0.23 \\
+\bottomrule
+\end{tabular}
+\end{table}
