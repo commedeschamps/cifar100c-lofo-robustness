@@ -1,0 +1,55 @@
+# Controlled replication v3: frozen post-hoc analysis addendum
+
+Status for every result below: **post-hoc analysis, specified before computation, not confirmatory**.
+
+This document is written after the original v3 outcomes and manuscript exist, and before running any new calculation specified here. It is not a preregistration and does not retroactively change the accepted main analysis. A local Git commit, this file's SHA-256, commit time and first analysis-start UTC will be recorded outside this file. Do not amend this file after that commit; record deviations separately. No training, model inference, checkpoint selection, or modification of existing artifacts is authorized. Phase B is explicitly deferred.
+
+## Inputs, units and fixed conventions
+
+Read only the saved `results/replication_v3/{mac_m5,win_rtx3050ti}/seed_<k>/<condition>/evaluation/per_condition.csv` files, saved predicted classes, training histories and existing overlap-index record. Seeds are 52, 67, 999, 555 and 1666, matched by identifier across conditions and platforms. Conditions are Clean, the four LOFO conditions, and All-Four. Report platforms separately; never treat the two platforms as ten independent seeds. Accuracy is 100 times correct predictions divided by images. Average five severities equally for each type, and member types equally within a family. No weighting by observed gains or precision, no selection of favorable severities or seeds, and no new image sampling.
+
+Families (fixed): Noise = Gaussian noise, shot noise, impulse noise; Blur = defocus blur, glass blur, motion blur, zoom blur; Weather = snow, frost, fog, brightness; Digital = contrast, elastic transform, pixelate, JPEG compression. Representatives are respectively Gaussian noise, defocus blur, fog, JPEG compression. All estimates are conditional on these operators, split, architecture, training recipe, selected checkpoints and common Mac MPS evaluation.
+
+For any five paired differences x_k report arithmetic mean, sample SD (denominator 4), and mean +/- t_(0.975,4) SD/sqrt(5). Call this a **nominal 95% t interval over five training seeds**; do not call any result significant. These marginal intervals do not incorporate test-image, split, representative or environment sampling uncertainty. Retain full precision in CSVs; display pp to two decimals, ratios to three decimals, and probabilities to four decimals or scientific notation. Each output table, figure caption and result row carries the status above. Original displayed manuscript numbers and existing table/figure files are frozen; moving them to the supplement does not change their values.
+
+## A1: operator association matrix and directional claims
+
+Define M_(p,k,m,c) = mean_s accuracy_(p,k,m,c,s). Define A_(p,k,F,c) = M_(p,k,All-Four,c) - M_(p,k,LOFO_F,c), in pp. For each platform report all 4 x 15 mean/SD/nominal interval cells, all seed contrasts, and a 4 x 15 heatmap on a shared zero-centered color scale. This is an association between policies: adding o_F also adds 12.5 pp total corruption dose (37.5% versus 50%). It is not an isolated operator ablation or a causal content estimate.
+
+Exactly three directional hypotheses are assessed, interpreted as conjunctions of the stated components in **both** environments:
+
+- H1: A_(Weather,contrast) > 0 in each platform (adding the fog slot is associated with higher contrast accuracy).
+- H2: A_(Noise,impulse_noise) > 0 AND A_(Noise,glass_blur) > 0 in each platform (both types, both platforms).
+- H3: brightness gain versus matched Clean < 0 in each of the five augmented conditions in each platform (all five conditions, both platforms).
+
+For each component compute a one-sided paired t test of zero mean in the stated direction with df=4, using only five within-platform differences. For each conjunction use the largest component p value (intersection-union test; no independence between platforms is assumed). Apply Holm step-down adjustment to these **three** conjunction p values only. Report all component estimates/p values and the three raw/Holm values, without dichotomous significance language. A conjunction does not claim every seed is positive/negative; report observed signs separately. If SD is zero, use the exact directional limit (p=0 for a strict positive directional constant, p=1 for a strict negative constant, p=1 for identically zero); record such cases.
+
+The remaining matrix cells exclude Weather/contrast and Noise/impulse_noise and Noise/glass_blur: 57 per platform, 114 in total. Compute two-sided paired t p values and Benjamini-Hochberg q values jointly over these 114 cells. Include all in supplementary tables/CSVs and label exploratory. Do not include the three designated cell types or H3 components in that BH family. This prevents silently changing the multiplicity family after looking at outcomes. Descriptive nominal intervals remain unadjusted, including for directional cells.
+
+## A2: transfer groups and clean-loss scatter
+
+For each LOFO_F define three disjoint groups partitioning the 15 types: (a) the three retained representative types; (b) every type of held-out family F; (c) types in the three represented families other than their representatives. Average type-level paired LOFO-minus-Clean gains equally within each group for each seed. Report all seed values and mean/SD/nominal intervals per platform and family. Do not compare unequal group sizes as independent observations. Scatter x = Clean clean-test accuracy minus LOFO clean-test accuracy (positive = clean loss), y = group (b) paired gain, with each seed identified and platform indicated; no fitted regression or inferential correlation.
+
+Discuss a simple uniform, omission-insensitive regularization account as a diagnostic expectation, not as a necessary consequence of every regularization mechanism. Describe gains on group (c), heterogeneous type gains and negative held-out fog/brightness gains. Neither these patterns nor the scatter rule out generic regularization; no matched-strength generic control exists.
+
+## A3: matched-seed environment equivalence
+
+Use existing D_(p,k,F) = family accuracy(LOFO_F) - family accuracy(Clean). Let z_(k,F) = D_(Mac,k,F) - D_(Windows,k,F). Report five matched differences, mean, SD and nominal 95% t interval over the five matched seed identifiers. TOST uses primary delta=1.0 pp and sensitivity delta=0.5 pp, both fixed here before computation, with df=4 and each one-sided alpha=0.05. Lower test p = survival_t((mean+delta)/SE); upper test p = CDF_t((mean-delta)/SE); p_TOST=max(p_lower,p_upper). Also give the corresponding 90% t interval. Equivalence is supported at a stated margin only if both one-sided p values are below 0.05 (equivalently, the 90% interval is strictly inside the margin). Report per-family exploratory decisions, not a simultaneous four-family equivalence assertion; no new Holm family is used. A zero-containing 95% interval alone never establishes equivalence. Power is low with five matched seeds; failure to support equivalence is inconclusive, not evidence of inequivalence. No post-hoc power estimate.
+
+## A4: variance structure
+
+For D and G_(p,k,F) = family accuracy(All-Four) - family accuracy(Clean), report the sample between-seed SD separately per platform, signed Mac-minus-Windows mean shift, and within-platform RMS SD = sqrt((SD_Mac^2+SD_Windows^2)/2). Report shift/RMS_SD and its absolute value. RMS is a descriptive scale summary, not a pooled ten-seed inferential sample. If denominator is zero, record undefined. No mixed model or random-effects model will be fitted; two environments do not support general environment variance estimation.
+
+## A5: fixed sensitivity analyses
+
+For every A1 platform/family/type cell, delete each seed in turn, recompute the four-seed mean, and report each change from its five-seed mean plus maximum absolute change per cell/platform and globally. For T = mean(D)/mean(G), recompute numerator and denominator after the same seed deletion; report all deletions, maximum absolute ratio change per family/platform and globally, and denominator sign/zero flags. Do not create ratio confidence intervals. Main means/ratios remain unchanged. LOO does not create additional independent replications.
+
+Use exactly the existing ten exact-overlap test indices in `paper_revision_v3/verification/overlap_sensitivity_summary.json`, already used in the manuscript; do not discover or select new exclusions. Verify this record against `overlap_matches.csv`. Read saved per-image predictions and official labels, verify their counts match each original CSV, remove these same ten identities from every type/severity/condition, and recompute A1 using 9,990 images. Report all 120 cell means and changes, per-seed changes, maximum absolute cell-mean change per platform/globally, and maximum absolute seed-cell change. This sensitivity does not rule out near duplicates and does not replace official results. No image inference.
+
+## Output contract and checks
+
+Write new files only under `final_hardening/` until the manuscript is assembled. Inputs are read-only. Capture input hashes before analysis and verify unchanged hashes at completion. Deliver A1 seed/summary/exploratory-q tables and heatmaps; A2 group seed/summary tables and scatter; H1-H3 component and Holm tables; A3 matched differences/TOST tables; A4 variance table; A5 LOO and overlap seed/summary/maxima tables; a numeric source ledger; and executable read-only analysis scripts. Use independent arithmetic checks for representative cells, hypotheses, TOST and group partitioning. Any implementation error may be fixed without changing this specification; log the correction and rerun affected derived outputs.
+
+Preserve the current v3 manuscript first. Keep title and abstract unchanged. Preserve all original measured numbers in prose, tables and figures; report a number-diff with retained/moved/new/corrected-bibliography distinctions and no changed scientific values. The explicitly requested Saikia page-range correction is bibliographic metadata, not a scientific-result change. Numbering of moved sections/tables/figures/references may change. Preserve limitations and bracketed author declarations. Add no more than four verified references. Main named/blinded PDFs must be at most 12 pages in the official 11-pt ELCVIA layout; supplementary named/blinded PDFs carry moved appendices and new analyses. Inspect page renderings and final logs, verify anonymity and source synchronization, and package existing predictions as lossless uint8 classes with exact ordering metadata. List checkpoints with hashes/sizes separately; no checkpoint tensors are required in the deposit. Nothing is uploaded or pushed.
+
+Target completion: 10 November 2026 17:59 Asia/Almaty (12:59 UTC), at least six hours before the stated submission deadline. Finish with sentence-level claim/evidence mapping, a twelve-objection internal reviewer simulation, unresolved citation list, before/after revision report, new-number provenance, page/warning/hash checks, and remaining author-owned tasks. This is internal self-review, not external peer review.
